@@ -1,0 +1,90 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{C84353F4-85B4-4150-9819-BBC25F4B6D87}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>zfit</RootNamespace>
+    <AssemblyName>zfitClasses</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>..\..\bin\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <PlatformTarget>x86</PlatformTarget>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+    <Reference Include="zfitCommon, Version=1.0.0.0, Culture=neutral, processorArchitecture=x86">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\bin\zfitCommon.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Classes\Function.cs" />
+    <Compile Include="Classes\FunctionAccess.cs" />
+    <Compile Include="Classes\Role.cs" />
+    <Compile Include="Classes\RoleFunction.cs" />
+    <Compile Include="Classes\Fan.cs" />
+    <Compile Include="Classes\FanFunctionAccess.cs" />
+    <Compile Include="Classes\FanRole.cs" />
+    <Compile Include="Classes\User.cs" />
+    <Compile Include="Classes\UserFunctionAccess.cs" />
+    <Compile Include="Classes\UserRole.cs" />
+    <Compile Include="Collections\FunctionCollection.cs" />
+    <Compile Include="Collections\RoleCollection.cs" />
+    <Compile Include="Collections\RoleFunctionCollection.cs" />
+    <Compile Include="Collections\FanCollection.cs" />
+    <Compile Include="Collections\FanFunctionAccessCollection.cs" />
+    <Compile Include="Collections\FanRoleCollection.cs" />
+    <Compile Include="Collections\UserCollection.cs" />
+    <Compile Include="Collections\UserFunctionAccessCollection.cs" />
+    <Compile Include="Collections\UserRoleCollection.cs" />
+    <Compile Include="Common\zfitEnums.cs" />
+    <Compile Include="Filters\FanFilter.cs" />
+    <Compile Include="Filters\UserFilter.cs" />
+    <Compile Include="Keys\FunctionKey.cs" />
+    <Compile Include="Keys\RoleFunctionKey.cs" />
+    <Compile Include="Keys\RoleKey.cs" />
+    <Compile Include="Keys\FanKey.cs" />
+    <Compile Include="Keys\FanRoleKey.cs" />
+    <Compile Include="Keys\UserKey.cs" />
+    <Compile Include="Keys\UserRoleKey.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Editors\" />
+    <Folder Include="Proxies\" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>
