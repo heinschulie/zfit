@@ -16,8 +16,10 @@ var ajaxCall = function ajaxData(methodname, aThing) {
     })
         .done(function (msg) {
             if (msg.d.TransactionResult === 1) {
-                document.location = "http://www.google.com"; 
-                //window.location.href = msg.d.TargetUrl;
+                //document.location = "http://www.google.com"; 
+                window.location = msg.d.TargetUrl; 
+                //window.open("http://www.google.com");
+                return false;
             }
             else {
                 alert(msg.d.Message);
@@ -39,11 +41,12 @@ var logonuser = function () {
     aUser.UsrID = d3.select("input#username").node().value;
     aUser.UsrPassword = d3.select("input#password").node().value;
     var User = { 'aUser': aUser };
-    ajaxCall("userLogon", User);
+    var status = ajaxCall("userLogon", User);
+    return false; 
 }
 
-var logonuserClick = d3.select("input#btnUsrLogon")
-                .on("click", logonuser);
+//var logonuserClick = d3.select("input#btnUsrLogon")
+//                .on("click", logonuser);
 
 //Method and click event for fan logon 
 

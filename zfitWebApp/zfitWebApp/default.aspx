@@ -31,7 +31,7 @@
                             <label for="loginkeeping">Keep me logged in</label>
                         </p>
                         <p class="login button"> 
-                            <input type="submit" id="btnLogon" value="Fan" /> 
+                            <input type="submit" id="btnLogon" value="Fan" onclick="return logonuser()" /> 
                             <input type="submit" id="btnUsrLogon" value="User" /> 
                         </p>
                         <p class="change_link">
