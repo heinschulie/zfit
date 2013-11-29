@@ -25,10 +25,10 @@ namespace zfit
                 throw new ArgumentNullException("Load Fan Business");
             }
 
-            if (!FanFunctionAccessData.HasModeAccess(aFanKey, "Fan", AccessMode.List))
-            {
-                throw new ZpAccessException("Access Denied", String.Format("{0}", aFanKey.FannKey), AccessMode.List, "Fan");
-            }
+            //if (!FanFunctionAccessData.HasModeAccess(aFanKey, "Fan", AccessMode.List))
+            //{
+            //    throw new ZpAccessException("Access Denied", String.Format("{0}", aFanKey.FannKey), AccessMode.List, "Fan");
+            //}
 
             FanData.Load(aFanCollection);
         }
@@ -51,7 +51,7 @@ namespace zfit
             {
                 throw new ArgumentNullException("LoadByID Fan Business");
             }
-            if (String.IsNullOrWhiteSpace(aFan.FanID))
+            if (String.IsNullOrWhiteSpace(aFan.FanUserID))
             {
                 throw new ArgumentNullException("Empty ID in LoadByID Fan Business");
             }
@@ -81,10 +81,10 @@ namespace zfit
                 throw new ArgumentNullException("Load Fan Business");
             }
 
-            if (!FanFunctionAccessData.HasModeAccess(aFanKey, "Fanatic", AccessMode.Read))
-            {
-                throw new ZpAccessException("Access Denied", String.Format("{0}", aFanKey.FannKey), AccessMode.Read, "Fan");
-            }
+            //if (!FanFunctionAccessData.HasModeAccess(aFanKey, "Fanatic", AccessMode.Read))
+            //{
+            //    throw new ZpAccessException("Access Denied", String.Format("{0}", aFanKey.FannKey), AccessMode.Read, "Fan");
+            //}
 
             FanData.Load(aFan);
         }
@@ -131,10 +131,10 @@ namespace zfit
                 throw new ArgumentNullException("Update Fan Business");
             }
 
-            if (!FanFunctionAccessData.HasModeAccess(aFanKey, "Fanatic", AccessMode.Update))
-            {
-                throw new ZpAccessException("Access Denied", String.Format("{0}", aFanKey.FannKey), AccessMode.Update, "Fan");
-            }
+            //if (!FanFunctionAccessData.HasModeAccess(aFanKey, "Fanatic", AccessMode.Update))
+            //{
+            //    throw new ZpAccessException("Access Denied", String.Format("{0}", aFanKey.FannKey), AccessMode.Update, "Fan");
+            //}
 
             FanData.Update(aFan);
         }
@@ -156,10 +156,10 @@ namespace zfit
                 throw new ArgumentNullException("Delete Fan Business");
             }
 
-            if (!FanFunctionAccessData.HasModeAccess(aFanKey, "Fanatic", AccessMode.Delete))
-            {
-                throw new ZpAccessException("Access Denied", String.Format("{0}", aFanKey.FannKey), AccessMode.Delete, "Fan");
-            }
+            //if (!FanFunctionAccessData.HasModeAccess(aFanKey, "Fanatic", AccessMode.Delete))
+            //{
+            //    throw new ZpAccessException("Access Denied", String.Format("{0}", aFanKey.FannKey), AccessMode.Delete, "Fan");
+            //}
 
             FanData.Delete(aFan);
         }

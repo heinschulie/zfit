@@ -199,6 +199,60 @@ namespace zfit
         //}
 
         #endregion
-        
+
+
+        #region Fan Service Calls        
+
+        /// <summary>
+        /// Call the WebService with a request to return a Fan with a specified FanKey
+        /// </summary>
+        /// <param name="aCell">The Fan object to return</param>
+        /// <param name="aCellToken">A user token.</param>
+        public static void GetCell(FanToken aCellToken, Cell aCell)
+        {
+            FanCallHandler.ServiceCall<Cell>(aCellToken, "GetCell", aCell);
+        }
+
+        /// <summary>
+        /// Gets a FanCollection
+        /// </summary>
+        /// <param name="aCellToken">A user token.</param>
+        /// <param name="aCellCollection">A user collection.</param>
+        public static void GetCellCollection(FanToken aCellToken, FanCollection aCellCollection)
+        {
+            FanCallHandler.ServiceCall<CellCollection>(aCellToken, "GetCellCollection", aCellCollection);
+        }
+
+        /// <summary>
+        /// Call the WebService with a request to Add a Fan
+        /// </summary>
+        /// <param name="aCell">The Fan object to Add</param>
+        /// <param name="aCellToken">A user token.</param>
+        public static void AddFan(FanToken aCellToken, Cell aCell)
+        {
+            FanCallHandler.ServiceCall<Cell>(aCellToken, "AddFan", aCell);
+        }
+
+        /// <summary>
+        /// Call the WebService with a request to Edit a Fan
+        /// </summary>
+        /// <param name="aCell">The Fan object to Edit</param>
+        /// <param name="aCellToken">A user token.</param>
+        public static void EditCell(FanToken aCellToken, Cell aCell)
+        {
+            FanCallHandler.ServiceCall<Cell>(aCellToken, "EditCell", aCell);
+        }
+
+        /// <summary>
+        /// Call the WebService with a request to Delete a Fan
+        /// </summary>
+        /// <param name="aCell">The Fan object to Delete</param>
+        /// <param name="aCellToken">A user token.</param>
+        public static void DeleteCell(FanToken aCellToken, Cell aCell)
+        {
+            FanCallHandler.ServiceCall<Cell>(aCellToken, "DeleteCell", aCell);
+        }
+        #endregion
+
     }
 }

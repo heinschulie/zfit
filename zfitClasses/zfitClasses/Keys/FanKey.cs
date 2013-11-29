@@ -82,18 +82,6 @@ namespace zfit
 
         #endregion
 
-        #region AssignFromAlternateSource
-
-        public void AssignFromAlternateSource(object aAlternateSource, List<Type> aAlternateTypeDescriptorList)
-        {
-            if (!(aAlternateTypeDescriptorList.Contains(aAlternateSource.GetType())))
-            {
-                throw new ArgumentException("Invalid assignment source", string.Format("{0}", aAlternateSource.GetType()));
-            }
-            _fanKey = (int)aAlternateSource.GetType().GetProperty("FanKey").GetValue(aAlternateSource, null);
-        }
-        #endregion
-
         #region AssignFromSource
 
         /// <summary>

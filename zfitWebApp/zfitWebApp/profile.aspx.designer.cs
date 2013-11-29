@@ -10,6 +10,6 @@
 namespace zfit {
     
     
-    public partial class fandashboard1 {
+    public partial class profile {
     }
 }

@@ -7,7 +7,7 @@ using System.Web.UI.WebControls;
 
 namespace zfitWebApp
 {
-    public partial class fandashboard1 : System.Web.UI.Page
+    public partial class fandashboard : System.Web.UI.Page
     {
         protected void Page_Load(object sender, EventArgs e)
         {

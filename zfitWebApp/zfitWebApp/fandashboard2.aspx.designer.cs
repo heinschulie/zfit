@@ -7,9 +7,9 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace zfit {
+namespace zfitWebApp {
     
     
-    public partial class fandashboard1 {
+    public partial class fandashboard {
     }
 }

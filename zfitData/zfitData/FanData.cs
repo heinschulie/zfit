@@ -42,7 +42,7 @@ namespace zfit
         public static void DataToObject(Fan aFan, SqlDataReader aSqlDataReader, bool aIncludeAvatar)
         {
             aFan.FannKey = Convert.ToInt32(aSqlDataReader["FAN_Key"]);
-            aFan.FanID = Convert.ToString(aSqlDataReader["FAN_UserID"]);
+            aFan.FanUserID = Convert.ToString(aSqlDataReader["FAN_UserID"]);
             aFan.FanPassword = Convert.ToString(aSqlDataReader["FAN_Password"]);
             aFan.FanName = Convert.ToString(aSqlDataReader["FAN_Name"]);
             aFan.FanSurname = Convert.ToString(aSqlDataReader["FAN_Surname"]);
@@ -65,7 +65,7 @@ namespace zfit
         public static void ObjectToData(SqlCommand aSqlCommand, Fan aFan)
         {
 
-            aSqlCommand.Parameters.AddWithValue("@FANID", aFan.FanID);
+            aSqlCommand.Parameters.AddWithValue("@FANID", aFan.FanUserID);
             aSqlCommand.Parameters.AddWithValue("@FANPassword", aFan.FanPassword);
             aSqlCommand.Parameters.AddWithValue("@FANName", aFan.FanName);
             aSqlCommand.Parameters.AddWithValue("@FANSurname", aFan.FanSurname);
@@ -149,14 +149,14 @@ namespace zfit
             {
                 var vStringBuilder = BuildSQL(true);
                 vStringBuilder.AppendLine("where FAN_UserID = @FANID");
-                vSqlCommand.Parameters.AddWithValue("@FANID", aFan.FanID);
+                vSqlCommand.Parameters.AddWithValue("@FANID", aFan.FanUserID);
                 vSqlCommand.CommandText = vStringBuilder.ToString();
                 vSqlCommand.Connection.Open();
                 using (SqlDataReader vSqlDataReader = vSqlCommand.ExecuteReader())
                 {
                     if (!(vSqlDataReader.HasRows))
                     {
-                        throw new Exception(String.Format("Expected Fan not found: FAN_ID = {0}", aFan.FanID));
+                        throw new Exception(String.Format("Expected Fan not found: FAN_ID = {0}", aFan.FanUserID));
                     }
                     vSqlDataReader.Read();
                     DataToObject(aFan, vSqlDataReader, true);

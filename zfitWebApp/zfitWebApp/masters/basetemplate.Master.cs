@@ -5,9 +5,9 @@ using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 
-namespace zfitWebApp
+namespace zfit
 {
-    public partial class fandashboard1 : System.Web.UI.Page
+    public partial class basetemplate : System.Web.UI.MasterPage
     {
         protected void Page_Load(object sender, EventArgs e)
         {

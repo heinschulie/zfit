@@ -15,16 +15,11 @@ namespace zfit
     {
         #region Fields
 
-        private string _fanID;
+        private string _fanUserID;
         private string _fanPassword;
         private string _fanName;
         private string _fanSurname;
         private string _fanEmail;
-        private string _fanMobile;
-        private string _fanPhone;
-        private string _fanFax;
-        private bool _fanWebContact;
-        private string _fanWebTitle;
         private byte[] _fanAvatar;
 
         #endregion
@@ -37,10 +32,10 @@ namespace zfit
         /// <value>
         ///   The ID;
         /// </value>
-        public string FanID
+        public string FanUserID
         {
-            get { return _fanID; }
-            set { _fanID = value; }
+            get { return _fanUserID; }
+            set { _fanUserID = value; }
         }
         /// <summary>
         ///   Gets or sets the Password property;
@@ -97,61 +92,6 @@ namespace zfit
             set { _fanEmail = value; }
         }
         /// <summary>
-        ///   Gets or sets the Mobile property;
-        /// </summary>
-        /// <value>
-        ///   The Mobile;
-        /// </value>
-        public string FanMobile
-        {
-            get { return _fanMobile; }
-            set { _fanMobile = value; }
-        }
-        /// <summary>
-        ///   Gets or sets the Phone property;
-        /// </summary>
-        /// <value>
-        ///   The Phone;
-        /// </value>
-        public string FanPhone
-        {
-            get { return _fanPhone; }
-            set { _fanPhone = value; }
-        }
-        /// <summary>
-        ///   Gets or sets the Fax property;
-        /// </summary>
-        /// <value>
-        ///   The Fax;
-        /// </value>
-        public string FanFax
-        {
-            get { return _fanFax; }
-            set { _fanFax = value; }
-        }
-        /// <summary>
-        /// Gets or sets the usr web title.
-        /// </summary>
-        /// <value>
-        /// The usr web title.
-        /// </value>
-        public string FanWebTitle
-        {
-            get { return _fanWebTitle; }
-            set { _fanWebTitle = value; }
-        }
-        /// <summary>
-        /// Gets or sets a value indicating whether [usr web contact].
-        /// </summary>
-        /// <value>
-        ///   <c>true</c> if [usr web contact]; otherwise, <c>false</c>.
-        /// </value>
-        public bool FanWebContact
-        {
-            get { return _fanWebContact; }
-            set { _fanWebContact = value; }
-        }
-        /// <summary>
         ///   Gets or sets the Avatar property;
         /// </summary>
         /// <value>
@@ -178,16 +118,11 @@ namespace zfit
                 throw new ArgumentException("Invalid Source Argument to Fan Assign");
             }
             base.AssignFromSource(aSource);
-            _fanID = (aSource as Fan)._fanID;
+            _fanUserID = (aSource as Fan)._fanUserID;
             _fanPassword = (aSource as Fan)._fanPassword;
             _fanName = (aSource as Fan)._fanName;
             _fanSurname = (aSource as Fan)._fanSurname;
             _fanEmail = (aSource as Fan)._fanEmail;
-            _fanMobile = (aSource as Fan)._fanMobile;
-            _fanPhone = (aSource as Fan)._fanPhone;
-            _fanFax = (aSource as Fan)._fanFax;
-            _fanWebContact = (aSource as Fan)._fanWebContact;
-            _fanWebTitle = (aSource as Fan)._fanWebTitle;
             _fanAvatar = (aSource as Fan)._fanAvatar;
         } 
 

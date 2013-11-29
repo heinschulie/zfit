@@ -11,14 +11,15 @@
     <ProjectTypeGuids>{349c5851-65df-11da-9384-00065b846f21};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>zfitWebApp</RootNamespace>
+    <RootNamespace>zfit</RootNamespace>
     <AssemblyName>zfitWebApp</AssemblyName>
-    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <UseIISExpress>true</UseIISExpress>
     <IISExpressSSLPort />
     <IISExpressAnonymousAuthentication />
     <IISExpressWindowsAuthentication />
     <IISExpressUseClassicPipelineMode />
+    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -40,22 +41,21 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="System.Web.DynamicData" />
     <Reference Include="System.Web.Entity" />
     <Reference Include="System.Web.ApplicationServices" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System" />
     <Reference Include="System.Data" />
-    <Reference Include="System.Core" />
-    <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="System.Web.Extensions" />
-    <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Drawing" />
     <Reference Include="System.Web" />
     <Reference Include="System.Xml" />
     <Reference Include="System.Configuration" />
     <Reference Include="System.Web.Services" />
     <Reference Include="System.EnterpriseServices" />
+    <Reference Include="System.Xml.Linq" />
     <Reference Include="zfitClasses">
       <HintPath>..\..\bin\zfitClasses.dll</HintPath>
     </Reference>
@@ -67,11 +67,18 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="community.aspx" />
     <Content Include="default.aspx" />
     <Content Include="fandashboard.aspx" />
+    <Content Include="fandashboard2.aspx" />
+    <Content Include="profile.aspx" />
+    <Content Include="scripts\base.js" />
     <Content Include="scripts\classie.js" />
+    <Content Include="scripts\community.js" />
+    <Content Include="scripts\profile.js" />
     <Content Include="scripts\sidebarEffects.js" />
-    <Content Include="styles\dashboard.css" />
+    <Content Include="styles\base.css" />
+    <Content Include="styles\dashboard2.css" />
     <Content Include="styles\demo.css" />
     <Content Include="styles\icons.css" />
     <Content Include="scripts\jquery-1.10.1.min.js" />
@@ -83,12 +90,20 @@
     <Content Include="styles\fonts\Dharma Type Font License.txt" />
     <Content Include="styles\fonts\fontomas-webfont.svg" />
     <Content Include="styles\fonts\franchise-bold-webfont.svg" />
+    <Content Include="styles\profile.css" />
     <Content Include="styles\style.css" />
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="classes\Person.cs" />
     <Compile Include="classes\ServerSession.cs" />
+    <Compile Include="classes\webObject.cs" />
+    <Compile Include="community.aspx.cs">
+      <DependentUpon>community.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="community.aspx.designer.cs">
+      <DependentUpon>community.aspx</DependentUpon>
+    </Compile>
     <Compile Include="default.aspx.cs">
       <DependentUpon>default.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -103,6 +118,27 @@
     <Compile Include="fandashboard.aspx.designer.cs">
       <DependentUpon>fandashboard.aspx</DependentUpon>
     </Compile>
+    <Compile Include="fandashboard2.aspx.cs">
+      <DependentUpon>fandashboard2.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="fandashboard2.aspx.designer.cs">
+      <DependentUpon>fandashboard2.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="masters\basetemplate.Master.cs">
+      <DependentUpon>basetemplate.Master</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="masters\basetemplate.Master.designer.cs">
+      <DependentUpon>basetemplate.Master</DependentUpon>
+    </Compile>
+    <Compile Include="profile.aspx.cs">
+      <DependentUpon>profile.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="profile.aspx.designer.cs">
+      <DependentUpon>profile.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -115,6 +151,7 @@
     <Content Include="styles\fonts\franchise-bold-webfont.eot" />
     <Content Include="styles\fonts\franchise-bold-webfont.ttf" />
     <Content Include="styles\fonts\franchise-bold-webfont.woff" />
+    <Content Include="masters\basetemplate.Master" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -124,7 +161,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="images\" />
-    <Folder Include="masters\" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

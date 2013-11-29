@@ -94,7 +94,7 @@ namespace zfit
         {
             var vFanKey = new FanKey();
 
-            var vFan = new Fan() { FanID = aFanToken.FanID };
+            var vFan = new Fan() { FanUserID = aFanToken.FanID };
             FanBusiness.LoadByID(vFanKey, vFan);
             if (String.Compare(vFan.FanPassword, aFanToken.Password, false) != 0)
             {

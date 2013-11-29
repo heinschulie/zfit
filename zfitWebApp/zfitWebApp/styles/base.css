@@ -1,0 +1,172 @@
+﻿html,
+body,
+.wrapper{
+	height: 100%;
+    margin: 0; 
+}
+
+a
+{
+    text-decoration: none; 
+    color: white; 
+}
+
+.header,
+.sideNav,
+.content
+{
+    float: left; 
+}
+
+/*Header and high-level navigation*/ 
+
+.header
+{
+    height: 10%;
+    width: 100%;
+    background-color: #B9D1EA; 
+	font-family: 'Lato', Calibri, Arial, sans-serif;
+}
+
+.navigation
+{
+    width: 60%; 
+    margin: 0 20%; 
+}
+
+.navigation li
+{
+    float: right; 
+    width: 20%; 
+    background-color: #336699;
+    border-radius: 3px; 
+    margin-right: 4%; 
+    text-align: center; 
+    transition: 0.5s; 
+}
+
+.navigation li:hover
+{
+    background-color: #6699CC;
+    color: #000000; 
+}
+
+/*Side bar and specific navigation*/
+
+.sideNav
+{
+    width: 20%; 
+    height:90%; 
+    background-color: aliceblue; 
+}
+
+.sideNavElement
+{
+    position: relative;
+    display: block; 
+    width: 50%;
+    height: 5%; 
+    margin: 3% auto 0px 5%; 
+    background-color: #FFFF66; 
+    border-radius: 3px; 
+    margin-right: 4%; 
+    text-align: center; 
+	font-family: 'Lato', Calibri, Arial, sans-serif;
+}
+    .sideNavElement:hover
+    {
+        cursor: pointer; 
+        background-color: #33FF66; 
+    }
+
+.subelementContainer
+{
+    position: relative;
+    display: block; 
+    width: 50%;
+    margin: 3% auto 0px 5%;
+    background-color: rgba(255,255,255,0.8); 
+    border-radius: 5px;
+	font-family: 'Lato', Calibri, Arial, sans-serif;
+    display: none; 
+}
+
+.sideNavSubElement
+{
+    width: 100%; 
+    margin: 3% auto 0px 5%;
+    background-color: #3366FF; 
+    border-radius: 3px; 
+    color: white; 
+}
+
+    .sideNavSubElement:hover
+    {
+        background-color: #0099CC; 
+        cursor: pointer; 
+    }
+
+/*Content and data visualization*/
+
+.content
+{
+    width: 78%;
+    height:90%; 
+}
+
+.properties
+{
+    position: relative;
+    display: block; 
+    width: 50%;
+    height: 5%; 
+    margin: 3% auto 0px 5%; 
+    background-color: #6699FF; 
+}
+
+    .properties:active
+    {
+        background-color: #99CCFF; 
+    }
+    
+    .properties:focus
+    {
+        background-color: #99CCFF; 
+    }
+
+.edit
+{
+    background-color: #FFCC00; 
+    color: black; 
+}
+
+.delete
+{
+    opacity: 0.3; 
+}
+
+.textFilter
+{
+    width: 33%;
+    height: 5%;
+    background-color: #6699FF;
+    margin: 3% auto 0px 5%; 
+    border: 1px solid gray; 
+    border-radius: 5px; 
+}
+
+    .testButton
+    {
+    width: 20%;
+    height: 5%; 
+    margin: 3% auto 0px 5%;
+    background-color: burlywood;
+    font-family: 'Lato', Calibri, Arial, sans-serif;
+    transition: 0.5s;  
+    }
+
+    .testButton:hover
+    {
+        cursor: pointer;
+        background-color: #1E90FF;
+    }

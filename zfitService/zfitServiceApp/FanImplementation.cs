@@ -534,6 +534,108 @@ namespace zfit
             return XmlUtils.Serialize<Fan>(vFan, true);
         }
 
+        #endregion
+
+        #region Cell Methods
+
+        /// <summary>
+        ///   Gets the <see cref="Cell"/> by Key.
+        /// </summary>
+        /// <param name="aXmlArgument">XML Argument <see cref="string"/>.</param>
+        /// <returns>Cell as XML <see cref="string"/>.</returns>
+        /// <exception cref="ArgumentNullException">If <c>aXmlArgument</c> is <c>null</c>.</exception>
+        public static string GetCell(FanKey aFanKey, string aXmlArgument)
+        {
+            if (aXmlArgument == null)
+            {
+                throw new ArgumentNullException("aXmlArgument of GetCell");
+            }
+            Cell vCell = new Cell();
+            vCell = XmlUtils.Deserialize<Cell>(aXmlArgument);
+            CellBusiness.Load(aFanKey, vCell);
+            return XmlUtils.Serialize<Cell>(vCell, true);
+        }
+
+        /// <summary>
+        ///   The <c>GetCellCollection</c> implementation method deserializes an incoming XML Argument <see cref="string"/> as a new <see cref="CellCollection"/> object.
+        ///   It invokes the <c>Insert</c> method of <see cref="CellBusiness"/> with the newly deserialized <see cref="CellCollection"/> object.
+        ///   Finally, it returns the collection object as a serialized <see cref="string"/> of XML.
+        /// </summary>
+        /// <param name="aXmlArgument">XML Argument <see cref="string"/>.</param>
+        /// <returns><see cref="CellCollection"/> as XML <see cref="string"/>.</returns>
+        /// <exception cref="ArgumentNullException">If <c>aXmlArgument</c> is <c>null</c>.</exception>
+        public static string GetCellCollection(FanKey aFanKey, string aXmlArgument)
+        {
+            if (aXmlArgument == null)
+            {
+                throw new ArgumentNullException("aXmlArgument of GetCellCollection");
+            }
+            CellCollection vCellCollection = new CellCollection();
+            vCellCollection = XmlUtils.Deserialize<CellCollection>(aXmlArgument);
+            CellBusiness.Load(aFanKey, vCellCollection);
+            return XmlUtils.Serialize<CellCollection>(vCellCollection, true);
+        }
+
+        /// <summary>
+        ///   The <c>AddCell</c> implementation method deserializes an incoming XML Argument <see cref="string"/> as a new <see cref="Cell"/> object.
+        ///   It invokes the <c>Insert</c> method of <see cref="CellBusiness"/> with the newly deserialized <see cref="Cell"/> object.
+        ///   Finally, it returns the inserted object (now with an assigned Cell Key) as a serialized <see cref="string"/> of XML.
+        /// </summary>
+        /// <param name="aXmlArgument">XML Argument <see cref="string"/>.</param>
+        /// <returns><see cref="Cell"/> as XML <see cref="string"/>.</returns>
+        /// <exception cref="ArgumentNullException">If <c>aXmlArgument</c> is <c>null</c>.</exception>
+        public static string AddCell(FanKey aFanKey, string aXmlArgument)
+        {
+            if (aXmlArgument == null)
+            {
+                throw new ArgumentNullException("aXmlArgument of AddCell");
+            }
+            Cell vCell = new Cell();
+            vCell = XmlUtils.Deserialize<Cell>(aXmlArgument);
+            CellBusiness.Insert(aFanKey, vCell);
+            return XmlUtils.Serialize<Cell>(vCell, true);
+        }
+
+        /// <summary>
+        ///   The <c>EditCell</c> implementation method deserializes an incoming XML Argument <see cref="string"/> as a new <see cref="Cell"/> object.
+        ///   It invokes the <c>Update</c> method of <see cref="CellBusiness"/> with the newly deserialized <see cref="Cell"/> object.
+        ///   Finally, it returns the updated object unchanged as a serialized <see cref="string"/> of XML.
+        /// </summary>
+        /// <param name="aXmlArgument">XML Argument <see cref="string"/>.</param>
+        /// <returns><see cref="Cell"/> as XML <see cref="string"/>.</returns>
+        /// <exception cref="ArgumentNullException">If <c>aXmlArgument</c> is <c>null</c>.</exception>
+        public static string EditCell(FanKey aFanKey, string aXmlArgument)
+        {
+            if (aXmlArgument == null)
+            {
+                throw new ArgumentNullException("aXmlArgument of EditCell");
+            }
+            Cell vCell = new Cell();
+            vCell = XmlUtils.Deserialize<Cell>(aXmlArgument);
+            CellBusiness.Update(aFanKey, vCell);
+            return XmlUtils.Serialize<Cell>(vCell, true);
+        }
+
+        /// <summary>
+        ///   The <c>DeleteCell</c> implementation method deserializes an incoming XML Argument as a new <see cref="Cell"/> object.
+        ///   It invokes the <c>Delete</c> method of <see cref="CellBusiness"/> with the newly deserialized <see cref="Cell"/> object.
+        ///   Finally, it returns the Deleted object unchanged as a serialized <c>string</c> of XML.
+        /// </summary>
+        /// <param name="aXmlArgument">A XML Argument <see cref="string"/>.</param>
+        /// <returns><see cref="Cell"/> as XML <see cref="string"/>.</returns>
+        /// <exception cref="ArgumentNullException">If <c>aXmlArgument</c> is <c>null</c>.</exception>
+        public static string DeleteCell(FanKey aFanKey, string aXmlArgument)
+        {
+            if (aXmlArgument == null)
+            {
+                throw new ArgumentNullException("aXmlArgument of DeleteCell");
+            }
+            Cell vCell = new Cell();
+            vCell = XmlUtils.Deserialize<Cell>(aXmlArgument);
+            CellBusiness.Delete(aFanKey, vCell);
+            return XmlUtils.Serialize<Cell>(vCell, true);
+        }
+
         #endregion   
   
     }

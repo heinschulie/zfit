@@ -68,7 +68,7 @@ namespace zfit
             //
             FanToken vFanToken = new FanToken()
             {
-                FanID = aFan.FanID,
+                FanID = aFan.FanUserID,
                 Password = aFan.FanPassword,
                 Url = "http://localhost/zfitsoap/zfitService.asmx"
             };
