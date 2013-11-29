@@ -126,6 +126,6 @@ namespace zfit
             _fanAvatar = (aSource as Fan)._fanAvatar;
         } 
 
-#endregion
+        #endregion
     }
  }

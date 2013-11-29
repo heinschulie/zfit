@@ -46,6 +46,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Classes\Cell.cs" />
+    <Compile Include="Classes\CellFan.cs" />
+    <Compile Include="Classes\Fed.cs" />
     <Compile Include="Classes\Function.cs" />
     <Compile Include="Classes\FunctionAccess.cs" />
     <Compile Include="Classes\Role.cs" />
@@ -57,6 +59,8 @@
     <Compile Include="Classes\UserFunctionAccess.cs" />
     <Compile Include="Classes\UserRole.cs" />
     <Compile Include="Collections\CellCollection.cs" />
+    <Compile Include="Collections\CellFanCollection.cs" />
+    <Compile Include="Collections\FedCollection.cs" />
     <Compile Include="Collections\FunctionCollection.cs" />
     <Compile Include="Collections\RoleCollection.cs" />
     <Compile Include="Collections\RoleFunctionCollection.cs" />
@@ -67,10 +71,14 @@
     <Compile Include="Collections\UserFunctionAccessCollection.cs" />
     <Compile Include="Collections\UserRoleCollection.cs" />
     <Compile Include="Common\zfitEnums.cs" />
+    <Compile Include="Filters\CellFanFilter.cs" />
     <Compile Include="Filters\CellFilter.cs" />
     <Compile Include="Filters\FanFilter.cs" />
+    <Compile Include="Filters\FedFilter.cs" />
     <Compile Include="Filters\UserFilter.cs" />
+    <Compile Include="Keys\CellFanKey.cs" />
     <Compile Include="Keys\CellKey.cs" />
+    <Compile Include="Keys\FedKey.cs" />
     <Compile Include="Keys\FunctionKey.cs" />
     <Compile Include="Keys\RoleFunctionKey.cs" />
     <Compile Include="Keys\RoleKey.cs" />

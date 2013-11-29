@@ -16,7 +16,6 @@ namespace zfit
         #region Fields
 
         private bool _isFiltered;
-
         private List<Fan> _fanList = new List<Fan>();
 
         #endregion

@@ -636,7 +636,170 @@ namespace zfit
             return XmlUtils.Serialize<Cell>(vCell, true);
         }
 
+        #endregion
+
+        #region Fed Methods
+
+        /// <summary>
+        ///   Gets the <see cref="Fed"/> by Key.
+        /// </summary>
+        /// <param name="aXmlArgument">XML Argument <see cref="string"/>.</param>
+        /// <returns>Fed as XML <see cref="string"/>.</returns>
+        /// <exception cref="ArgumentNullException">If <c>aXmlArgument</c> is <c>null</c>.</exception>
+        public static string GetFed(FanKey aFanKey, string aXmlArgument)
+        {
+            if (aXmlArgument == null)
+            {
+                throw new ArgumentNullException("aXmlArgument of GetFed");
+            }
+            Fed vFed = new Fed();
+            vFed = XmlUtils.Deserialize<Fed>(aXmlArgument);
+            FedBusiness.Load(aFanKey, vFed);
+            return XmlUtils.Serialize<Fed>(vFed, true);
+        }
+
+        /// <summary>
+        ///   The <c>GetFedCollection</c> implementation method deserializes an incoming XML Argument <see cref="string"/> as a new <see cref="FedCollection"/> object.
+        ///   It invokes the <c>Insert</c> method of <see cref="FedBusiness"/> with the newly deserialized <see cref="FedCollection"/> object.
+        ///   Finally, it returns the collection object as a serialized <see cref="string"/> of XML.
+        /// </summary>
+        /// <param name="aXmlArgument">XML Argument <see cref="string"/>.</param>
+        /// <returns><see cref="FedCollection"/> as XML <see cref="string"/>.</returns>
+        /// <exception cref="ArgumentNullException">If <c>aXmlArgument</c> is <c>null</c>.</exception>
+        public static string GetFedCollection(FanKey aFanKey, string aXmlArgument)
+        {
+            if (aXmlArgument == null)
+            {
+                throw new ArgumentNullException("aXmlArgument of GetFedCollection");
+            }
+            FedCollection vFedCollection = new FedCollection();
+            vFedCollection = XmlUtils.Deserialize<FedCollection>(aXmlArgument);
+            FedBusiness.Load(aFanKey, vFedCollection);
+            return XmlUtils.Serialize<FedCollection>(vFedCollection, true);
+        }
+
+        /// <summary>
+        ///   The <c>AddFed</c> implementation method deserializes an incoming XML Argument <see cref="string"/> as a new <see cref="Fed"/> object.
+        ///   It invokes the <c>Insert</c> method of <see cref="FedBusiness"/> with the newly deserialized <see cref="Fed"/> object.
+        ///   Finally, it returns the inserted object (now with an assigned Fed Key) as a serialized <see cref="string"/> of XML.
+        /// </summary>
+        /// <param name="aXmlArgument">XML Argument <see cref="string"/>.</param>
+        /// <returns><see cref="Fed"/> as XML <see cref="string"/>.</returns>
+        /// <exception cref="ArgumentNullException">If <c>aXmlArgument</c> is <c>null</c>.</exception>
+        public static string AddFed(FanKey aFanKey, string aXmlArgument)
+        {
+            if (aXmlArgument == null)
+            {
+                throw new ArgumentNullException("aXmlArgument of AddFed");
+            }
+            Fed vFed = new Fed();
+            vFed = XmlUtils.Deserialize<Fed>(aXmlArgument);
+            FedBusiness.Insert(aFanKey, vFed);
+            return XmlUtils.Serialize<Fed>(vFed, true);
+        }
+
+        /// <summary>
+        ///   The <c>EditFed</c> implementation method deserializes an incoming XML Argument <see cref="string"/> as a new <see cref="Fed"/> object.
+        ///   It invokes the <c>Update</c> method of <see cref="FedBusiness"/> with the newly deserialized <see cref="Fed"/> object.
+        ///   Finally, it returns the updated object unchanged as a serialized <see cref="string"/> of XML.
+        /// </summary>
+        /// <param name="aXmlArgument">XML Argument <see cref="string"/>.</param>
+        /// <returns><see cref="Fed"/> as XML <see cref="string"/>.</returns>
+        /// <exception cref="ArgumentNullException">If <c>aXmlArgument</c> is <c>null</c>.</exception>
+        public static string EditFed(FanKey aFanKey, string aXmlArgument)
+        {
+            if (aXmlArgument == null)
+            {
+                throw new ArgumentNullException("aXmlArgument of EditFed");
+            }
+            Fed vFed = new Fed();
+            vFed = XmlUtils.Deserialize<Fed>(aXmlArgument);
+            FedBusiness.Update(aFanKey, vFed);
+            return XmlUtils.Serialize<Fed>(vFed, true);
+        }
+
+        /// <summary>
+        ///   The <c>DeleteFed</c> implementation method deserializes an incoming XML Argument as a new <see cref="Fed"/> object.
+        ///   It invokes the <c>Delete</c> method of <see cref="FedBusiness"/> with the newly deserialized <see cref="Fed"/> object.
+        ///   Finally, it returns the Deleted object unchanged as a serialized <c>string</c> of XML.
+        /// </summary>
+        /// <param name="aXmlArgument">A XML Argument <see cref="string"/>.</param>
+        /// <returns><see cref="Fed"/> as XML <see cref="string"/>.</returns>
+        /// <exception cref="ArgumentNullException">If <c>aXmlArgument</c> is <c>null</c>.</exception>
+        public static string DeleteFed(FanKey aFanKey, string aXmlArgument)
+        {
+            if (aXmlArgument == null)
+            {
+                throw new ArgumentNullException("aXmlArgument of DeleteFed");
+            }
+            Fed vFed = new Fed();
+            vFed = XmlUtils.Deserialize<Fed>(aXmlArgument);
+            FedBusiness.Delete(aFanKey, vFed);
+            return XmlUtils.Serialize<Fed>(vFed, true);
+        }
+
         #endregion   
-  
+     
+        #region CellFan Methods
+
+        /// <summary>
+        ///   Gets the <see cref="CellFan"/> by Key.
+        /// </summary>
+        /// <param name="aXmlArgument">XML Argument <see cref="string"/>.</param>
+        /// <returns>CellFan as XML <see cref="string"/>.</returns>
+        /// <exception cref="ArgumentNullException">If <c>aXmlArgument</c> is <c>null</c>.</exception>
+        public static string GetCellFan(FanKey aFanKey, string aXmlArgument)
+        {
+            if (aXmlArgument == null)
+            {
+                throw new ArgumentNullException("aXmlArgument of GetCellFan");
+            }
+            CellFan vCellFan = new CellFan();
+            vCellFan = XmlUtils.Deserialize<CellFan>(aXmlArgument);
+            CellFanBusiness.Load(aFanKey, vCellFan);
+            return XmlUtils.Serialize<CellFan>(vCellFan, true);
+        }
+
+        /// <summary>
+        ///   The <c>GetCellFanCollection</c> implementation method deserializes an incoming XML Argument <see cref="string"/> as a new <see cref="CellFanCollection"/> object.
+        ///   It invokes the <c>Insert</c> method of <see cref="CellFanBusiness"/> with the newly deserialized <see cref="CellFanCollection"/> object.
+        ///   Finally, it returns the collection object as a serialized <see cref="string"/> of XML.
+        /// </summary>
+        /// <param name="aXmlArgument">XML Argument <see cref="string"/>.</param>
+        /// <returns><see cref="CellFanCollection"/> as XML <see cref="string"/>.</returns>
+        /// <exception cref="ArgumentNullException">If <c>aXmlArgument</c> is <c>null</c>.</exception>
+        public static string GetCellFanCollection(FanKey aFanKey, string aXmlArgument)
+        {
+            if (aXmlArgument == null)
+            {
+                throw new ArgumentNullException("aXmlArgument of GetCellFanCollection");
+            }
+            CellFanCollection vCellFanCollection = new CellFanCollection();
+            vCellFanCollection = XmlUtils.Deserialize<CellFanCollection>(aXmlArgument);
+            CellFanBusiness.Load(aFanKey, vCellFanCollection);
+            return XmlUtils.Serialize<CellFanCollection>(vCellFanCollection, true);
+        }
+
+        /// <summary>
+        /// Saves the provider suburb.
+        /// </summary>
+        /// <param name="aFanKey">A user key.</param>
+        /// <param name="aXmlArgument">A XML argument.</param>
+        /// <returns>A string of XML representing a CellFanCollection</returns>
+        /// <exception cref="System.ArgumentNullException">aXmlArgument of SaveCellFan</exception>
+        public static string SaveCellFan(FanKey aFanKey, string aXmlArgument)
+        {
+            if (aXmlArgument == null)
+            {
+                throw new ArgumentNullException("aXmlArgument of SaveCellFan");
+            }
+            CellFanCollection vCellFanCollection = new CellFanCollection();
+            vCellFanCollection = XmlUtils.Deserialize<CellFanCollection>(aXmlArgument);
+            CellFanBusiness.Save(aFanKey, vCellFanCollection);
+            return XmlUtils.Serialize<CellFanCollection>(vCellFanCollection, true);
+        }
+
+        #endregion
+ 
     }
 }

@@ -16,7 +16,6 @@ namespace zfit
         #region Fields
 
         private bool _isFiltered;
-
         private List<User> _userList = new List<User>();
 
         #endregion

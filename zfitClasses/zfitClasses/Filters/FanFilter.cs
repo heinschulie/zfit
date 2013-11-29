@@ -9,14 +9,8 @@ namespace zfit
 {
     public class FanFilter : Zephob
     {
-        private bool _isFiltered;
-        private string _fanNameFilter;
 
-        public bool IsFiltered
-        {
-            get { return _isFiltered; }
-            set { _isFiltered = value; }
-        }
+        private string _fanNameFilter;
 
         public string FanNameFilter
         {
@@ -31,7 +25,6 @@ namespace zfit
                 throw new ArgumentException("Invalid assignment source", "FanFilter");
             }
 
-            _isFiltered = (aSource as FanFilter)._isFiltered;
             _fanNameFilter = (aSource as FanFilter)._fanNameFilter;
         }
     }

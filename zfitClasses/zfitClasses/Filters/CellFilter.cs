@@ -8,14 +8,7 @@ namespace zfit
 {
     public class CellFilter : Zephob
     {
-        private bool _isFiltered;
         private string _cellNameFilter;
-
-        public bool IsFiltered
-        {
-            get { return _isFiltered; }
-            set { _isFiltered = value; }
-        }
 
         public string CellNameFilter
         {
@@ -30,7 +23,6 @@ namespace zfit
                 throw new ArgumentException("Invalid assignment source", "CellFilter");
             }
 
-            _isFiltered = (aSource as CellFilter)._isFiltered;
             _cellNameFilter = (aSource as CellFilter)._cellNameFilter;
         }
     }

@@ -22,3 +22,24 @@ var ajaxCall = function ajaxData(methodname, aThing, callback) {
             alert("Request failed: " + msg.responseText);
         })
 };
+
+//Click method to switch between side navigation cruds 
+
+var sidenav = function (container) {
+    if (container.style("display") === "none") {
+        container.style("display", "block");
+    }
+    else {
+        container.style("display", "none");
+    }
+};
+
+var comCategories = d3.selectAll("div.sideNavElement").on("click", function () {
+    var container = d3.select("div#" + this.id + "CrudContainer");
+    sidenav(container); 
+});
+
+var secCategories = d3.selectAll("div.sideNavSecElement").on("click", function () {
+    var container = d3.select("div#" + this.id + "CrudContainer");
+    sidenav(container);
+});
