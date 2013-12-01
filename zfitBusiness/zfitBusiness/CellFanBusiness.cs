@@ -74,10 +74,10 @@ namespace zfit
                 throw new ArgumentNullException("Update CellFanCollection Business");
             }
 
-            if (!FanFunctionAccessData.HasModeAccess(aFanKey, "CellFan", AccessMode.Update))
-            {
-                throw new ZpAccessException("Access Denied", String.Format("{0}", aFanKey.FannKey), AccessMode.Update, "CellFan");
-            }
+            //if (!FanFunctionAccessData.HasModeAccess(aFanKey, "CellFan", AccessMode.Update))
+            //{
+            //    throw new ZpAccessException("Access Denied", String.Format("{0}", aFanKey.FannKey), AccessMode.Update, "CellFan");
+            //}
 
             CellFanData.Save(aCellFanCollection);
         }

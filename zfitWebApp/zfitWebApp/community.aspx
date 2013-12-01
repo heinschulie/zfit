@@ -11,6 +11,9 @@
             <div class="sideNavTerElement" id="editFriends">Edit Friends List</div>
         </div>       
         <div class="sideNavSecElement" id="fancelllist">Fan's Cell List</div>
+        <div class="subelementContainer" id="fancelllistCrudContainer">
+            <div class="sideNavTerElement" id="editFancells">Edit Fan's Cell List</div>
+        </div> 
         <div class="sideNavSecElement" id="fanfedlist">Fan's Fed List</div>
     </div>
     <div class="sideNavElement" id="cel" contenteditable="false">Cells</div>

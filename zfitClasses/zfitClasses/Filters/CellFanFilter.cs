@@ -10,13 +10,11 @@ namespace zfit
     {
         private CellFan _cellFanFilter;
 
-
         public CellFan CellfanFilter
         {
             get { return _cellFanFilter; }
             set { _cellFanFilter = value; }
         }
-
 
         public override void AssignFromSource(object aSource)
         {

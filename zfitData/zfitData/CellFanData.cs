@@ -22,7 +22,7 @@ namespace zfit
             vStringBuilder.AppendLine("select t1.CEL_Key, t1.CEL_Name, t2.FAN_Key, t2.FAN_Name, t2.FAN_Surname, t3.CAN_DateJoined");
             vStringBuilder.AppendLine("from   CEL_Cell t1, ");
             vStringBuilder.AppendLine("       FAN_Fanatic t2,");
-            vStringBuilder.AppendLine("       CAN_CellFan t3,");
+            vStringBuilder.AppendLine("       CAN_CellFan t3");
             vStringBuilder.AppendLine("where  t1.CEL_Key = t3.CEL_Key");
             vStringBuilder.AppendLine("and    t2.FAN_Key = t3.FAN_Key");
 
@@ -92,13 +92,23 @@ namespace zfit
                 var vStringBuilder = BuildSQL();
                 if (aCellFanCollection.IsFiltered)
                 {
-                    if (aCellFanCollection.CellFanFilter.CellfanFilter.CellName != string.Empty)
+                    if (aCellFanCollection.CellFanFilter.CellfanFilter.CelKey > 0)
                     {
-                        vStringBuilder.AppendFormat("and t1.CEL_Name is like '%{0}%", aCellFanCollection.CellFanFilter.CellfanFilter.CellName);
+                        vStringBuilder.AppendLine("and t1.CEL_Key = @CELKey");
+                        vSqlCommand.Parameters.AddWithValue("@CELKey", aCellFanCollection.CellFanFilter.CellfanFilter.CelKey);
                     }
-                    if (aCellFanCollection.CellFanFilter.CellfanFilter.FanName != string.Empty)
+                    if (aCellFanCollection.CellFanFilter.CellfanFilter.FanKey > 0)
                     {
-                        vStringBuilder.AppendFormat("and t2.FAN_Name is like '%{0}%", aCellFanCollection.CellFanFilter.CellfanFilter.FanName);
+                        vStringBuilder.AppendLine("and t2.FAN_Key = @FANKey");
+                        vSqlCommand.Parameters.AddWithValue("@FANKey", aCellFanCollection.CellFanFilter.CellfanFilter.FanKey);
+                    }
+                    if (aCellFanCollection.CellFanFilter.CellfanFilter.CellName != null)
+                    {
+                        vStringBuilder.AppendFormat("and t1.CEL_Name like '%{0}%'", aCellFanCollection.CellFanFilter.CellfanFilter.CellName);
+                    }
+                    if (aCellFanCollection.CellFanFilter.CellfanFilter.FanName != null)
+                    {
+                        vStringBuilder.AppendFormat("and t2.FAN_Name like '%{0}%'", aCellFanCollection.CellFanFilter.CellfanFilter.FanName);
                     }
                 }
                 vStringBuilder.AppendLine("order by t1.CEL_Name");
@@ -271,8 +281,19 @@ namespace zfit
             {
                 var vStringBuilder = new StringBuilder();
                 vStringBuilder.AppendLine("delete CAN_CellFan");
-                vStringBuilder.AppendLine("where  CEL_Key = @CELKey");
-                vStringBuilder.AppendLine("and    FAN_Key = @FANKey");
+                if (aCellFan.CelKey > 0 && aCellFan.FanKey > 0)
+                {
+                    vStringBuilder.AppendLine("where  CEL_Key = @CELKey");
+                    vStringBuilder.AppendLine("and    FAN_Key = @FANKey");
+                }
+                else if (aCellFan.CelKey > 0)
+                {
+                    vStringBuilder.AppendLine("where  CEL_Key = @CELKey");
+                }
+                else if (aCellFan.FanKey > 0)
+                {
+                    vStringBuilder.AppendLine("where  FAN_Key = @FANKey");
+                }
                 vSqlCommand.Parameters.AddWithValue("@CELKey", aCellFan.CelKey);
                 vSqlCommand.Parameters.AddWithValue("@FANKey", aCellFan.FanKey);
                 vSqlCommand.CommandText = vStringBuilder.ToString();

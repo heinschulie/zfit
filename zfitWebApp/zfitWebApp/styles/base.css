@@ -164,6 +164,15 @@ a
     opacity: 0.3; 
 }
 
+.chkbox
+{
+    width: 15px;
+    height: 15px;
+    position: relative; 
+    float: right; 
+    border-radius: 10px; 
+}
+
 .textFilter
 {
     width: 33%;

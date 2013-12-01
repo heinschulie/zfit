@@ -1,7 +1,210 @@
 ﻿
+// ||||||||||||||   ***    BASIC SETUP FOR COMMUNITY JS    ***    |||||||||||||||| //
+
+//Setting up the content div
+
+var contentSetup = function (template, editable) {
+    var properties = d3.select("div.content")
+        .selectAll("div.properties")
+        .data(template);
+
+    //Enter
+    properties
+        .enter()
+        .append("div")
+        .classed("properties", true)
+        .attr("contenteditable", "" + editable);
+
+    //Update
+    properties
+        .attr("id", function (d) { return d.fieldId })
+        .text(function (d) { return d.title })
+        .classed("edit", false)
+        .classed("add", false)
+        .classed("delete", false);
+
+    //Exit
+    properties.exit();
+};
+
+// ||||||||||||||   ***    CELLFAN CRUD    ***    |||||||||||||||| //
+
+//Callbacks for CELLFAN CRUD 
+
+var populateCollectionFields = function (anArray, cellfan) {
+
+    //Select & data
+    var elements = d3.select("div.content")
+        .selectAll("div.properties")
+        .data(anArray);
+
+    //Enter
+    elements
+        .enter()
+        .append("div")
+        .classed("properties", true); 
+    
+    //Update
+    if (cellfan === "fan") {
+        elements.text(function (d) { return d.CellName });
+    }
+    else {
+        elements.text(function (d) { return d.FanName });
+    }
+
+    //elements
+    //    .each(function (d) {
+    //        d3.select(this).append("input")
+    //          .attr("type", "checkbox")
+    //          .classed("chkbox", true);
+    //    });
+
+    //Exit
+    elements
+        .exit()
+        .remove();
+};
+
+var fanCellCollectionLoaded = function (aCellFanCollection) {
+    populateCollectionFields(aCellFanCollection.CellFanList, "fan");
+};
+
+var fanCellCollectionEdited = function (aCellFanCollection) {
+    populateCollectionFields(aCellFanCollection.CellFanList, "fan");
+};
+
+var cellFanCollectionLoaded = function (aCellFanCollection) {
+    populateCollectionFields(aCellFanCollection.CellFanList, "cell");
+};
+
+// CELLFAN Methods and Events  
+
+var cellfancrud = function cellfanData(d, i) {
+
+    var methodname = d.methodName;
+    var callback = d.callBack;
+    var aCellFanCollection = { CellFanFilter: { CellfanFilter: {} } };
+    var filter = d3.select("#textFilter");
+
+    if (filter.attr("type") === "number") {
+        aCellFanCollection.isFiltered = true; 
+        if (d.filtertype === "fan")
+            aCellFanCollection.CellFanFilter.CellfanFilter.FanKey = filter.node().value;
+        else
+            aCellFanCollection.CellFanFilter.CellfanFilter.CelKey = filter.node().value;
+    }
+    else {
+        aCellFanCollection.isFiltered = true;
+        if (d.filtertype === "fan")
+            aCellFanCollection.CellFanFilter.CellfanFilter.FanName = filter.text();
+        else
+            aCellFanCollection.CellFanFilter.CellfanFilter.CellName = filter.text();
+    }
+
+    //Remove the cellfans that are have checkboxes that are checked 
+    if (d.crudtype === "edit") {
+        aCellFanCollection.CellFanList = [];
+        var chkboxes = d3.selectAll("input.chkbox"); 
+        chkboxes.each(function (d, i) {
+            if (chkboxes[0][i].checked === false) {
+                var CellFan = { }; 
+                var thiscellfan = chkboxes[0][i].__data__;
+                CellFan.CelKey = thiscellfan.CelKey; 
+                //CellFan.CellFanDateJoined = thiscellfan.CellFanDateJoined;
+                CellFan.CellName = thiscellfan.CellName;
+                CellFan.FanDisplayName = thiscellfan.FanDisplayName;
+                CellFan.FanKey = thiscellfan.FanKey;
+                CellFan.FanName = thiscellfan.FanName;
+                CellFan.FanSurname = thiscellfan.FanSurname;
+                CellFan.HashValue = thiscellfan.HashValue;
+                CellFan.ObjectState = thiscellfan.ObjectState;
+
+                aCellFanCollection.CellFanList.push(CellFan);
+            }
+        }); 
+    }
+
+    var CellFanCollection = { 'aCellFanCollection': aCellFanCollection };
+    ajaxCall(methodname, CellFanCollection, callback);
+}
+
+//Data Arrays for CellFan Crud Methods 
+var cellfanContentTemplate = [
+    { title: "Cell Key", fieldId: "CelKey" },
+    { title: "Cell Name", fieldId: "CellName" },
+    { title: "Cell Owner Key", fieldId: "FanKey" },
+    { title: "Cell Owner Name", fieldId: "FanName" }
+];
+
+// Fan viewing his/her cells 
+var fanscellsloadData = [
+  { methodName: "community.aspx/loadCellFanCollection", callBack: fanCellCollectionLoaded, filtertype: "fan" }
+];
+// Fan editing his/her cells 
+var fanscellseditData = [
+  { methodName: "community.aspx/editCellFanCollection", callBack: fanCellCollectionEdited, filtertype: "fan", crudtype: "edit" }
+];
+// Cell viewing its fans 
+var cellsfansloadData = [
+  { methodName: "community.aspx/loadCellFanCollection", callBack: cellFanCollectionLoaded, filtertype: "cell" }
+];
+
+var loadfanCellClick = d3.select("div#fancelllist").on("click", function () {
+    
+    contentSetup(cellfanContentTemplate, false); 
+
+    d3.select("#textFilter")
+        .attr("type", "number");
+
+    d3.select(".testButton")
+        .data(fanscellsloadData)
+        .text("Load CellFan")
+        .on("click", cellfancrud);
+
+    var container = d3.select("div#" + this.id + "CrudContainer");
+    sidenav(container);
+});
+
+//Editing of list follows a different pattern  
+var editfanCellClick = d3.select("div#editFancells").on("click", function () {
+
+    var elements = d3.select("div.content")
+        .selectAll("div.properties");
+
+    elements
+       .each(function (d) {
+           d3.select(this).append("input")
+             .attr("type", "checkbox")
+             .classed("chkbox", true);
+       });
+
+    d3.select(".testButton")
+        .data(fanscellseditData)
+        .text("Edit CellFan")
+        .on("click", cellfancrud);
+});
+
+var loadCellFanClick = d3.select("div#cellfanlist").on("click", function () {
+
+    contentSetup(cellfanContentTemplate, false);
+
+    d3.select("#textFilter")
+        .attr("type", "number");
+
+    d3.select(".testButton")
+        .data(cellsfansloadData)
+        .text("Load CellFan")
+        .on("click", cellfancrud);
+
+    var container = d3.select("div#" + this.id + "CrudContainer");
+    sidenav(container);
+});
+
+
+
 // ||||||||||||||   ***    CELL CRUD    ***    |||||||||||||||| // 
 
-//Callbacks for CRUD 
+
 var populateCellFields = function (aCell) {
     d3.select("#CellName").text(aCell.CellName);
     d3.select("#FanKey").text(aCell.FanKey);
@@ -25,7 +228,7 @@ var cellDeleted = function (aCell) {
     alert("Cell Deleted"); 
 };
 
-//Method for fan crud 
+// CELL Methods and Events  
 
 var cellcrud = function cellData(d, i) {
 
@@ -71,27 +274,8 @@ var celldeleteData = [
 ];
 
 var loadCellClick = d3.select("div#loadCell").on("click", function () {
-    var properties = d3.select("div.content")
-        .selectAll("div.properties")
-        .data(cellContentTemplate);
 
-    //Enter
-    properties
-        .enter()
-        .append("div")
-        .classed("properties", true)
-        .attr("contenteditable", "false");
-        
-    //Update
-    properties
-        .attr("id", function (d) { return d.fieldId })
-        .text(function (d) { return d.title })
-        .classed("edit", false)
-        .classed("add", false)
-        .classed("delete", false);
-
-    //Exit
-    properties.exit(); 
+    contentSetup(cellContentTemplate, false);
 
     d3.select("#textFilter")
         .attr("type", "number"); 
@@ -106,27 +290,8 @@ var loadCellClick = d3.select("div#loadCell").on("click", function () {
 });
 
 var addCellClick = d3.select("div#addCell").on("click", function () {
-    var properties = d3.select("div.content")
-        .selectAll("div.properties")
-        .data(cellContentTemplate);
-
-    //Enter
-    properties
-        .enter()
-        .append("div")
-        .classed("properties", true)
-        .classed("add", true)
-        .attr("contenteditable", "true");
-
-    //Update
-    properties
-        .attr("id", function (d) { return d.fieldId })
-        .text(function (d) { return d.title })
-        .classed("delete", false)
-        .classed("edit", false);
-
-    //Exit
-    properties.exit();
+    
+    contentSetup(cellContentTemplate, true);
 
     d3.select("#textFilter")
         .attr("type", "number");
@@ -168,7 +333,7 @@ var deleteCellClick = d3.select("div#deleteCell").on("click", function () {
 
 // ||||||||||||||   ***    FED CRUD    ***    |||||||||||||||| // 
 
-//Callbacks for CRUD 
+//Callbacks for Fed CRUD 
 var populateFedFields = function (aFed) {
     d3.select("#FedName").text(aFed.FedName);
     d3.select("#FanKey").text(aFed.FanKey);
@@ -192,7 +357,7 @@ var fedDeleted = function (aFed) {
     alert("Fed Deleted");
 };
 
-//Method for fan crud 
+// FED Methods and Events  
 
 var fedcrud = function fedData(d, i) {
 
@@ -239,6 +404,7 @@ var feddeleteData = [
 
 var loadFedClick = d3.select("div#loadFed").on("click", function () {
 
+    contentSetup(fedContentTemplate, false); 
     var properties = d3.select("div.content")
         .selectAll("div.properties")
         .data(fedContentTemplate);
@@ -275,27 +441,8 @@ var loadFedClick = d3.select("div#loadFed").on("click", function () {
 
 
 var addFedClick = d3.select("div#addFed").on("click", function () {
-    var properties = d3.select("div.content")
-        .selectAll("div.properties")
-        .data(fedContentTemplate);
-
-    //Enter
-    properties
-        .enter()
-        .append("div")
-        .classed("properties", true)
-        .classed("add", true)
-        .attr("contenteditable", "true");
-
-    //Update
-    properties
-        .attr("id", function (d) { return d.fieldId })
-        .text(function (d) { return d.fieldId })
-        .classed("delete", false)
-        .classed("edit", false);
-
-    //Exit
-    properties.exit();
+    
+    contentSetup(fedContentTemplate, true); 
 
     d3.select("#textFilter")
         .attr("type", "number");

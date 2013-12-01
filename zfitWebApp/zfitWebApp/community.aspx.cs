@@ -331,5 +331,89 @@ namespace zfit
         #endregion
 
         #endregion
+
+        #region CellFan Web methods 
+        
+        #region Load CellFanCollection
+
+        [WebMethod(EnableSession = false)]
+        public static webObject loadCellFanCollection(CellFanCollection aCellFanCollection)
+        {
+            FanToken vFanToken = ServerSession.GetFanToken(HttpContext.Current.Session);
+            FanKey vFanKey = ServerSession.GetObject<FanKey>(HttpContext.Current.Session);
+            
+            ServerSession.ClearSessionBusiness(HttpContext.Current.Session);
+            ServerSession.PutObject<FanKey>(HttpContext.Current.Session, vFanKey); // Review this element of pattern 
+            webObject vWebObject = new webObject();
+            vWebObject.aTransactionStatus = ServerSession.GetTransactionStatus(HttpContext.Current.Session);
+            try
+            {
+                FanServiceConsumer.GetCellFanCollection(vFanToken, aCellFanCollection);
+                vWebObject.aTransactionStatus.TransactionResult = TransactionResult.OK;
+                vWebObject.aTransactionStatus.Message = "CellFanCollection Loaded";
+                ServerSession.SetTransactionStatus(HttpContext.Current.Session, vWebObject.aTransactionStatus);
+                vWebObject.AnObject = aCellFanCollection;
+            }
+            catch (TransactionStatusException tx)
+            {
+
+                vWebObject.aTransactionStatus.AssignFromSource(tx.TransactionStatus);
+                return vWebObject;
+            }
+            catch (Exception ex)
+            {
+                vWebObject.aTransactionStatus.TransactionResult = TransactionResult.GeneralException;
+                vWebObject.aTransactionStatus.Message = "Load of CellFanCollection unsuccesful" + ex.Message;
+                vWebObject.aTransactionStatus.InnerMessage = ex.InnerException == null ? String.Empty : ex.InnerException.Message;
+                return vWebObject;
+            }
+            return vWebObject;
+        }
+        #endregion
+
+        #region Edit CellFanCollection
+
+        [WebMethod(EnableSession = false)]
+        public static webObject editCellFanCollection(CellFanCollection aCellFanCollection)
+        {
+            FanToken vFanToken = ServerSession.GetFanToken(HttpContext.Current.Session);
+            FanKey vFanKey = ServerSession.GetObject<FanKey>(HttpContext.Current.Session);
+
+            // ********** TEMPORARY REMEDY UNTIL I SORT OUT DATETIME ISSUE 
+            foreach (CellFan vCF in aCellFanCollection.CellFanList)
+            {
+                vCF.CellFanDateJoined = DateTime.Now; 
+            }
+
+            ServerSession.ClearSessionBusiness(HttpContext.Current.Session);
+            ServerSession.PutObject<FanKey>(HttpContext.Current.Session, vFanKey); // Review this element of pattern 
+            webObject vWebObject = new webObject();
+            vWebObject.aTransactionStatus = ServerSession.GetTransactionStatus(HttpContext.Current.Session);
+            try
+            {
+                FanServiceConsumer.SaveCellFan(vFanToken, aCellFanCollection);
+                vWebObject.aTransactionStatus.TransactionResult = TransactionResult.OK;
+                vWebObject.aTransactionStatus.Message = "CellFanCollection Edited";
+                ServerSession.SetTransactionStatus(HttpContext.Current.Session, vWebObject.aTransactionStatus);
+                vWebObject.AnObject = aCellFanCollection;
+            }
+            catch (TransactionStatusException tx)
+            {
+
+                vWebObject.aTransactionStatus.AssignFromSource(tx.TransactionStatus);
+                return vWebObject;
+            }
+            catch (Exception ex)
+            {
+                vWebObject.aTransactionStatus.TransactionResult = TransactionResult.GeneralException;
+                vWebObject.aTransactionStatus.Message = "Edit of CellFanCollection unsuccesful" + ex.Message;
+                vWebObject.aTransactionStatus.InnerMessage = ex.InnerException == null ? String.Empty : ex.InnerException.Message;
+                return vWebObject;
+            }
+            return vWebObject;
+        }
+        #endregion
+
+        #endregion 
     }
 }
