@@ -11,7 +11,7 @@ namespace zfit
         #region Fields
 
         private bool _isFiltered;
-        private FriendFilter _friendFilter;
+        private FriendFilter _friendFilter = new FriendFilter();
         private List<Friend> _friendList = new List<Friend>();
 
         #endregion

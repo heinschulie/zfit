@@ -11,7 +11,7 @@ namespace zfit
         #region Fields
 
         private bool _isFiltered;
-        private FedFilter _fedFilter;
+        private FedFilter _fedFilter = new FedFilter();
         private List<Fed> _fedList = new List<Fed>();
 
         #endregion

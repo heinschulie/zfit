@@ -8,7 +8,7 @@ namespace zfit
 {
     public class FriendFilter : Zephob
     {
-        private Friend _friendFilter;
+        private Friend _friendFilter = new Friend();
 
         public Friend FriendshipFilter
         {

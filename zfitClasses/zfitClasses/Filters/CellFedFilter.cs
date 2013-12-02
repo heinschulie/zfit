@@ -8,7 +8,7 @@ namespace zfit
 {
     public class CellFedFilter : Zephob
     {
-        private CellFed _cellFedFilter;
+        private CellFed _cellFedFilter = new CellFed();
 
         public CellFed CellfedFilter
         {

@@ -10,7 +10,7 @@ namespace zfit
         #region Fields
 
         private bool _isFiltered;
-        private CellFilter _cellFilter; 
+        private CellFilter _cellFilter = new CellFilter(); 
         private List<Cell> _cellList = new List<Cell>();
 
         #endregion

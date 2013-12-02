@@ -16,6 +16,7 @@ namespace zfit
         #region Fields
 
         private bool _isFiltered;
+        private FanFilter _fanFilter = new FanFilter(); 
         private List<Fan> _fanList = new List<Fan>();
 
         #endregion
@@ -34,6 +35,17 @@ namespace zfit
             set { _isFiltered = value; }
         }
 
+        /// <summary>
+        /// Gets or sets the <see cref="FanFilter"/> FanFilter.
+        /// </summary>
+        /// <value>
+        /// The FanFilter .
+        /// </value>
+        public FanFilter FanFilter
+        {
+            get { return _fanFilter; }
+            set { _fanFilter = value; }
+        }
         /// <summary>
         /// Gets or sets the <see cref="Fan"/> list.
         /// </summary>

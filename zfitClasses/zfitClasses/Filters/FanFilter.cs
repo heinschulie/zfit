@@ -9,7 +9,6 @@ namespace zfit
 {
     public class FanFilter : Zephob
     {
-
         private string _fanNameFilter;
 
         public string FanNameFilter

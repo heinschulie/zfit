@@ -11,7 +11,7 @@ namespace zfit
         #region Fields
 
         private bool _isFiltered;
-        private FanFedFilter _fanFedFilter;
+        private FanFedFilter _fanFedFilter = new FanFedFilter();
         private List<FanFed> _fanFedList = new List<FanFed>();
 
         #endregion

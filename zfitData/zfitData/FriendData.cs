@@ -27,8 +27,8 @@ namespace zfit
             vStringBuilder.AppendLine("       FRD_Friend t3,");
             vStringBuilder.AppendLine("       REL_Relationship t4");
             vStringBuilder.AppendLine("where  t1.FAN_Key = t3.FAN_Key1");
-            vStringBuilder.AppendLine("and    and t2.FAN_Key = t3.FAN_Key2");
-            vStringBuilder.AppendLine("and    and t4.REL_Key = t3.REL_Key");
+            vStringBuilder.AppendLine("and    t2.FAN_Key = t3.FAN_Key2");
+            vStringBuilder.AppendLine("and    t4.REL_Key = t3.REL_Key");
             
             return vStringBuilder;
         }
@@ -44,13 +44,13 @@ namespace zfit
         /// <param name="aSqlDataReader">A <see cref="SqlDataReader"/> argument.</param>
         public static void DataToObject(Friend aFriend, SqlDataReader aSqlDataReader, bool aIncludeAvatar)
         {
-            aFriend.Fan1Key = Convert.ToInt32(aSqlDataReader["FAN_Key"]);
-            aFriend.Fan1Name = Convert.ToString(aSqlDataReader["FAN_Name"]);
-            aFriend.Fan1Surname = Convert.ToString(aSqlDataReader["FAN_Surname"]);
-            aFriend.Fan2Key = Convert.ToInt32(aSqlDataReader["FAN_Key"]);
-            aFriend.Fan2Name = Convert.ToString(aSqlDataReader["FAN_Name"]);
-            aFriend.Fan2Surname = Convert.ToString(aSqlDataReader["FAN_Surname"]);
-            aFriend.FriendDateEstablished = Convert.ToDateTime(aSqlDataReader["FRD_DateEstablished,"]);
+            aFriend.Fan1Key = Convert.ToInt32(aSqlDataReader["Friend1_Key"]);
+            aFriend.Fan1Name = Convert.ToString(aSqlDataReader["Friend1_Name"]);
+            aFriend.Fan1Surname = Convert.ToString(aSqlDataReader["Friend1_Surname"]);
+            aFriend.Fan2Key = Convert.ToInt32(aSqlDataReader["Friend2_Key"]);
+            aFriend.Fan2Name = Convert.ToString(aSqlDataReader["Friend2_Name"]);
+            aFriend.Fan2Surname = Convert.ToString(aSqlDataReader["Friend2_Surname"]);
+            aFriend.FriendDateEstablished = Convert.ToDateTime(aSqlDataReader["FRD_DateEstablished"]);
             aFriend.Relationship = Convert.ToInt32(aSqlDataReader["Relationship_Key"]);
             aFriend.RelationshipType = Convert.ToString(aSqlDataReader["Relationship_Type"]);
         }
@@ -293,16 +293,16 @@ namespace zfit
                 vStringBuilder.AppendLine("delete FRD_Friend");
                 if (aFriend.Fan1Key > 0 && aFriend.Fan2Key > 0)
                 {
-                    vStringBuilder.AppendLine("where  FAN_Key = @FAN1Key");
-                    vStringBuilder.AppendLine("and    FAN_Key = @FAN2Key");
+                    vStringBuilder.AppendLine("where  FAN_Key1 = @FAN1Key");
+                    vStringBuilder.AppendLine("and    FAN_Key2 = @FAN2Key");
                 }
                 else if (aFriend.Fan1Key > 0)
                 {
-                    vStringBuilder.AppendLine("where  FAN_Key = @FAN1Key");
+                    vStringBuilder.AppendLine("where  FAN_Key1 = @FAN1Key");
                 }
                 else if (aFriend.Fan2Key > 0)
                 {
-                    vStringBuilder.AppendLine("where  FAN_Key = @FAN2Key");
+                    vStringBuilder.AppendLine("where  FAN_Key2 = @FAN2Key");
                 }
                 vSqlCommand.Parameters.AddWithValue("@FAN1Key", aFriend.Fan1Key);
                 vSqlCommand.Parameters.AddWithValue("@FAN2Key", aFriend.Fan2Key);

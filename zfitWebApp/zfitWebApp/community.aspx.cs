@@ -608,6 +608,18 @@ namespace zfit
                 vCF.FriendDateEstablished = DateTime.Now;
             }
 
+            //faisdfhfhlasdkfhlasdjkfhalsdkfj TEST
+            Friend friend1 = new Friend();
+            friend1.Fan1Key = 11;
+            friend1.Fan2Key = 3; 
+
+            Friend friend2 = new Friend();
+            friend1.Fan1Key = 2;
+            friend1.Fan2Key = 3;
+
+            aFriendCollection.FriendList.Add(friend1);
+            aFriendCollection.FriendList.Add(friend2);  
+
             try
             {
                 FanServiceConsumer.SaveFriend(vFanToken, aFriendCollection);

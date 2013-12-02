@@ -11,7 +11,7 @@ namespace zfit
         #region Fields
 
         private bool _isFiltered;
-        private CellFanFilter _cellFanFilter;
+        private CellFanFilter _cellFanFilter = new CellFanFilter();
         private List<CellFan> _cellFanList = new List<CellFan>();
 
         #endregion

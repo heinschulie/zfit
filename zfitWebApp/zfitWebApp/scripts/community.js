@@ -915,11 +915,11 @@ var populateFriendCollectionFields = function (anArray, friend) {
         .classed("properties", true);
 
     //Update
-    if (fanfed === "friend") {
-        elements.text(function (d) { return d.Fan1Name });
+    if (friend === "friend") {
+        elements.text(function (d) { return d.Fan2DisplayName });
     }
     else {
-        elements.text(function (d) { return d.Fan2Name });
+        elements.text(function (d) { return d.Fan1DisplayName });
     }
 
     //Exit
@@ -929,11 +929,11 @@ var populateFriendCollectionFields = function (anArray, friend) {
 };
 
 var friendsCollectionLoaded = function (aFriendCollection) {
-    populateFriendCollectionFields(aFriendCollection.FriendList, "fed");
+    populateFriendCollectionFields(aFriendCollection.FriendList, "friend");
 };
 
 var friendCollectionEdited = function (aFriendCollection) {
-    populateFriendCollectionFields(aFriendCollection.FriendList, "fed");
+    populateFriendCollectionFields(aFriendCollection.FriendList, "friend");
 };
 
 // FANFED Methods and Events  
@@ -965,7 +965,7 @@ var friendcrud = function fanfedData(d, i) {
                 Friend.Fan1Key = thisfriend.Fan1Key;
                 Friend.Fan1Name = thisfriend.Fan1Name;
                 Friend.Fan1Surname = thisfriend.Fan1Surname;
-                Friend.Fan2Key = thisfriend.Fed2Key;
+                Friend.Fan2Key = thisfriend.Fan2Key;
                 Friend.Fan2Name = thisfriend.Fan2Name;
                 Friend.Fan2Surname = thisfriend.Fan2Surname;
                 //Friend.FriendDateJoined = thisfanfed.FriendDateJoined;
@@ -995,7 +995,7 @@ var friendloadData = [
 ];
 // Fan editing his/her friends 
 var friendeditData = [
-  { methodName: "community.aspx/editFriendCollection", callBack: friendCollectionEdited, filtertype: "fed", crudtype: "edit" }
+  { methodName: "community.aspx/editFriendCollection", callBack: friendCollectionEdited, filtertype: "fan", crudtype: "edit" }
 ];
 
 //*** FRIEND's from Fans perspective
@@ -1017,7 +1017,7 @@ var loadfriendsClick = d3.select("div#loadFriends").on("click", function () {
 });
 
 //Editing of list follows a different pattern  
-var editfriendsClick = d3.select("div#editFanfeds").on("click", function () {
+var editfriendsClick = d3.select("div#editFriends").on("click", function () {
 
     var elements = d3.select("div.content")
         .selectAll("div.properties");

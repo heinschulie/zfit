@@ -74,30 +74,41 @@ namespace zfit
                 throw new ArgumentNullException("Update FriendCollection Business");
             }
 
-
             //if (!FanFunctionAccessData.HasModeAccess(aFanKey, "Friend", AccessMode.Update))
             //{
             //    throw new ZpAccessException("Access Denied", String.Format("{0}", aFanKey.FannKey), AccessMode.Update, "Friend");
             //}
            
             FriendCollection vExisting = new FriendCollection();
+            vExisting.IsFiltered = true; 
             vExisting.FriendFilter.AssignFromSource(aFriendCollection.FriendFilter);
             FriendData.Load(vExisting);
             FriendCollection vFresh = new FriendCollection();
-            vFresh.FriendFilter.AssignFromSource(aFriendCollection); 
+            vFresh.IsFiltered = true; 
+            vFresh.FriendFilter.AssignFromSource(aFriendCollection.FriendFilter);
 
             foreach (Friend vFriend in aFriendCollection.FriendList)
-            {
+            {             
+                bool exists = false;
+                bool bonafide = true;
+                int instancenumber = 0;
+
                 foreach (Friend aFriend in vExisting.FriendList)
-                {
-                    if (vFriend.Equals(aFriend))
-                        vFresh.FriendList.Add(vFriend);
-                    else
+                {                    
+                    if (vFriend.Fan1Key == aFriend.Fan1Key && vFriend.Fan2Key == aFriend.Fan2Key)
                     {
-                        if (vFriend.Fan1Key != aFriend.Fan2Key && vFriend.Fan2Key != aFriend.Fan1Key)
-                            vFresh.FriendList.Add(vFriend);
+                        exists = true;
+                        instancenumber++; 
+                        break; 
+                    }
+                    else if (vFriend.Fan1Key == aFriend.Fan2Key && vFriend.Fan2Key == aFriend.Fan1Key)
+                    {
+                        bonafide = false; 
+                        break;
                     }
                 }
+                if ((exists || bonafide) && instancenumber < 2)
+                    vFresh.FriendList.Add(vFriend);
             }
 
             FriendData.Save(vFresh);

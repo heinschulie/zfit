@@ -8,7 +8,7 @@ namespace zfit
 {
     public class CellFanFilter : Zephob
     {
-        private CellFan _cellFanFilter;
+        private CellFan _cellFanFilter = new CellFan();
 
         public CellFan CellfanFilter
         {

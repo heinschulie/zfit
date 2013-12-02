@@ -8,7 +8,7 @@ namespace zfit
 {
     public class FanFedFilter : Zephob
     {
-        private FanFed _fanFedFilter;
+        private FanFed _fanFedFilter = new FanFed();
 
         public FanFed FanfedFilter
         {
