@@ -700,8 +700,6 @@ var editfedCellsClick = d3.select("div#editFedCells").on("click", function () {
 });
 
 
-
-
 // ||||||||||||||   ***    FANFED CRUD    ***    |||||||||||||||| //
 
 //Callbacks for FANFED CRUD 
@@ -897,3 +895,142 @@ var editfedFansClick = d3.select("div#editFedFans").on("click", function () {
         .on("click", fanfedcrud);
 });
 
+
+
+// ||||||||||||||   ***    FANFED CRUD    ***    |||||||||||||||| //
+
+//Callbacks for FANFED CRUD 
+
+var populateFriendCollectionFields = function (anArray, friend) {
+
+    //Select & data
+    var elements = d3.select("div.content")
+        .selectAll("div.properties")
+        .data(anArray);
+
+    //Enter
+    elements
+        .enter()
+        .append("div")
+        .classed("properties", true);
+
+    //Update
+    if (fanfed === "friend") {
+        elements.text(function (d) { return d.Fan1Name });
+    }
+    else {
+        elements.text(function (d) { return d.Fan2Name });
+    }
+
+    //Exit
+    elements
+        .exit()
+        .remove();
+};
+
+var friendsCollectionLoaded = function (aFriendCollection) {
+    populateFriendCollectionFields(aFriendCollection.FriendList, "fed");
+};
+
+var friendCollectionEdited = function (aFriendCollection) {
+    populateFriendCollectionFields(aFriendCollection.FriendList, "fed");
+};
+
+// FANFED Methods and Events  
+
+var friendcrud = function fanfedData(d, i) {
+
+    var methodname = d.methodName;
+    var callback = d.callBack;
+    var aFriendCollection = { FriendFilter: { FriendshipFilter: {} } };
+    var filter = d3.select("#textFilter");
+
+    if (filter.attr("type") === "number") {
+        aFriendCollection.isFiltered = true;
+        aFriendCollection.FriendFilter.FriendshipFilter.Fan1Key = filter.node().value;
+    }
+    else {
+        aFriendCollection.isFiltered = true;
+        aFriendCollection.FriendFilter.FriendshipFilter.Fan1Name = filter.text();
+    }
+
+    //Remove the friends that are have checkboxes that are checked 
+    if (d.crudtype === "edit") {
+        aFriendCollection.FriendList = [];
+        var chkboxes = d3.selectAll("input.chkbox");
+        chkboxes.each(function (d, i) {
+            if (chkboxes[0][i].checked === false) {
+                var Friend = {};
+                var thisfriend = chkboxes[0][i].__data__;
+                Friend.Fan1Key = thisfriend.Fan1Key;
+                Friend.Fan1Name = thisfriend.Fan1Name;
+                Friend.Fan1Surname = thisfriend.Fan1Surname;
+                Friend.Fan2Key = thisfriend.Fed2Key;
+                Friend.Fan2Name = thisfriend.Fan2Name;
+                Friend.Fan2Surname = thisfriend.Fan2Surname;
+                //Friend.FriendDateJoined = thisfanfed.FriendDateJoined;
+                Friend.HashValue = thisfriend.HashValue;
+                Friend.ObjectState = thisfriend.ObjectState;
+
+                aFriendCollection.FriendList.push(Friend);
+            }
+        });
+    }
+
+    var FriendCollection = { 'aFriendCollection': aFriendCollection };
+    ajaxCall(methodname, FriendCollection, callback);
+}
+
+//Data Arrays for Friend Crud Methods 
+var friendContentTemplate = [
+    { title: "Fan Key", fieldId: "FanKey" },
+    { title: "Fan Name", fieldId: "FanName" },
+    { title: "Fan Owner Key", fieldId: "FedKey" },
+    { title: "Fan Owner Name", fieldId: "FedName" }
+];
+
+// Fan viewing his/her friends 
+var friendloadData = [
+  { methodName: "community.aspx/loadFriendCollection", callBack: friendsCollectionLoaded, filtertype: "fan" }
+];
+// Fan editing his/her friends 
+var friendeditData = [
+  { methodName: "community.aspx/editFriendCollection", callBack: friendCollectionEdited, filtertype: "fed", crudtype: "edit" }
+];
+
+//*** FRIEND's from Fans perspective
+
+var loadfriendsClick = d3.select("div#loadFriends").on("click", function () {
+
+    contentSetup(friendContentTemplate, false);
+
+    d3.select("#textFilter")
+        .attr("type", "number");
+
+    d3.select(".testButton")
+        .data(friendloadData)
+        .text("Load Friend")
+        .on("click", friendcrud);
+
+    var container = d3.select("div#" + this.id + "CrudContainer");
+    sidenav(container);
+});
+
+//Editing of list follows a different pattern  
+var editfriendsClick = d3.select("div#editFanfeds").on("click", function () {
+
+    var elements = d3.select("div.content")
+        .selectAll("div.properties");
+
+    elements
+       .each(function (d) {
+           d3.select(this).append("input")
+             .attr("type", "checkbox")
+             .classed("chkbox", true);
+       });
+
+    d3.select(".testButton")
+        .data(friendeditData)
+        .text("Edit Friend")
+        .on("click", friendcrud);
+});

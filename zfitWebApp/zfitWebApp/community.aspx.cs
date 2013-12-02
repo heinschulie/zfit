@@ -555,5 +555,84 @@ namespace zfit
         #endregion
 
         #endregion 
+      
+        #region Friend Web methods
+
+        #region Load FriendCollection
+
+        [WebMethod(EnableSession = false)]
+        public static webObject loadFriendCollection(FriendCollection aFriendCollection)
+        {
+            FanToken vFanToken = ServerSession.GetFanToken(HttpContext.Current.Session);
+            ServerSession.ClearSessionBusiness(HttpContext.Current.Session);
+            webObject vWebObject = new webObject();
+            vWebObject.aTransactionStatus = ServerSession.GetTransactionStatus(HttpContext.Current.Session);
+
+            try
+            {
+                FanServiceConsumer.GetFriendCollection(vFanToken, aFriendCollection);
+                vWebObject.aTransactionStatus.TransactionResult = TransactionResult.OK;
+                vWebObject.aTransactionStatus.Message = "FriendCollection Loaded";
+                ServerSession.SetTransactionStatus(HttpContext.Current.Session, vWebObject.aTransactionStatus);
+                vWebObject.AnObject = aFriendCollection;
+            }
+            catch (TransactionStatusException tx)
+            {
+                vWebObject.aTransactionStatus.AssignFromSource(tx.TransactionStatus);
+                return vWebObject;
+            }
+            catch (Exception ex)
+            {
+                vWebObject.aTransactionStatus.TransactionResult = TransactionResult.GeneralException;
+                vWebObject.aTransactionStatus.Message = "Load of FriendCollection unsuccesful" + ex.Message;
+                vWebObject.aTransactionStatus.InnerMessage = ex.InnerException == null ? String.Empty : ex.InnerException.Message;
+                return vWebObject;
+            }
+            return vWebObject;
+        }
+        #endregion
+
+        #region Edit FriendCollection
+
+        [WebMethod(EnableSession = false)]
+        public static webObject editFriendCollection(FriendCollection aFriendCollection)
+        {
+            FanToken vFanToken = ServerSession.GetFanToken(HttpContext.Current.Session);
+            ServerSession.ClearSessionBusiness(HttpContext.Current.Session);
+            webObject vWebObject = new webObject();
+            vWebObject.aTransactionStatus = ServerSession.GetTransactionStatus(HttpContext.Current.Session);
+
+            // ********** TEMPORARY REMEDY UNTIL I SORT OUT DATETIME ISSUE 
+            foreach (Friend vCF in aFriendCollection.FriendList)
+            {
+                vCF.FriendDateEstablished = DateTime.Now;
+            }
+
+            try
+            {
+                FanServiceConsumer.SaveFriend(vFanToken, aFriendCollection);
+                vWebObject.aTransactionStatus.TransactionResult = TransactionResult.OK;
+                vWebObject.aTransactionStatus.Message = "FriendCollection Edited";
+                ServerSession.SetTransactionStatus(HttpContext.Current.Session, vWebObject.aTransactionStatus);
+                vWebObject.AnObject = aFriendCollection;
+            }
+            catch (TransactionStatusException tx)
+            {
+
+                vWebObject.aTransactionStatus.AssignFromSource(tx.TransactionStatus);
+                return vWebObject;
+            }
+            catch (Exception ex)
+            {
+                vWebObject.aTransactionStatus.TransactionResult = TransactionResult.GeneralException;
+                vWebObject.aTransactionStatus.Message = "Edit of FriendCollection unsuccesful" + ex.Message;
+                vWebObject.aTransactionStatus.InnerMessage = ex.InnerException == null ? String.Empty : ex.InnerException.Message;
+                return vWebObject;
+            }
+            return vWebObject;
+        }
+        #endregion
+
+        #endregion 
     }
 }

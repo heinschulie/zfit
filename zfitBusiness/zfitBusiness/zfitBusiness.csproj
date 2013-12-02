@@ -58,6 +58,7 @@
     <Compile Include="CellFedBusiness.cs" />
     <Compile Include="FanFedBusiness.cs" />
     <Compile Include="FedBusiness.cs" />
+    <Compile Include="FriendBusiness.cs" />
     <Compile Include="FunctionBusiness.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="RoleBusiness.cs" />

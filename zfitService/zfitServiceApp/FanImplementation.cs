@@ -922,5 +922,66 @@ namespace zfit
         }
 
         #endregion
+
+        #region Friend Methods
+
+        /// <summary>
+        ///   Gets the <see cref="Friend"/> by Key.
+        /// </summary>
+        /// <param name="aXmlArgument">XML Argument <see cref="string"/>.</param>
+        /// <returns>Friend as XML <see cref="string"/>.</returns>
+        /// <exception cref="ArgumentNullException">If <c>aXmlArgument</c> is <c>null</c>.</exception>
+        public static string GetFriend(FanKey aFanKey, string aXmlArgument)
+        {
+            if (aXmlArgument == null)
+            {
+                throw new ArgumentNullException("aXmlArgument of GetFriend");
+            }
+            Friend vFriend = new Friend();
+            vFriend = XmlUtils.Deserialize<Friend>(aXmlArgument);
+            FriendBusiness.Load(aFanKey, vFriend);
+            return XmlUtils.Serialize<Friend>(vFriend, true);
+        }
+
+        /// <summary>
+        ///   The <c>GetFriendCollection</c> implementation method deserializes an incoming XML Argument <see cref="string"/> as a new <see cref="FriendCollection"/> object.
+        ///   It invokes the <c>Insert</c> method of <see cref="FriendBusiness"/> with the newly deserialized <see cref="FriendCollection"/> object.
+        ///   Finally, it returns the collection object as a serialized <see cref="string"/> of XML.
+        /// </summary>
+        /// <param name="aXmlArgument">XML Argument <see cref="string"/>.</param>
+        /// <returns><see cref="FriendCollection"/> as XML <see cref="string"/>.</returns>
+        /// <exception cref="ArgumentNullException">If <c>aXmlArgument</c> is <c>null</c>.</exception>
+        public static string GetFriendCollection(FanKey aFanKey, string aXmlArgument)
+        {
+            if (aXmlArgument == null)
+            {
+                throw new ArgumentNullException("aXmlArgument of GetFriendCollection");
+            }
+            FriendCollection vFriendCollection = new FriendCollection();
+            vFriendCollection = XmlUtils.Deserialize<FriendCollection>(aXmlArgument);
+            FriendBusiness.Load(aFanKey, vFriendCollection);
+            return XmlUtils.Serialize<FriendCollection>(vFriendCollection, true);
+        }
+
+        /// <summary>
+        /// Saves the provider suburb.
+        /// </summary>
+        /// <param name="aFanKey">A user key.</param>
+        /// <param name="aXmlArgument">A XML argument.</param>
+        /// <returns>A string of XML representing a FriendCollection</returns>
+        /// <exception cref="System.ArgumentNullException">aXmlArgument of SaveFriend</exception>
+        public static string SaveFriend(FanKey aFanKey, string aXmlArgument)
+        {
+            if (aXmlArgument == null)
+            {
+                throw new ArgumentNullException("aXmlArgument of SaveFriend");
+            }
+            FriendCollection vFriendCollection = new FriendCollection();
+            vFriendCollection = XmlUtils.Deserialize<FriendCollection>(aXmlArgument);
+            FriendBusiness.Save(aFanKey, vFriendCollection);
+            return XmlUtils.Serialize<FriendCollection>(vFriendCollection, true);
+        }
+
+        #endregion
     }
 }

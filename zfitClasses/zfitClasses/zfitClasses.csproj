@@ -50,6 +50,7 @@
     <Compile Include="Classes\CellFed.cs" />
     <Compile Include="Classes\FanFed.cs" />
     <Compile Include="Classes\Fed.cs" />
+    <Compile Include="Classes\Friend.cs" />
     <Compile Include="Classes\Function.cs" />
     <Compile Include="Classes\FunctionAccess.cs" />
     <Compile Include="Classes\Role.cs" />
@@ -65,6 +66,7 @@
     <Compile Include="Collections\CellFedCollection.cs" />
     <Compile Include="Collections\FanFedCollection.cs" />
     <Compile Include="Collections\FedCollection.cs" />
+    <Compile Include="Collections\FriendCollection.cs" />
     <Compile Include="Collections\FunctionCollection.cs" />
     <Compile Include="Collections\RoleCollection.cs" />
     <Compile Include="Collections\RoleFunctionCollection.cs" />
@@ -81,12 +83,14 @@
     <Compile Include="Filters\FanFedFilter.cs" />
     <Compile Include="Filters\FanFilter.cs" />
     <Compile Include="Filters\FedFilter.cs" />
+    <Compile Include="Filters\FriendFilter.cs" />
     <Compile Include="Filters\UserFilter.cs" />
     <Compile Include="Keys\CellFanKey.cs" />
     <Compile Include="Keys\CellFedKey.cs" />
     <Compile Include="Keys\CellKey.cs" />
     <Compile Include="Keys\FanFedKey.cs" />
     <Compile Include="Keys\FedKey.cs" />
+    <Compile Include="Keys\FriendKey.cs" />
     <Compile Include="Keys\FunctionKey.cs" />
     <Compile Include="Keys\RoleFunctionKey.cs" />
     <Compile Include="Keys\RoleKey.cs" />

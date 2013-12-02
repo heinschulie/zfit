@@ -407,5 +407,39 @@ namespace zfit
         }
 
         #endregion
+
+        #region Friend Service Calls
+
+        /// <summary>
+        ///   Gets a specified <see cref="Friend"/> by key.
+        /// </summary>
+        /// <param name="aFanToken">A <see cref="FanToken"/> object used for Access Control.</param>
+        /// <param name="aFriend"><see cref="Friend"/> object.</param>
+        public static void GetFriend(FanToken aFanToken, Friend aFriend)
+        {
+            FanCallHandler.ServiceCall<Friend>(aFanToken, "GetFriend", aFriend);
+        }
+
+        /// <summary>
+        ///   Gets a specified <see cref="FriendCollection"/>.
+        /// </summary>
+        /// <param name="aFanToken">A <see cref="FanToken"/> object used for Access Control.</param>
+        /// <param name="aFriendCollection"><see cref="Friend"/>Collection object.</param>
+        public static void GetFriendCollection(FanToken aFanToken, FriendCollection aFriendCollection)
+        {
+            FanCallHandler.ServiceCall<FriendCollection>(aFanToken, "GetFriendCollection", aFriendCollection);
+        }
+
+        /// <summary>
+        /// Add a <see cref="Friend" />.
+        /// </summary>
+        /// <param name="aFanToken">A <see cref="FanToken" /> object used for Access Control.</param>
+        /// <param name="aFriendCollection">A provider suburb collection.</param>
+        public static void SaveFriend(FanToken aFanToken, FriendCollection aFriendCollection)
+        {
+            FanCallHandler.ServiceCall<FriendCollection>(aFanToken, "SaveFriend", aFriendCollection);
+        }
+
+        #endregion
     }
 }

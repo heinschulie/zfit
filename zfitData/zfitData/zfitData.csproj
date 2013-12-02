@@ -54,6 +54,7 @@
     <Compile Include="CellFedData.cs" />
     <Compile Include="FanFedData.cs" />
     <Compile Include="FedData.cs" />
+    <Compile Include="FriendData.cs" />
     <Compile Include="FunctionData.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="RoleData.cs" />
