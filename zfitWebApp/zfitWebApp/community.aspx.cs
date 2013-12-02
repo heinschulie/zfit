@@ -476,5 +476,84 @@ namespace zfit
         #endregion
 
         #endregion 
+        
+        #region FanFed Web methods
+
+        #region Load FanFedCollection
+
+        [WebMethod(EnableSession = false)]
+        public static webObject loadFanFedCollection(FanFedCollection aFanFedCollection)
+        {
+            FanToken vFanToken = ServerSession.GetFanToken(HttpContext.Current.Session);
+            ServerSession.ClearSessionBusiness(HttpContext.Current.Session);
+            webObject vWebObject = new webObject();
+            vWebObject.aTransactionStatus = ServerSession.GetTransactionStatus(HttpContext.Current.Session);
+
+            try
+            {
+                FanServiceConsumer.GetFanFedCollection(vFanToken, aFanFedCollection);
+                vWebObject.aTransactionStatus.TransactionResult = TransactionResult.OK;
+                vWebObject.aTransactionStatus.Message = "FanFedCollection Loaded";
+                ServerSession.SetTransactionStatus(HttpContext.Current.Session, vWebObject.aTransactionStatus);
+                vWebObject.AnObject = aFanFedCollection;
+            }
+            catch (TransactionStatusException tx)
+            {
+                vWebObject.aTransactionStatus.AssignFromSource(tx.TransactionStatus);
+                return vWebObject;
+            }
+            catch (Exception ex)
+            {
+                vWebObject.aTransactionStatus.TransactionResult = TransactionResult.GeneralException;
+                vWebObject.aTransactionStatus.Message = "Load of FanFedCollection unsuccesful" + ex.Message;
+                vWebObject.aTransactionStatus.InnerMessage = ex.InnerException == null ? String.Empty : ex.InnerException.Message;
+                return vWebObject;
+            }
+            return vWebObject;
+        }
+        #endregion
+
+        #region Edit FanFedCollection
+
+        [WebMethod(EnableSession = false)]
+        public static webObject editFanFedCollection(FanFedCollection aFanFedCollection)
+        {
+            FanToken vFanToken = ServerSession.GetFanToken(HttpContext.Current.Session);
+            ServerSession.ClearSessionBusiness(HttpContext.Current.Session);
+            webObject vWebObject = new webObject();
+            vWebObject.aTransactionStatus = ServerSession.GetTransactionStatus(HttpContext.Current.Session);
+
+            // ********** TEMPORARY REMEDY UNTIL I SORT OUT DATETIME ISSUE 
+            foreach (FanFed vCF in aFanFedCollection.FanFedList)
+            {
+                vCF.FanFedDateJoined = DateTime.Now;
+            }
+
+            try
+            {
+                FanServiceConsumer.SaveFanFed(vFanToken, aFanFedCollection);
+                vWebObject.aTransactionStatus.TransactionResult = TransactionResult.OK;
+                vWebObject.aTransactionStatus.Message = "FanFedCollection Edited";
+                ServerSession.SetTransactionStatus(HttpContext.Current.Session, vWebObject.aTransactionStatus);
+                vWebObject.AnObject = aFanFedCollection;
+            }
+            catch (TransactionStatusException tx)
+            {
+
+                vWebObject.aTransactionStatus.AssignFromSource(tx.TransactionStatus);
+                return vWebObject;
+            }
+            catch (Exception ex)
+            {
+                vWebObject.aTransactionStatus.TransactionResult = TransactionResult.GeneralException;
+                vWebObject.aTransactionStatus.Message = "Edit of FanFedCollection unsuccesful" + ex.Message;
+                vWebObject.aTransactionStatus.InnerMessage = ex.InnerException == null ? String.Empty : ex.InnerException.Message;
+                return vWebObject;
+            }
+            return vWebObject;
+        }
+        #endregion
+
+        #endregion 
     }
 }

@@ -15,6 +15,9 @@
             <div class="sideNavTerElement" id="editFancells">Edit Fan's Cell List</div>
         </div> 
         <div class="sideNavSecElement" id="fanfedlist">Fan's Fed List</div>
+        <div class="subelementContainer" id="fanfedlistCrudContainer">
+            <div class="sideNavTerElement" id="editFanfeds">Edit Fan's Fed List</div>
+        </div> 
     </div>
     <div class="sideNavElement" id="cel" contenteditable="false">Cells</div>
     <div class="subelementContainer" id="celCrudContainer">
@@ -41,8 +44,14 @@
             <div class="sideNavTerElement" id="deleteFed">Delete Fed</div>
         </div> 
         <div class="sideNavSecElement" id="addFed">Add Fed</div>
-        <div class="sideNavSecElement" id="fedfanlist">Fed Fan's List</div>
+        <div class="sideNavSecElement" id="fedfanlist">Fed Fan's List</div>       
+        <div class="subelementContainer" id="fedfanlistCrudContainer">
+            <div class="sideNavTerElement" id="editFedFans">Edit Fed's Fan List</div>
+        </div> 
         <div class="sideNavSecElement" id="fedcelllist">Fed Cell's List</div>
+        <div class="subelementContainer" id="fedcelllistCrudContainer">
+            <div class="sideNavTerElement" id="editFedCells">Edit Fed's Cell List</div>
+        </div> 
     </div>
 </asp:Content>
 <asp:Content ID="Content3" ContentPlaceHolderID="contentPlaceHolder" runat="server">

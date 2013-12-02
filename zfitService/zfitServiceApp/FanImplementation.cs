@@ -861,5 +861,66 @@ namespace zfit
         }
 
         #endregion
+
+        #region FanFed Methods
+
+        /// <summary>
+        ///   Gets the <see cref="FanFed"/> by Key.
+        /// </summary>
+        /// <param name="aXmlArgument">XML Argument <see cref="string"/>.</param>
+        /// <returns>FanFed as XML <see cref="string"/>.</returns>
+        /// <exception cref="ArgumentNullException">If <c>aXmlArgument</c> is <c>null</c>.</exception>
+        public static string GetFanFed(FanKey aFanKey, string aXmlArgument)
+        {
+            if (aXmlArgument == null)
+            {
+                throw new ArgumentNullException("aXmlArgument of GetFanFed");
+            }
+            FanFed vFanFed = new FanFed();
+            vFanFed = XmlUtils.Deserialize<FanFed>(aXmlArgument);
+            FanFedBusiness.Load(aFanKey, vFanFed);
+            return XmlUtils.Serialize<FanFed>(vFanFed, true);
+        }
+
+        /// <summary>
+        ///   The <c>GetFanFedCollection</c> implementation method deserializes an incoming XML Argument <see cref="string"/> as a new <see cref="FanFedCollection"/> object.
+        ///   It invokes the <c>Insert</c> method of <see cref="FanFedBusiness"/> with the newly deserialized <see cref="FanFedCollection"/> object.
+        ///   Finally, it returns the collection object as a serialized <see cref="string"/> of XML.
+        /// </summary>
+        /// <param name="aXmlArgument">XML Argument <see cref="string"/>.</param>
+        /// <returns><see cref="FanFedCollection"/> as XML <see cref="string"/>.</returns>
+        /// <exception cref="ArgumentNullException">If <c>aXmlArgument</c> is <c>null</c>.</exception>
+        public static string GetFanFedCollection(FanKey aFanKey, string aXmlArgument)
+        {
+            if (aXmlArgument == null)
+            {
+                throw new ArgumentNullException("aXmlArgument of GetFanFedCollection");
+            }
+            FanFedCollection vFanFedCollection = new FanFedCollection();
+            vFanFedCollection = XmlUtils.Deserialize<FanFedCollection>(aXmlArgument);
+            FanFedBusiness.Load(aFanKey, vFanFedCollection);
+            return XmlUtils.Serialize<FanFedCollection>(vFanFedCollection, true);
+        }
+
+        /// <summary>
+        /// Saves the provider suburb.
+        /// </summary>
+        /// <param name="aFanKey">A user key.</param>
+        /// <param name="aXmlArgument">A XML argument.</param>
+        /// <returns>A string of XML representing a FanFedCollection</returns>
+        /// <exception cref="System.ArgumentNullException">aXmlArgument of SaveFanFed</exception>
+        public static string SaveFanFed(FanKey aFanKey, string aXmlArgument)
+        {
+            if (aXmlArgument == null)
+            {
+                throw new ArgumentNullException("aXmlArgument of SaveFanFed");
+            }
+            FanFedCollection vFanFedCollection = new FanFedCollection();
+            vFanFedCollection = XmlUtils.Deserialize<FanFedCollection>(aXmlArgument);
+            FanFedBusiness.Save(aFanKey, vFanFedCollection);
+            return XmlUtils.Serialize<FanFedCollection>(vFanFedCollection, true);
+        }
+
+        #endregion
     }
 }

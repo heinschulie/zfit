@@ -373,5 +373,39 @@ namespace zfit
         }
 
         #endregion
+
+        #region FanFed Service Calls
+
+        /// <summary>
+        ///   Gets a specified <see cref="FanFed"/> by key.
+        /// </summary>
+        /// <param name="aFanToken">A <see cref="FanToken"/> object used for Access Control.</param>
+        /// <param name="aFanFed"><see cref="FanFed"/> object.</param>
+        public static void GetFanFed(FanToken aFanToken, FanFed aFanFed)
+        {
+            FanCallHandler.ServiceCall<FanFed>(aFanToken, "GetFanFed", aFanFed);
+        }
+
+        /// <summary>
+        ///   Gets a specified <see cref="FanFedCollection"/>.
+        /// </summary>
+        /// <param name="aFanToken">A <see cref="FanToken"/> object used for Access Control.</param>
+        /// <param name="aFanFedCollection"><see cref="FanFed"/>Collection object.</param>
+        public static void GetFanFedCollection(FanToken aFanToken, FanFedCollection aFanFedCollection)
+        {
+            FanCallHandler.ServiceCall<FanFedCollection>(aFanToken, "GetFanFedCollection", aFanFedCollection);
+        }
+
+        /// <summary>
+        /// Add a <see cref="FanFed" />.
+        /// </summary>
+        /// <param name="aFanToken">A <see cref="FanToken" /> object used for Access Control.</param>
+        /// <param name="aFanFedCollection">A provider suburb collection.</param>
+        public static void SaveFanFed(FanToken aFanToken, FanFedCollection aFanFedCollection)
+        {
+            FanCallHandler.ServiceCall<FanFedCollection>(aFanToken, "SaveFanFed", aFanFedCollection);
+        }
+
+        #endregion
     }
 }
