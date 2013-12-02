@@ -22,7 +22,11 @@ namespace zfit
             ServerSession.PutObject<FanKey>(HttpContext.Current.Session, vFanKey);
         }
 
-        #region Cell Web methods 
+        #region Session and Method Success/Exception Calls
+    
+        #endregion
+
+        #region Cell Web methods
 
         #region Load Cell
 
@@ -30,12 +34,10 @@ namespace zfit
         public static webObject loadCell(Cell aCell)
         {
             FanToken vFanToken = ServerSession.GetFanToken(HttpContext.Current.Session);
-            FanKey vFanKey = ServerSession.GetObject<FanKey>(HttpContext.Current.Session);
-
             ServerSession.ClearSessionBusiness(HttpContext.Current.Session);
-            ServerSession.PutObject<FanKey>(HttpContext.Current.Session, vFanKey); // Review this element of pattern 
             webObject vWebObject = new webObject();
             vWebObject.aTransactionStatus = ServerSession.GetTransactionStatus(HttpContext.Current.Session);
+
             try
             {
                 FanServiceConsumer.GetCell(vFanToken, aCell);
@@ -67,12 +69,10 @@ namespace zfit
         public static webObject addCell(Cell aCell)
         {
             FanToken vFanToken = ServerSession.GetFanToken(HttpContext.Current.Session);
-            FanKey vFanKey = ServerSession.GetObject<FanKey>(HttpContext.Current.Session);
-
             ServerSession.ClearSessionBusiness(HttpContext.Current.Session);
-            ServerSession.PutObject<FanKey>(HttpContext.Current.Session, vFanKey); // Review this element of pattern 
             webObject vWebObject = new webObject();
             vWebObject.aTransactionStatus = ServerSession.GetTransactionStatus(HttpContext.Current.Session);
+
             try
             {
                 FanServiceConsumer.AddCell(vFanToken, aCell);
@@ -105,12 +105,10 @@ namespace zfit
         public static webObject editCell(Cell aCell)
         {
             FanToken vFanToken = ServerSession.GetFanToken(HttpContext.Current.Session);
-            FanKey vFanKey = ServerSession.GetObject<FanKey>(HttpContext.Current.Session);
-
             ServerSession.ClearSessionBusiness(HttpContext.Current.Session);
-            ServerSession.PutObject<FanKey>(HttpContext.Current.Session, vFanKey); // Review this element of pattern 
             webObject vWebObject = new webObject();
             vWebObject.aTransactionStatus = ServerSession.GetTransactionStatus(HttpContext.Current.Session);
+
             try
             {
                 FanServiceConsumer.EditCell(vFanToken, aCell);
@@ -143,12 +141,10 @@ namespace zfit
         public static webObject deleteCell(Cell aCell)
         {
             FanToken vFanToken = ServerSession.GetFanToken(HttpContext.Current.Session);
-            FanKey vFanKey = ServerSession.GetObject<FanKey>(HttpContext.Current.Session);
-
             ServerSession.ClearSessionBusiness(HttpContext.Current.Session);
-            ServerSession.PutObject<FanKey>(HttpContext.Current.Session, vFanKey); // Review this element of pattern 
             webObject vWebObject = new webObject();
             vWebObject.aTransactionStatus = ServerSession.GetTransactionStatus(HttpContext.Current.Session);
+
             try
             {
                 FanServiceConsumer.DeleteCell(vFanToken, aCell);
@@ -185,12 +181,10 @@ namespace zfit
         public static webObject loadFed(Fed aFed)
         {
             FanToken vFanToken = ServerSession.GetFanToken(HttpContext.Current.Session);
-            FanKey vFanKey = ServerSession.GetObject<FanKey>(HttpContext.Current.Session);
-
-            ServerSession.ClearSessionBusiness(HttpContext.Current.Session);
-            ServerSession.PutObject<FanKey>(HttpContext.Current.Session, vFanKey); // Review this element of pattern 
+            ServerSession.ClearSessionBusiness(HttpContext.Current.Session); 
             webObject vWebObject = new webObject();
             vWebObject.aTransactionStatus = ServerSession.GetTransactionStatus(HttpContext.Current.Session);
+
             try
             {
                 FanServiceConsumer.GetFed(vFanToken, aFed);
@@ -222,12 +216,10 @@ namespace zfit
         public static webObject addFed(Fed aFed)
         {
             FanToken vFanToken = ServerSession.GetFanToken(HttpContext.Current.Session);
-            FanKey vFanKey = ServerSession.GetObject<FanKey>(HttpContext.Current.Session);
-
             ServerSession.ClearSessionBusiness(HttpContext.Current.Session);
-            ServerSession.PutObject<FanKey>(HttpContext.Current.Session, vFanKey); // Review this element of pattern 
             webObject vWebObject = new webObject();
             vWebObject.aTransactionStatus = ServerSession.GetTransactionStatus(HttpContext.Current.Session);
+
             try
             {
                 FanServiceConsumer.AddFed(vFanToken, aFed);
@@ -238,7 +230,6 @@ namespace zfit
             }
             catch (TransactionStatusException tx)
             {
-
                 vWebObject.aTransactionStatus.AssignFromSource(tx.TransactionStatus);
                 return vWebObject;
             }
@@ -260,12 +251,10 @@ namespace zfit
         public static webObject editFed(Fed aFed)
         {
             FanToken vFanToken = ServerSession.GetFanToken(HttpContext.Current.Session);
-            FanKey vFanKey = ServerSession.GetObject<FanKey>(HttpContext.Current.Session);
-
             ServerSession.ClearSessionBusiness(HttpContext.Current.Session);
-            ServerSession.PutObject<FanKey>(HttpContext.Current.Session, vFanKey); // Review this element of pattern 
             webObject vWebObject = new webObject();
             vWebObject.aTransactionStatus = ServerSession.GetTransactionStatus(HttpContext.Current.Session);
+
             try
             {
                 FanServiceConsumer.EditFed(vFanToken, aFed);
@@ -298,12 +287,10 @@ namespace zfit
         public static webObject deleteFed(Fed aFed)
         {
             FanToken vFanToken = ServerSession.GetFanToken(HttpContext.Current.Session);
-            FanKey vFanKey = ServerSession.GetObject<FanKey>(HttpContext.Current.Session);
-
             ServerSession.ClearSessionBusiness(HttpContext.Current.Session);
-            ServerSession.PutObject<FanKey>(HttpContext.Current.Session, vFanKey); // Review this element of pattern 
             webObject vWebObject = new webObject();
             vWebObject.aTransactionStatus = ServerSession.GetTransactionStatus(HttpContext.Current.Session);
+
             try
             {
                 FanServiceConsumer.DeleteFed(vFanToken, aFed);
@@ -339,13 +326,11 @@ namespace zfit
         [WebMethod(EnableSession = false)]
         public static webObject loadCellFanCollection(CellFanCollection aCellFanCollection)
         {
-            FanToken vFanToken = ServerSession.GetFanToken(HttpContext.Current.Session);
-            FanKey vFanKey = ServerSession.GetObject<FanKey>(HttpContext.Current.Session);
-            
+            FanToken vFanToken = ServerSession.GetFanToken(HttpContext.Current.Session);           
             ServerSession.ClearSessionBusiness(HttpContext.Current.Session);
-            ServerSession.PutObject<FanKey>(HttpContext.Current.Session, vFanKey); // Review this element of pattern 
             webObject vWebObject = new webObject();
             vWebObject.aTransactionStatus = ServerSession.GetTransactionStatus(HttpContext.Current.Session);
+
             try
             {
                 FanServiceConsumer.GetCellFanCollection(vFanToken, aCellFanCollection);
@@ -356,7 +341,6 @@ namespace zfit
             }
             catch (TransactionStatusException tx)
             {
-
                 vWebObject.aTransactionStatus.AssignFromSource(tx.TransactionStatus);
                 return vWebObject;
             }
@@ -376,19 +360,17 @@ namespace zfit
         [WebMethod(EnableSession = false)]
         public static webObject editCellFanCollection(CellFanCollection aCellFanCollection)
         {
-            FanToken vFanToken = ServerSession.GetFanToken(HttpContext.Current.Session);
-            FanKey vFanKey = ServerSession.GetObject<FanKey>(HttpContext.Current.Session);
-
+            FanToken vFanToken = ServerSession.GetFanToken(HttpContext.Current.Session);           
+            ServerSession.ClearSessionBusiness(HttpContext.Current.Session);
+            webObject vWebObject = new webObject();
+            vWebObject.aTransactionStatus = ServerSession.GetTransactionStatus(HttpContext.Current.Session);
+            
             // ********** TEMPORARY REMEDY UNTIL I SORT OUT DATETIME ISSUE 
             foreach (CellFan vCF in aCellFanCollection.CellFanList)
             {
                 vCF.CellFanDateJoined = DateTime.Now; 
             }
 
-            ServerSession.ClearSessionBusiness(HttpContext.Current.Session);
-            ServerSession.PutObject<FanKey>(HttpContext.Current.Session, vFanKey); // Review this element of pattern 
-            webObject vWebObject = new webObject();
-            vWebObject.aTransactionStatus = ServerSession.GetTransactionStatus(HttpContext.Current.Session);
             try
             {
                 FanServiceConsumer.SaveCellFan(vFanToken, aCellFanCollection);
@@ -407,6 +389,85 @@ namespace zfit
             {
                 vWebObject.aTransactionStatus.TransactionResult = TransactionResult.GeneralException;
                 vWebObject.aTransactionStatus.Message = "Edit of CellFanCollection unsuccesful" + ex.Message;
+                vWebObject.aTransactionStatus.InnerMessage = ex.InnerException == null ? String.Empty : ex.InnerException.Message;
+                return vWebObject;
+            }
+            return vWebObject;
+        }
+        #endregion
+
+        #endregion 
+        
+        #region CellFed Web methods
+
+        #region Load CellFedCollection
+
+        [WebMethod(EnableSession = false)]
+        public static webObject loadCellFedCollection(CellFedCollection aCellFedCollection)
+        {
+            FanToken vFanToken = ServerSession.GetFanToken(HttpContext.Current.Session);
+            ServerSession.ClearSessionBusiness(HttpContext.Current.Session);
+            webObject vWebObject = new webObject();
+            vWebObject.aTransactionStatus = ServerSession.GetTransactionStatus(HttpContext.Current.Session);
+
+            try
+            {
+                FanServiceConsumer.GetCellFedCollection(vFanToken, aCellFedCollection);
+                vWebObject.aTransactionStatus.TransactionResult = TransactionResult.OK;
+                vWebObject.aTransactionStatus.Message = "CellFedCollection Loaded";
+                ServerSession.SetTransactionStatus(HttpContext.Current.Session, vWebObject.aTransactionStatus);
+                vWebObject.AnObject = aCellFedCollection;
+            }
+            catch (TransactionStatusException tx)
+            {
+                vWebObject.aTransactionStatus.AssignFromSource(tx.TransactionStatus);
+                return vWebObject;
+            }
+            catch (Exception ex)
+            {
+                vWebObject.aTransactionStatus.TransactionResult = TransactionResult.GeneralException;
+                vWebObject.aTransactionStatus.Message = "Load of CellFedCollection unsuccesful" + ex.Message;
+                vWebObject.aTransactionStatus.InnerMessage = ex.InnerException == null ? String.Empty : ex.InnerException.Message;
+                return vWebObject;
+            }
+            return vWebObject;
+        }
+        #endregion
+
+        #region Edit CellFedCollection
+
+        [WebMethod(EnableSession = false)]
+        public static webObject editCellFedCollection(CellFedCollection aCellFedCollection)
+        {
+            FanToken vFanToken = ServerSession.GetFanToken(HttpContext.Current.Session);           
+            ServerSession.ClearSessionBusiness(HttpContext.Current.Session); 
+            webObject vWebObject = new webObject();
+            vWebObject.aTransactionStatus = ServerSession.GetTransactionStatus(HttpContext.Current.Session);
+
+            // ********** TEMPORARY REMEDY UNTIL I SORT OUT DATETIME ISSUE 
+            foreach (CellFed vCF in aCellFedCollection.CellFedList)
+            {
+                vCF.CellFedDateJoined = DateTime.Now;
+            }
+
+            try
+            {
+                FanServiceConsumer.SaveCellFed(vFanToken, aCellFedCollection);
+                vWebObject.aTransactionStatus.TransactionResult = TransactionResult.OK;
+                vWebObject.aTransactionStatus.Message = "CellFedCollection Edited";
+                ServerSession.SetTransactionStatus(HttpContext.Current.Session, vWebObject.aTransactionStatus);
+                vWebObject.AnObject = aCellFedCollection;
+            }
+            catch (TransactionStatusException tx)
+            {
+
+                vWebObject.aTransactionStatus.AssignFromSource(tx.TransactionStatus);
+                return vWebObject;
+            }
+            catch (Exception ex)
+            {
+                vWebObject.aTransactionStatus.TransactionResult = TransactionResult.GeneralException;
+                vWebObject.aTransactionStatus.Message = "Edit of CellFedCollection unsuccesful" + ex.Message;
                 vWebObject.aTransactionStatus.InnerMessage = ex.InnerException == null ? String.Empty : ex.InnerException.Message;
                 return vWebObject;
             }

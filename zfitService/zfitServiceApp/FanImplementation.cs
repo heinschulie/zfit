@@ -800,6 +800,66 @@ namespace zfit
         }
 
         #endregion
- 
+
+        #region CellFed Methods
+
+        /// <summary>
+        ///   Gets the <see cref="CellFed"/> by Key.
+        /// </summary>
+        /// <param name="aXmlArgument">XML Argument <see cref="string"/>.</param>
+        /// <returns>CellFed as XML <see cref="string"/>.</returns>
+        /// <exception cref="ArgumentNullException">If <c>aXmlArgument</c> is <c>null</c>.</exception>
+        public static string GetCellFed(FanKey aFanKey, string aXmlArgument)
+        {
+            if (aXmlArgument == null)
+            {
+                throw new ArgumentNullException("aXmlArgument of GetCellFed");
+            }
+            CellFed vCellFed = new CellFed();
+            vCellFed = XmlUtils.Deserialize<CellFed>(aXmlArgument);
+            CellFedBusiness.Load(aFanKey, vCellFed);
+            return XmlUtils.Serialize<CellFed>(vCellFed, true);
+        }
+
+        /// <summary>
+        ///   The <c>GetCellFedCollection</c> implementation method deserializes an incoming XML Argument <see cref="string"/> as a new <see cref="CellFedCollection"/> object.
+        ///   It invokes the <c>Insert</c> method of <see cref="CellFedBusiness"/> with the newly deserialized <see cref="CellFedCollection"/> object.
+        ///   Finally, it returns the collection object as a serialized <see cref="string"/> of XML.
+        /// </summary>
+        /// <param name="aXmlArgument">XML Argument <see cref="string"/>.</param>
+        /// <returns><see cref="CellFedCollection"/> as XML <see cref="string"/>.</returns>
+        /// <exception cref="ArgumentNullException">If <c>aXmlArgument</c> is <c>null</c>.</exception>
+        public static string GetCellFedCollection(FanKey aFanKey, string aXmlArgument)
+        {
+            if (aXmlArgument == null)
+            {
+                throw new ArgumentNullException("aXmlArgument of GetCellFedCollection");
+            }
+            CellFedCollection vCellFedCollection = new CellFedCollection();
+            vCellFedCollection = XmlUtils.Deserialize<CellFedCollection>(aXmlArgument);
+            CellFedBusiness.Load(aFanKey, vCellFedCollection);
+            return XmlUtils.Serialize<CellFedCollection>(vCellFedCollection, true);
+        }
+
+        /// <summary>
+        /// Saves the provider suburb.
+        /// </summary>
+        /// <param name="aFanKey">A user key.</param>
+        /// <param name="aXmlArgument">A XML argument.</param>
+        /// <returns>A string of XML representing a CellFedCollection</returns>
+        /// <exception cref="System.ArgumentNullException">aXmlArgument of SaveCellFed</exception>
+        public static string SaveCellFed(FanKey aFanKey, string aXmlArgument)
+        {
+            if (aXmlArgument == null)
+            {
+                throw new ArgumentNullException("aXmlArgument of SaveCellFed");
+            }
+            CellFedCollection vCellFedCollection = new CellFedCollection();
+            vCellFedCollection = XmlUtils.Deserialize<CellFedCollection>(aXmlArgument);
+            CellFedBusiness.Save(aFanKey, vCellFedCollection);
+            return XmlUtils.Serialize<CellFedCollection>(vCellFedCollection, true);
+        }
+
+        #endregion
     }
 }

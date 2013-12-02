@@ -52,13 +52,6 @@ var populateCollectionFields = function (anArray, cellfan) {
         elements.text(function (d) { return d.FanName });
     }
 
-    //elements
-    //    .each(function (d) {
-    //        d3.select(this).append("input")
-    //          .attr("type", "checkbox")
-    //          .classed("chkbox", true);
-    //    });
-
     //Exit
     elements
         .exit()
@@ -74,6 +67,10 @@ var fanCellCollectionEdited = function (aCellFanCollection) {
 };
 
 var cellFanCollectionLoaded = function (aCellFanCollection) {
+    populateCollectionFields(aCellFanCollection.CellFanList, "cell");
+};
+
+var cellFanCollectionEdited = function (aCellFanCollection) {
     populateCollectionFields(aCellFanCollection.CellFanList, "cell");
 };
 
@@ -148,6 +145,12 @@ var fanscellseditData = [
 var cellsfansloadData = [
   { methodName: "community.aspx/loadCellFanCollection", callBack: cellFanCollectionLoaded, filtertype: "cell" }
 ];
+// Cell editing its fans 
+var cellsfanseditData = [
+  { methodName: "community.aspx/editCellFanCollection", callBack: cellFanCollectionEdited, filtertype: "cell", crudtype: "edit" }
+];
+
+//*** CELLFAN's from Fans perspective 
 
 var loadfanCellClick = d3.select("div#fancelllist").on("click", function () {
     
@@ -184,6 +187,8 @@ var editfanCellClick = d3.select("div#editFancells").on("click", function () {
         .on("click", cellfancrud);
 });
 
+//*** CELLFAN's from Cells perspective
+
 var loadCellFanClick = d3.select("div#cellfanlist").on("click", function () {
 
     contentSetup(cellfanContentTemplate, false);
@@ -200,7 +205,196 @@ var loadCellFanClick = d3.select("div#cellfanlist").on("click", function () {
     sidenav(container);
 });
 
+var editcellFanClick = d3.select("div#editCellfans").on("click", function () {
 
+    var elements = d3.select("div.content")
+        .selectAll("div.properties");
+
+    elements
+       .each(function (d) {
+           d3.select(this).append("input")
+             .attr("type", "checkbox")
+             .classed("chkbox", true);
+       });
+
+    d3.select(".testButton")
+        .data(cellsfanseditData)
+        .text("Edit CellFan")
+        .on("click", cellfancrud);
+});
+
+
+// ||||||||||||||   ***    CELLFED CRUD    ***    |||||||||||||||| //
+
+//Callbacks for CELLFED CRUD 
+
+var populateCellFedCollectionFields = function (anArray, cellfed) {
+
+    //Select & data
+    var elements = d3.select("div.content")
+        .selectAll("div.properties")
+        .data(anArray);
+
+    //Enter
+    elements
+        .enter()
+        .append("div")
+        .classed("properties", true);
+
+    //Update
+    if (cellfed === "fed") {
+        elements.text(function (d) { return d.CellName });
+    }
+    else {
+        elements.text(function (d) { return d.FedName });
+    }
+
+    //Exit
+    elements
+        .exit()
+        .remove();
+};
+
+var fedCellsCollectionLoaded = function (aCellFedCollection) {
+    populateCellFedCollectionFields(aCellFedCollection.CellFedList, "fed");
+};
+
+var fedCellsCollectionEdited = function (aCellFedCollection) {
+    populateCellFedCollectionFields(aCellFedCollection.CellFedList, "fed");
+};
+
+var cellFedCollectionLoaded = function (aCellFedCollection) {
+    populateCellFedCollectionFields(aCellFedCollection.CellFedList, "cell");
+};
+
+var cellFedsCollectionEdited = function (aCellFedCollection) {
+    populateCellFedCollectionFields(aCellFedCollection.CellFedList, "cell");
+};
+
+// CELLFED Methods and Events  
+
+var cellfedcrud = function cellfedData(d, i) {
+
+    var methodname = d.methodName;
+    var callback = d.callBack;
+    var aCellFedCollection = { CellFedFilter: { CellfedFilter: {} } };
+    var filter = d3.select("#textFilter");
+
+    if (filter.attr("type") === "number") {
+        aCellFedCollection.isFiltered = true;
+        if (d.filtertype === "fed")
+            aCellFedCollection.CellFedFilter.CellfedFilter.FedKey = filter.node().value;
+        else
+            aCellFedCollection.CellFedFilter.CellfedFilter.CelKey = filter.node().value;
+    }
+    else {
+        aCellFedCollection.isFiltered = true;
+        if (d.filtertype === "fed")
+            aCellFedCollection.CellFedFilter.CellfedFilter.FedName = filter.text();
+        else
+            aCellFedCollection.CellFedFilter.CellfedFilter.CellName = filter.text();
+    }
+
+    //Remove the cellfeds that are have checkboxes that are checked 
+    if (d.crudtype === "edit") {
+        aCellFedCollection.CellFedList = [];
+        var chkboxes = d3.selectAll("input.chkbox");
+        chkboxes.each(function (d, i) {
+            if (chkboxes[0][i].checked === false) {
+                var CellFed = {};
+                var thiscellfed = chkboxes[0][i].__data__;
+                CellFed.CelKey = thiscellfed.CelKey;
+                //CellFed.CellFedDateJoined = thiscellfed.CellFedDateJoined;
+                CellFed.CellName = thiscellfed.CellName;
+                CellFed.FedKey = thiscellfed.FedKey;
+                CellFed.FedName = thiscellfed.FedName;
+                CellFed.HashValue = thiscellfed.HashValue;
+                CellFed.ObjectState = thiscellfed.ObjectState;
+
+                aCellFedCollection.CellFedList.push(CellFed);
+            }
+        });
+    }
+
+    var CellFedCollection = { 'aCellFedCollection': aCellFedCollection };
+    ajaxCall(methodname, CellFedCollection, callback);
+}
+
+//Data Arrays for CellFed Crud Methods 
+var cellfedContentTemplate = [
+    { title: "Cell Key", fieldId: "CelKey" },
+    { title: "Cell Name", fieldId: "CellName" },
+    { title: "Cell Owner Key", fieldId: "FedKey" },
+    { title: "Cell Owner Name", fieldId: "FedName" }
+];
+
+// Fan viewing his/her cells 
+var fedscellsloadData = [
+  { methodName: "community.aspx/loadCellFedCollection", callBack: fedCellsCollectionLoaded, filtertype: "fed" }
+];
+// Fan editing his/her cells 
+var fedscellseditData = [
+  { methodName: "community.aspx/editCellFedCollection", callBack: fedCellsCollectionEdited, filtertype: "fed", crudtype: "edit" }
+];
+// Cell viewing its fans 
+var cellsfedsloadData = [
+  { methodName: "community.aspx/loadCellFedCollection", callBack: cellFedCollectionLoaded, filtertype: "cell" }
+];
+// Fan editing his/her cells 
+var cellsfedseditData = [
+  { methodName: "community.aspx/editCellFedCollection", callBack: cellFedsCollectionEdited, filtertype: "cell", crudtype: "edit" }
+];
+
+var loadfedCellsClick = d3.select("div#fedcelllist").on("click", function () {
+
+    contentSetup(cellfedContentTemplate, false);
+
+    d3.select("#textFilter")
+        .attr("type", "number");
+
+    d3.select(".testButton")
+        .data(fedscellsloadData)
+        .text("Load CellFed")
+        .on("click", cellfedcrud);
+
+    var container = d3.select("div#" + this.id + "CrudContainer");
+    sidenav(container);
+});
+
+var loadCellFedClick = d3.select("div#cellfedlist").on("click", function () {
+
+    contentSetup(cellfedContentTemplate, false);
+
+    d3.select("#textFilter")
+        .attr("type", "number");
+
+    d3.select(".testButton")
+        .data(cellsfedsloadData)
+        .text("Load CellFed")
+        .on("click", cellfedcrud);
+
+    var container = d3.select("div#" + this.id + "CrudContainer");
+    sidenav(container);
+});
+
+//Editing of list follows a different pattern  
+var editfedCellsClick = d3.select("div#editCellfeds").on("click", function () {
+
+    var elements = d3.select("div.content")
+        .selectAll("div.properties");
+
+    elements
+       .each(function (d) {
+           d3.select(this).append("input")
+             .attr("type", "checkbox")
+             .classed("chkbox", true);
+       });
+
+    d3.select(".testButton")
+        .data(cellsfedseditData)
+        .text("Edit CellFed")
+        .on("click", cellfedcrud);
+});
 
 // ||||||||||||||   ***    CELL CRUD    ***    |||||||||||||||| // 
 

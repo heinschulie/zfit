@@ -340,5 +340,38 @@ namespace zfit
 
         #endregion
 
+        #region CellFed Service Calls
+
+        /// <summary>
+        ///   Gets a specified <see cref="CellFed"/> by key.
+        /// </summary>
+        /// <param name="aFanToken">A <see cref="FanToken"/> object used for Access Control.</param>
+        /// <param name="aCellFed"><see cref="CellFed"/> object.</param>
+        public static void GetCellFed(FanToken aFanToken, CellFed aCellFed)
+        {
+            FanCallHandler.ServiceCall<CellFed>(aFanToken, "GetCellFed", aCellFed);
+        }
+
+        /// <summary>
+        ///   Gets a specified <see cref="CellFedCollection"/>.
+        /// </summary>
+        /// <param name="aFanToken">A <see cref="FanToken"/> object used for Access Control.</param>
+        /// <param name="aCellFedCollection"><see cref="CellFed"/>Collection object.</param>
+        public static void GetCellFedCollection(FanToken aFanToken, CellFedCollection aCellFedCollection)
+        {
+            FanCallHandler.ServiceCall<CellFedCollection>(aFanToken, "GetCellFedCollection", aCellFedCollection);
+        }
+
+        /// <summary>
+        /// Add a <see cref="CellFed" />.
+        /// </summary>
+        /// <param name="aFanToken">A <see cref="FanToken" /> object used for Access Control.</param>
+        /// <param name="aCellFedCollection">A provider suburb collection.</param>
+        public static void SaveCellFed(FanToken aFanToken, CellFedCollection aCellFedCollection)
+        {
+            FanCallHandler.ServiceCall<CellFedCollection>(aFanToken, "SaveCellFed", aCellFedCollection);
+        }
+
+        #endregion
     }
 }

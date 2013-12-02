@@ -55,6 +55,7 @@
   <ItemGroup>
     <Compile Include="CellBusiness.cs" />
     <Compile Include="CellFanBusiness.cs" />
+    <Compile Include="CellFedBusiness.cs" />
     <Compile Include="FedBusiness.cs" />
     <Compile Include="FunctionBusiness.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

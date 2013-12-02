@@ -51,6 +51,7 @@
   <ItemGroup>
     <Compile Include="CellData.cs" />
     <Compile Include="CellFanData.cs" />
+    <Compile Include="CellFedData.cs" />
     <Compile Include="FedData.cs" />
     <Compile Include="FunctionData.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
