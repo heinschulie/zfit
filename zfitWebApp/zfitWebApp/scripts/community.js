@@ -3,29 +3,29 @@
 
 //Setting up the content div
 
-var contentSetup = function (template, editable) {
-    var properties = d3.select("div.content")
-        .selectAll("div.properties")
-        .data(template);
+//var contentSetup = function (template, editable) {
+//    var properties = d3.select("div.content")
+//        .selectAll("div.properties")
+//        .data(template);
 
-    //Enter
-    properties
-        .enter()
-        .append("div")
-        .classed("properties", true)
-        .attr("contenteditable", "" + editable);
+//    //Enter
+//    properties
+//        .enter()
+//        .append("div")
+//        .classed("properties", true)
+//        .attr("contenteditable", "" + editable);
 
-    //Update
-    properties
-        .attr("id", function (d) { return d.fieldId })
-        .text(function (d) { return d.title })
-        .classed("edit", false)
-        .classed("add", false)
-        .classed("delete", false);
+//    //Update
+//    properties
+//        .attr("id", function (d) { return d.fieldId })
+//        .text(function (d) { return d.title })
+//        .classed("edit", false)
+//        .classed("add", false)
+//        .classed("delete", false);
 
-    //Exit
-    properties.exit();
-};
+//    //Exit
+//    properties.exit();
+//};
 
 
 // ||||||||||||||   ***    CELL CRUD    ***    |||||||||||||||| // 
@@ -968,7 +968,7 @@ var friendcrud = function fanfedData(d, i) {
                 Friend.Fan2Key = thisfriend.Fan2Key;
                 Friend.Fan2Name = thisfriend.Fan2Name;
                 Friend.Fan2Surname = thisfriend.Fan2Surname;
-                //Friend.FriendDateJoined = thisfanfed.FriendDateJoined;
+                Friend.FriendDateEstablishedString = thisfriend.FriendDateEstablishedString;
                 Friend.HashValue = thisfriend.HashValue;
                 Friend.ObjectState = thisfriend.ObjectState;
 

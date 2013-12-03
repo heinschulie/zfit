@@ -43,3 +43,32 @@ var secCategories = d3.selectAll("div.sideNavSecElement").on("click", function (
     var container = d3.select("div#" + this.id + "CrudContainer");
     sidenav(container);
 });
+
+// ||||||||||||||   ***    BASIC SETUP OF PROPERTIES    ***    |||||||||||||||| //
+
+//Setting up the content div
+
+var contentSetup = function (template, editable) {
+    var properties = d3.select("div.content")
+        .selectAll("div.properties")
+        .data(template);
+
+    //Enter
+    properties
+        .enter()
+        .append("div")
+        .classed("properties", true)
+        .attr("contenteditable", editable);
+
+    //Update
+    properties
+        .attr("id", function (d) { return d.fieldId })
+        .text(function (d) { return d.title })
+        .classed("edit", false)
+        .classed("add", false)
+        .classed("delete", false);
+
+    //Exit
+    properties.exit();
+};
+

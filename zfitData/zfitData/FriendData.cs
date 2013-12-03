@@ -212,23 +212,23 @@ namespace zfit
                 vStringBuilder.AppendLine("insert into FRD_Friend");
                 vStringBuilder.AppendLine("       (FAN_Key, FAN_Key,");
                 vStringBuilder.AppendLine("        REL_Key,");
-                vStringBuilder.AppendLine("        FRD_DateJoined)");
+                vStringBuilder.AppendLine("        FRD_DateEstablished)");
                 vStringBuilder.AppendLine("values");
                 vStringBuilder.AppendLine("       (@FAN1Key, @FAN2Key,");
-                vStringBuilder.AppendLine("        @RELKey, @FRDDateJoined)");
+                vStringBuilder.AppendLine("        @RELKey, @FRDDateEstablished)");
                 vStringBuilder.AppendLine(";");
                 vSqlCommand.Parameters.Add("@FAN1Key", SqlDbType.Int);
                 vSqlCommand.Parameters.Add("@FAN2Key", SqlDbType.Int);
                 vSqlCommand.Parameters.Add("@RELKey", SqlDbType.Int);
-                vSqlCommand.Parameters.Add("@FRDDateJoined", SqlDbType.DateTime);
+                vSqlCommand.Parameters.Add("@FRDDateEstablished", SqlDbType.DateTime);
                 vSqlCommand.CommandText = vStringBuilder.ToString();
                 vSqlCommand.Connection.Open();
                 aFriendCollection.FriendList.ForEach(vFriend =>
                 {
                     vSqlCommand.Parameters["@FAN1Key"].Value = vFriend.Fan1Key;
                     vSqlCommand.Parameters["@FAN2Key"].Value = vFriend.Fan2Key;
-                    vSqlCommand.Parameters["@RELKey"].Value = vFriend.Relationship; 
-                    vSqlCommand.Parameters["@FRDDateJoined"].Value = vFriend.FriendDateEstablished;
+                    vSqlCommand.Parameters["@RELKey"].Value = vFriend.Relationship;
+                    vSqlCommand.Parameters["@FRDDateEstablished"].Value = vFriend.FriendDateEstablished;
                     vSqlCommand.ExecuteScalar();
                 });
                 vSqlCommand.Connection.Close();

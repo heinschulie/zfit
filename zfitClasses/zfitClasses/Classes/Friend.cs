@@ -14,8 +14,9 @@ namespace zfit
         private string _fan1Surname;
         private string _fan2Surname;
         private int _relationship;
-        private string _relationshiptype; 
+        private string _relationshiptype;
         private DateTime _friendDateEstablished;
+        private string _friendDateEstablishedString;
 
         #endregion
 
@@ -118,6 +119,18 @@ namespace zfit
         {
             get { return _friendDateEstablished; }
             set { _friendDateEstablished = value; }
+        }
+
+        /// <summary>
+        ///   Gets or sets the Fan1fanDateEstablished property;
+        /// </summary>
+        /// <value>
+        ///   The FriendDateJoined;
+        /// </value>
+        public string FriendDateEstablishedString
+        {
+            get { return _friendDateEstablished.ToString(); }
+            set { _friendDateEstablishedString = value; }
         }
 
         #endregion

@@ -26,7 +26,8 @@
             <div class="sideNavTerElement" id="editCell">Edit Cell</div>
             <div class="sideNavTerElement" id="deleteCell">Delete Cell</div>
         </div> 
-        <div class="sideNavSecElement" id="addCell">Add Cell</div>       
+        <div class="sideNavSecElement" id="addCell">Add Cell</div>  
+        <div class="sideNavSecElement" id="loadCellList">Load Cell List</div>        
         <div class="sideNavSecElement" id="cellfanlist">Cell's Fan List</div>        
         <div class="subelementContainer" id="cellfanlistCrudContainer">
             <div class="sideNavTerElement" id="editCellfans">Edit Cell's Fan List</div>
@@ -44,6 +45,7 @@
             <div class="sideNavTerElement" id="deleteFed">Delete Fed</div>
         </div> 
         <div class="sideNavSecElement" id="addFed">Add Fed</div>
+        <div class="sideNavSecElement" id="loadFedList">Load Fed List</div>    
         <div class="sideNavSecElement" id="fedfanlist">Fed Fan's List</div>       
         <div class="subelementContainer" id="fedfanlistCrudContainer">
             <div class="sideNavTerElement" id="editFedFans">Edit Fed's Fan List</div>

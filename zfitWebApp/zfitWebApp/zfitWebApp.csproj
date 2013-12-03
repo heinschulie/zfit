@@ -71,10 +71,12 @@
     <Content Include="default.aspx" />
     <Content Include="fandashboard.aspx" />
     <Content Include="fandashboard2.aspx" />
+    <Content Include="physical.aspx" />
     <Content Include="profile.aspx" />
     <Content Include="scripts\base.js" />
     <Content Include="scripts\classie.js" />
     <Content Include="scripts\community.js" />
+    <Content Include="scripts\physical.js" />
     <Content Include="scripts\profile.js" />
     <Content Include="scripts\sidebarEffects.js" />
     <Content Include="styles\base.css" />
@@ -131,6 +133,13 @@
     </Compile>
     <Compile Include="masters\basetemplate.Master.designer.cs">
       <DependentUpon>basetemplate.Master</DependentUpon>
+    </Compile>
+    <Compile Include="physical.aspx.cs">
+      <DependentUpon>physical.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="physical.aspx.designer.cs">
+      <DependentUpon>physical.aspx</DependentUpon>
     </Compile>
     <Compile Include="profile.aspx.cs">
       <DependentUpon>profile.aspx</DependentUpon>

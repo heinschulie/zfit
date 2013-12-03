@@ -983,5 +983,107 @@ namespace zfit
         }
 
         #endregion
+
+        #region Exercise Methods
+
+        /// <summary>
+        ///   Gets the <see cref="Exercise"/> by Key.
+        /// </summary>
+        /// <param name="aXmlArgument">XML Argument <see cref="string"/>.</param>
+        /// <returns>Exercise as XML <see cref="string"/>.</returns>
+        /// <exception cref="ArgumentNullException">If <c>aXmlArgument</c> is <c>null</c>.</exception>
+        public static string GetExercise(FanKey aFanKey, string aXmlArgument)
+        {
+            if (aXmlArgument == null)
+            {
+                throw new ArgumentNullException("aXmlArgument of GetExercise");
+            }
+            Exercise vExercise = new Exercise();
+            vExercise = XmlUtils.Deserialize<Exercise>(aXmlArgument);
+            ExerciseBusiness.Load(aFanKey, vExercise);
+            return XmlUtils.Serialize<Exercise>(vExercise, true);
+        }
+
+        /// <summary>
+        ///   The <c>GetExerciseCollection</c> implementation method deserializes an incoming XML Argument <see cref="string"/> as a new <see cref="ExerciseCollection"/> object.
+        ///   It invokes the <c>Insert</c> method of <see cref="ExerciseBusiness"/> with the newly deserialized <see cref="ExerciseCollection"/> object.
+        ///   Finally, it returns the collection object as a serialized <see cref="string"/> of XML.
+        /// </summary>
+        /// <param name="aXmlArgument">XML Argument <see cref="string"/>.</param>
+        /// <returns><see cref="ExerciseCollection"/> as XML <see cref="string"/>.</returns>
+        /// <exception cref="ArgumentNullException">If <c>aXmlArgument</c> is <c>null</c>.</exception>
+        public static string GetExerciseCollection(FanKey aFanKey, string aXmlArgument)
+        {
+            if (aXmlArgument == null)
+            {
+                throw new ArgumentNullException("aXmlArgument of GetExerciseCollection");
+            }
+            ExerciseCollection vExerciseCollection = new ExerciseCollection();
+            vExerciseCollection = XmlUtils.Deserialize<ExerciseCollection>(aXmlArgument);
+            ExerciseBusiness.Load(aFanKey, vExerciseCollection);
+            return XmlUtils.Serialize<ExerciseCollection>(vExerciseCollection, true);
+        }
+
+        /// <summary>
+        ///   The <c>AddExercise</c> implementation method deserializes an incoming XML Argument <see cref="string"/> as a new <see cref="Exercise"/> object.
+        ///   It invokes the <c>Insert</c> method of <see cref="ExerciseBusiness"/> with the newly deserialized <see cref="Exercise"/> object.
+        ///   Finally, it returns the inserted object (now with an assigned Exercise Key) as a serialized <see cref="string"/> of XML.
+        /// </summary>
+        /// <param name="aXmlArgument">XML Argument <see cref="string"/>.</param>
+        /// <returns><see cref="Exercise"/> as XML <see cref="string"/>.</returns>
+        /// <exception cref="ArgumentNullException">If <c>aXmlArgument</c> is <c>null</c>.</exception>
+        public static string AddExercise(FanKey aFanKey, string aXmlArgument)
+        {
+            if (aXmlArgument == null)
+            {
+                throw new ArgumentNullException("aXmlArgument of AddExercise");
+            }
+            Exercise vExercise = new Exercise();
+            vExercise = XmlUtils.Deserialize<Exercise>(aXmlArgument);
+            ExerciseBusiness.Insert(aFanKey, vExercise);
+            return XmlUtils.Serialize<Exercise>(vExercise, true);
+        }
+
+        /// <summary>
+        ///   The <c>EditExercise</c> implementation method deserializes an incoming XML Argument <see cref="string"/> as a new <see cref="Exercise"/> object.
+        ///   It invokes the <c>Update</c> method of <see cref="ExerciseBusiness"/> with the newly deserialized <see cref="Exercise"/> object.
+        ///   Finally, it returns the updated object unchanged as a serialized <see cref="string"/> of XML.
+        /// </summary>
+        /// <param name="aXmlArgument">XML Argument <see cref="string"/>.</param>
+        /// <returns><see cref="Exercise"/> as XML <see cref="string"/>.</returns>
+        /// <exception cref="ArgumentNullException">If <c>aXmlArgument</c> is <c>null</c>.</exception>
+        public static string EditExercise(FanKey aFanKey, string aXmlArgument)
+        {
+            if (aXmlArgument == null)
+            {
+                throw new ArgumentNullException("aXmlArgument of EditExercise");
+            }
+            Exercise vExercise = new Exercise();
+            vExercise = XmlUtils.Deserialize<Exercise>(aXmlArgument);
+            ExerciseBusiness.Update(aFanKey, vExercise);
+            return XmlUtils.Serialize<Exercise>(vExercise, true);
+        }
+
+        /// <summary>
+        ///   The <c>DeleteExercise</c> implementation method deserializes an incoming XML Argument as a new <see cref="Exercise"/> object.
+        ///   It invokes the <c>Delete</c> method of <see cref="ExerciseBusiness"/> with the newly deserialized <see cref="Exercise"/> object.
+        ///   Finally, it returns the Deleted object unchanged as a serialized <c>string</c> of XML.
+        /// </summary>
+        /// <param name="aXmlArgument">A XML Argument <see cref="string"/>.</param>
+        /// <returns><see cref="Exercise"/> as XML <see cref="string"/>.</returns>
+        /// <exception cref="ArgumentNullException">If <c>aXmlArgument</c> is <c>null</c>.</exception>
+        public static string DeleteExercise(FanKey aFanKey, string aXmlArgument)
+        {
+            if (aXmlArgument == null)
+            {
+                throw new ArgumentNullException("aXmlArgument of DeleteExercise");
+            }
+            Exercise vExercise = new Exercise();
+            vExercise = XmlUtils.Deserialize<Exercise>(aXmlArgument);
+            ExerciseBusiness.Delete(aFanKey, vExercise);
+            return XmlUtils.Serialize<Exercise>(vExercise, true);
+        }
+
+        #endregion   
     }
 }

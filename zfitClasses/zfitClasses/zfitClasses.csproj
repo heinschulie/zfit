@@ -48,6 +48,7 @@
     <Compile Include="Classes\Cell.cs" />
     <Compile Include="Classes\CellFan.cs" />
     <Compile Include="Classes\CellFed.cs" />
+    <Compile Include="Classes\Exercise.cs" />
     <Compile Include="Classes\FanFed.cs" />
     <Compile Include="Classes\Fed.cs" />
     <Compile Include="Classes\Friend.cs" />
@@ -61,9 +62,11 @@
     <Compile Include="Classes\User.cs" />
     <Compile Include="Classes\UserFunctionAccess.cs" />
     <Compile Include="Classes\UserRole.cs" />
+    <Compile Include="Classes\Workout.cs" />
     <Compile Include="Collections\CellCollection.cs" />
     <Compile Include="Collections\CellFanCollection.cs" />
     <Compile Include="Collections\CellFedCollection.cs" />
+    <Compile Include="Collections\ExerciseCollection.cs" />
     <Compile Include="Collections\FanFedCollection.cs" />
     <Compile Include="Collections\FedCollection.cs" />
     <Compile Include="Collections\FriendCollection.cs" />
@@ -76,18 +79,22 @@
     <Compile Include="Collections\UserCollection.cs" />
     <Compile Include="Collections\UserFunctionAccessCollection.cs" />
     <Compile Include="Collections\UserRoleCollection.cs" />
+    <Compile Include="Collections\WorkoutCollection.cs" />
     <Compile Include="Common\zfitEnums.cs" />
     <Compile Include="Filters\CellFanFilter.cs" />
     <Compile Include="Filters\CellFedFilter.cs" />
     <Compile Include="Filters\CellFilter.cs" />
+    <Compile Include="Filters\ExerciseFilter.cs" />
     <Compile Include="Filters\FanFedFilter.cs" />
     <Compile Include="Filters\FanFilter.cs" />
     <Compile Include="Filters\FedFilter.cs" />
     <Compile Include="Filters\FriendFilter.cs" />
     <Compile Include="Filters\UserFilter.cs" />
+    <Compile Include="Filters\WorkoutFilter.cs" />
     <Compile Include="Keys\CellFanKey.cs" />
     <Compile Include="Keys\CellFedKey.cs" />
     <Compile Include="Keys\CellKey.cs" />
+    <Compile Include="Keys\ExerciseKey.cs" />
     <Compile Include="Keys\FanFedKey.cs" />
     <Compile Include="Keys\FedKey.cs" />
     <Compile Include="Keys\FriendKey.cs" />
@@ -98,6 +105,7 @@
     <Compile Include="Keys\FanRoleKey.cs" />
     <Compile Include="Keys\UserKey.cs" />
     <Compile Include="Keys\UserRoleKey.cs" />
+    <Compile Include="Keys\WorkoutKey.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
