@@ -81,6 +81,7 @@ namespace zfit
         public string WrtOwnerName
         {
             get { return _ownerName; }
+            set { _ownerName = value; }
         }
 
         /// <summary>
@@ -115,6 +116,7 @@ namespace zfit
         public string FedName
         {
             get { return _fedName; }
+            set { _fedName = value; }
         }
 
         /// <summary>
@@ -137,6 +139,7 @@ namespace zfit
         public string CelName
         {
             get { return _celName; }
+            set { _celName = value; }
         }
 
         /// <summary>
@@ -152,14 +155,14 @@ namespace zfit
         }
 
         /// <summary>
-        ///   Gets or sets the Fan1fanDateEstablished property;
+        ///   Gets or sets the DateCreatedString property;
         /// </summary>
         /// <value>
-        ///   The FriendDateJoined;
+        ///   The DateCreatedString;
         /// </value>
-        public string FriendDateEstablishedString
+        public string DateCreatedString
         {
-            get { return _dateCreatedString.ToString(); }
+            get { return _dateCreated.ToString(); }
             set { _dateCreatedString = value; }
         }
 

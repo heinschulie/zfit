@@ -10,7 +10,7 @@ namespace zfit
     {
         private Workout _workoutFilter = new Workout();
 
-        public Workout ExcFilter
+        public Workout WrtFilter
         {
             get { return _workoutFilter; }
             set { _workoutFilter = value; }

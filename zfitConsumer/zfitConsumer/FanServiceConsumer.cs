@@ -494,5 +494,58 @@ namespace zfit
             FanCallHandler.ServiceCall<Exercise>(aFantoken, "DeleteExercise", aExercise);
         }
         #endregion
+
+        #region Workout Service Calls
+
+        /// <summary>
+        /// Call the WebService with a request to return a Workout with a specified WorkoutKey
+        /// </summary>
+        /// <param name="aWorkout">The Workout object to return</param>
+        /// <param name="aFantoken">A Fan token.</param>
+        public static void GetWorkout(FanToken aFantoken, Workout aWorkout)
+        {
+            FanCallHandler.ServiceCall<Workout>(aFantoken, "GetWorkout", aWorkout);
+        }
+
+        /// <summary>
+        /// Gets a FanCollection
+        /// </summary>
+        /// <param name="aFantoken">A fantoken.</param>
+        /// <param name="aWorkoutCollection">A user collection.</param>
+        public static void GetWorkoutCollection(FanToken aFantoken, FanCollection aWorkoutCollection)
+        {
+            FanCallHandler.ServiceCall<WorkoutCollection>(aFantoken, "GetWorkoutCollection", aWorkoutCollection);
+        }
+
+        /// <summary>
+        /// Call the WebService with a request to Add a Workout
+        /// </summary>
+        /// <param name="aWorkout">The Workout object to Add</param>
+        /// <param name="aFantoken">A fantoken.</param>
+        public static void AddWorkout(FanToken aFantoken, Workout aWorkout)
+        {
+            FanCallHandler.ServiceCall<Workout>(aFantoken, "AddWorkout", aWorkout);
+        }
+
+        /// <summary>
+        /// Call the WebService with a request to Edit a Workout
+        /// </summary>
+        /// <param name="aWorkout">The Workout object to Edit</param>
+        /// <param name="aFantoken">A fantoken.</param>
+        public static void EditWorkout(FanToken aFantoken, Workout aWorkout)
+        {
+            FanCallHandler.ServiceCall<Workout>(aFantoken, "EditWorkout", aWorkout);
+        }
+
+        /// <summary>
+        /// Call the WebService with a request to Delete a Workout
+        /// </summary>
+        /// <param name="aWorkout">The Workout object to Delete</param>
+        /// <param name="aFantoken">A fantoken.</param>
+        public static void DeleteWorkout(FanToken aFantoken, Workout aWorkout)
+        {
+            FanCallHandler.ServiceCall<Workout>(aFantoken, "DeleteWorkout", aWorkout);
+        }
+        #endregion
     }
 }

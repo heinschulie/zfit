@@ -68,6 +68,7 @@
     <Compile Include="FanRoleBusiness.cs" />
     <Compile Include="UserBusiness.cs" />
     <Compile Include="UserRoleBusiness.cs" />
+    <Compile Include="WorkoutBusiness.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
