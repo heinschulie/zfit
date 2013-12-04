@@ -217,7 +217,7 @@ namespace zfit
                 {
                     vSqlCommand.Parameters["@WRTKey"].Value = vFanWorkout.WrtKey;
                     vSqlCommand.Parameters["@FANKey"].Value = vFanWorkout.FanKey;
-                    vSqlCommand.Parameters["@FAWDateCreated"].Value = vFanWorkout.FanWorkoutDateCreated;
+                    vSqlCommand.Parameters["@FAWDateCreated"].Value = DateTime.Parse(vFanWorkout.FanWorkoutDateCreated);
                     vSqlCommand.ExecuteScalar();
                 });
                 vSqlCommand.Connection.Close();
@@ -246,7 +246,7 @@ namespace zfit
             {
                 var vStringBuilder = new StringBuilder();
                 vStringBuilder.AppendLine("update FAW_FanWorkout");
-                vStringBuilder.AppendLine("set    FAW_DateCreated = @FAWDateCreated,");
+                vStringBuilder.AppendLine("set    FAW_DateCreated = @FAWDateCreated");
                 vStringBuilder.AppendLine("where  WRT_Key = @WRTKey");
                 vStringBuilder.AppendLine("and    FAN_Key = @FANKey");
                 ObjectToData(vSqlCommand, aFanWorkout);

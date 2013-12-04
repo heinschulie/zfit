@@ -634,5 +634,39 @@ namespace zfit
         }
 
         #endregion
+
+        #region FanSession Service Calls
+
+        /// <summary>
+        ///   Gets a specified <see cref="FanSession"/> by key.
+        /// </summary>
+        /// <param name="aFanToken">A <see cref="FanToken"/> object used for Access Control.</param>
+        /// <param name="aFanSession"><see cref="FanSession"/> object.</param>
+        public static void GetFanSession(FanToken aFanToken, FanSession aFanSession)
+        {
+            FanCallHandler.ServiceCall<FanSession>(aFanToken, "GetFanSession", aFanSession);
+        }
+
+        /// <summary>
+        ///   Gets a specified <see cref="FanSessionCollection"/>.
+        /// </summary>
+        /// <param name="aFanToken">A <see cref="FanToken"/> object used for Access Control.</param>
+        /// <param name="aFanSessionCollection"><see cref="FanSession"/>Collection object.</param>
+        public static void GetFanSessionCollection(FanToken aFanToken, FanSessionCollection aFanSessionCollection)
+        {
+            FanCallHandler.ServiceCall<FanSessionCollection>(aFanToken, "GetFanSessionCollection", aFanSessionCollection);
+        }
+
+        /// <summary>
+        /// Add a <see cref="FanSession" />.
+        /// </summary>
+        /// <param name="aFanToken">A <see cref="FanToken" /> object used for Access Control.</param>
+        /// <param name="aFanSessionCollection">A provider suburb collection.</param>
+        public static void SaveFanSession(FanToken aFanToken, FanSessionCollection aFanSessionCollection)
+        {
+            FanCallHandler.ServiceCall<FanSessionCollection>(aFanToken, "SaveFanSession", aFanSessionCollection);
+        }
+
+        #endregion
     }
 }

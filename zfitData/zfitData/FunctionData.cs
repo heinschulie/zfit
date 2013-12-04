@@ -56,7 +56,6 @@ namespace zfit
         /// <param name="aFunction">A <see cref="Function"/> argument.</param>
         public static void ObjectToData(SqlCommand aSqlCommand, Function aFunction)
         {
-
             aSqlCommand.Parameters.AddWithValue("@FNCCode", aFunction.FncCode);
             aSqlCommand.Parameters.AddWithValue("@FNCName", aFunction.FncName);
         }

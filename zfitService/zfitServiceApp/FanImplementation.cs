@@ -1289,8 +1289,7 @@ namespace zfit
         }
 
         #endregion   
-
-        
+      
         #region FanWorkout Methods
 
         /// <summary>
@@ -1348,6 +1347,67 @@ namespace zfit
             vFanWorkoutCollection = XmlUtils.Deserialize<FanWorkoutCollection>(aXmlArgument);
             FanWorkoutBusiness.Save(aFanKey, vFanWorkoutCollection);
             return XmlUtils.Serialize<FanWorkoutCollection>(vFanWorkoutCollection, true);
+        }
+
+        #endregion
+
+        #region FanSession Methods
+
+        /// <summary>
+        ///   Gets the <see cref="FanSession"/> by Key.
+        /// </summary>
+        /// <param name="aXmlArgument">XML Argument <see cref="string"/>.</param>
+        /// <returns>FanSession as XML <see cref="string"/>.</returns>
+        /// <exception cref="ArgumentNullException">If <c>aXmlArgument</c> is <c>null</c>.</exception>
+        public static string GetFanSession(FanKey aFanKey, string aXmlArgument)
+        {
+            if (aXmlArgument == null)
+            {
+                throw new ArgumentNullException("aXmlArgument of GetFanSession");
+            }
+            FanSession vFanSession = new FanSession();
+            vFanSession = XmlUtils.Deserialize<FanSession>(aXmlArgument);
+            FanSessionBusiness.Load(aFanKey, vFanSession);
+            return XmlUtils.Serialize<FanSession>(vFanSession, true);
+        }
+
+        /// <summary>
+        ///   The <c>GetFanSessionCollection</c> implementation method deserializes an incoming XML Argument <see cref="string"/> as a new <see cref="FanSessionCollection"/> object.
+        ///   It invokes the <c>Insert</c> method of <see cref="FanSessionBusiness"/> with the newly deserialized <see cref="FanSessionCollection"/> object.
+        ///   Finally, it returns the collection object as a serialized <see cref="string"/> of XML.
+        /// </summary>
+        /// <param name="aXmlArgument">XML Argument <see cref="string"/>.</param>
+        /// <returns><see cref="FanSessionCollection"/> as XML <see cref="string"/>.</returns>
+        /// <exception cref="ArgumentNullException">If <c>aXmlArgument</c> is <c>null</c>.</exception>
+        public static string GetFanSessionCollection(FanKey aFanKey, string aXmlArgument)
+        {
+            if (aXmlArgument == null)
+            {
+                throw new ArgumentNullException("aXmlArgument of GetFanSessionCollection");
+            }
+            FanSessionCollection vFanSessionCollection = new FanSessionCollection();
+            vFanSessionCollection = XmlUtils.Deserialize<FanSessionCollection>(aXmlArgument);
+            FanSessionBusiness.Load(aFanKey, vFanSessionCollection);
+            return XmlUtils.Serialize<FanSessionCollection>(vFanSessionCollection, true);
+        }
+
+        /// <summary>
+        /// Saves the provider suburb.
+        /// </summary>
+        /// <param name="aFanKey">A user key.</param>
+        /// <param name="aXmlArgument">A XML argument.</param>
+        /// <returns>A string of XML representing a FanSessionCollection</returns>
+        /// <exception cref="System.ArgumentNullException">aXmlArgument of SaveFanSession</exception>
+        public static string SaveFanSession(FanKey aFanKey, string aXmlArgument)
+        {
+            if (aXmlArgument == null)
+            {
+                throw new ArgumentNullException("aXmlArgument of SaveFanSession");
+            }
+            FanSessionCollection vFanSessionCollection = new FanSessionCollection();
+            vFanSessionCollection = XmlUtils.Deserialize<FanSessionCollection>(aXmlArgument);
+            FanSessionBusiness.Save(aFanKey, vFanSessionCollection);
+            return XmlUtils.Serialize<FanSessionCollection>(vFanSessionCollection, true);
         }
 
         #endregion

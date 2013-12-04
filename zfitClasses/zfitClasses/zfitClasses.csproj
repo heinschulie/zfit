@@ -51,6 +51,7 @@
     <Compile Include="Classes\CellFed.cs" />
     <Compile Include="Classes\Exercise.cs" />
     <Compile Include="Classes\FanFed.cs" />
+    <Compile Include="Classes\FanSession.cs" />
     <Compile Include="Classes\FanWorkout.cs" />
     <Compile Include="Classes\Fed.cs" />
     <Compile Include="Classes\Friend.cs" />
@@ -71,6 +72,7 @@
     <Compile Include="Collections\CellFedCollection.cs" />
     <Compile Include="Collections\ExerciseCollection.cs" />
     <Compile Include="Collections\FanFedCollection.cs" />
+    <Compile Include="Collections\FanSessionCollection.cs" />
     <Compile Include="Collections\FanWorkoutCollection.cs" />
     <Compile Include="Collections\FedCollection.cs" />
     <Compile Include="Collections\FriendCollection.cs" />
@@ -92,6 +94,7 @@
     <Compile Include="Filters\ExerciseFilter.cs" />
     <Compile Include="Filters\FanFedFilter.cs" />
     <Compile Include="Filters\FanFilter.cs" />
+    <Compile Include="Filters\FanSessionFilter.cs" />
     <Compile Include="Filters\FanWorkoutFilter.cs" />
     <Compile Include="Filters\FedFilter.cs" />
     <Compile Include="Filters\FriendFilter.cs" />
@@ -103,6 +106,7 @@
     <Compile Include="Keys\CellKey.cs" />
     <Compile Include="Keys\ExerciseKey.cs" />
     <Compile Include="Keys\FanFedKey.cs" />
+    <Compile Include="Keys\FanSessionKey.cs" />
     <Compile Include="Keys\FanWorkoutKey.cs" />
     <Compile Include="Keys\FedKey.cs" />
     <Compile Include="Keys\FriendKey.cs" />
