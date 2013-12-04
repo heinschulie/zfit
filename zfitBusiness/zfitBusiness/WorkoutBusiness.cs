@@ -79,6 +79,8 @@ namespace zfit
             //    throw new ZpAccessException("Access Denied", String.Format("{0}", aFanKey.FannKey), AccessMode.Create, "Workout");
             //}
 
+            //Set date of creation before insert 
+            aWorkout.DateCreated = DateTime.Now.ToLongDateString();
             WorkoutData.Insert(aWorkout);
         }
 

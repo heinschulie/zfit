@@ -50,7 +50,7 @@ namespace zfit
             aFriend.Fan2Key = Convert.ToInt32(aSqlDataReader["Friend2_Key"]);
             aFriend.Fan2Name = Convert.ToString(aSqlDataReader["Friend2_Name"]);
             aFriend.Fan2Surname = Convert.ToString(aSqlDataReader["Friend2_Surname"]);
-            aFriend.FriendDateEstablished = Convert.ToDateTime(aSqlDataReader["FRD_DateEstablished"]);
+            aFriend.FriendDateEstablished = (Convert.ToDateTime(aSqlDataReader["FRD_DateEstablished"])).ToLongDateString();          
             aFriend.Relationship = Convert.ToInt32(aSqlDataReader["Relationship_Key"]);
             aFriend.RelationshipType = Convert.ToString(aSqlDataReader["Relationship_Type"]);
         }
@@ -68,7 +68,7 @@ namespace zfit
         {
             aSqlCommand.Parameters.AddWithValue("@FAN1Key", aFriend.Fan1Key);
             aSqlCommand.Parameters.AddWithValue("@FAN2Key", aFriend.Fan2Key);
-            aSqlCommand.Parameters.AddWithValue("@FRDDateEstablished", aFriend.FriendDateEstablished);
+            aSqlCommand.Parameters.AddWithValue("@FRDDateEstablished", DateTime.Parse(aFriend.FriendDateEstablished));
             aSqlCommand.Parameters.AddWithValue("@RELKey", aFriend.RelationshipType);
         }
 

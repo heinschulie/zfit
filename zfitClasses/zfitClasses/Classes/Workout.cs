@@ -19,8 +19,7 @@ namespace zfit
         private string _fedName;
         private int _celKey;
         private string _celName;
-        private DateTime _dateCreated;
-        private string _dateCreatedString;
+        private string _dateCreated; //Date handled as string - converted within data.dll 
 
         #endregion
 
@@ -148,23 +147,12 @@ namespace zfit
         /// <value>
         ///   The DateCreated;
         /// </value>
-        public DateTime DateCreated
+        public string DateCreated
         {
             get { return _dateCreated; }
             set { _dateCreated = value; }
         }
 
-        /// <summary>
-        ///   Gets or sets the DateCreatedString property;
-        /// </summary>
-        /// <value>
-        ///   The DateCreatedString;
-        /// </value>
-        public string DateCreatedString
-        {
-            get { return _dateCreated.ToString(); }
-            set { _dateCreatedString = value; }
-        }
 
         #endregion
 
@@ -193,7 +181,6 @@ namespace zfit
             _celKey = (aSource as Workout)._celKey;
             _celName = (aSource as Workout)._celName;
             _dateCreated = (aSource as Workout)._dateCreated;
-            _dateCreatedString = (aSource as Workout)._dateCreatedString;
         }
 
         #endregion

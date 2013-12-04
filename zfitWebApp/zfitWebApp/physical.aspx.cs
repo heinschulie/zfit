@@ -213,10 +213,10 @@ namespace zfit
         public static webObject addWorkout(Workout aWorkout)
         {
             FanToken vFanToken = ServerSession.GetFanToken(HttpContext.Current.Session);
-            ServerSession.ClearSessionBusiness(HttpContext.Current.Session);
+            FanKey vFanKey = ServerSession.GetObject<FanKey>(HttpContext.Current.Session);
+            aWorkout.WrtOwnerKey = vFanKey.FannKey; 
             webObject vWebObject = new webObject();
             vWebObject.aTransactionStatus = ServerSession.GetTransactionStatus(HttpContext.Current.Session);
-
             try
             {
                 FanServiceConsumer.AddWorkout(vFanToken, aWorkout);
@@ -252,9 +252,6 @@ namespace zfit
             ServerSession.ClearSessionBusiness(HttpContext.Current.Session);
             webObject vWebObject = new webObject();
             vWebObject.aTransactionStatus = ServerSession.GetTransactionStatus(HttpContext.Current.Session);
-
-            // ********** TEMPORARY REMEDY UNTIL I SORT OUT DATETIME ISSUE 
-            aWorkout.DateCreated = DateTime.Now;
 
             try
             {

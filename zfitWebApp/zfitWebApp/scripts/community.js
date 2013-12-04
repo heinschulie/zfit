@@ -983,10 +983,10 @@ var friendcrud = function fanfedData(d, i) {
 
 //Data Arrays for Friend Crud Methods 
 var friendContentTemplate = [
-    { title: "Fan Key", fieldId: "FanKey" },
-    { title: "Fan Name", fieldId: "FanName" },
-    { title: "Fan Owner Key", fieldId: "FedKey" },
-    { title: "Fan Owner Name", fieldId: "FedName" }
+    { title: "Friend1 Key", fieldId: "Friend1Key" },
+    { title: "Friend2 Name", fieldId: "Friend2Name" },
+    { title: "Friend2 Key", fieldId: "Friend2Key" },
+    { title: "Friend2 Name", fieldId: "Friend2Name" }
 ];
 
 // Fan viewing his/her friends 

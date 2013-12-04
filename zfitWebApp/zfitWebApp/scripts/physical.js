@@ -135,7 +135,7 @@ var populateWorkoutFields = function (aWorkout) {
     d3.select("#FedName").text(aWorkout.FedName);
     d3.select("#CelKey").text(aWorkout.CelKey);
     d3.select("#CelName").text(aWorkout.CelName);
-    d3.select("#DateCreatedString").text(aWorkout.DateCreatedString);
+    d3.select("#DateCreated").text(aWorkout.DateCreated);
 };
 
 var workoutLoaded = function (aWorkout) {
@@ -174,11 +174,11 @@ var workoutcrud = function workoutData(d, i) {
     aWorkout.WrtDescription = d3.select("#WrtDescription").text();
     aWorkout.WrtOwnerKey = 2; //Hardcoded - Just to keep html simple 
     aWorkout.WrtOwnerName = d3.select("#WrtOwnerName").text();
-    aWorkout.FedKey = 2; //Hardcoded - Just to keep html simple 
+    aWorkout.FedKey = 3; //Hardcoded - Just to keep html simple 
     aWorkout.FedName = d3.select("#FedName").text();
-    aWorkout.CelKey = 2; //Hardcoded - Just to keep html simple 
+    aWorkout.CelKey = 4; //Hardcoded - Just to keep html simple 
     aWorkout.CelName = d3.select("#CelName").text();
-    aWorkout.DateCreatedString = d3.select("#DateCreatedString").text();
+    aWorkout.DateCreated = d3.select("#DateCreated").text();
 
     var Workout = { 'aWorkout': aWorkout };
     ajaxCall(methodname, Workout, callback);
@@ -196,7 +196,7 @@ var workoutContentTemplate = [
     { title: "Fed Name", fieldId: "FedName" },
     { title: "Cel Key", fieldId: "CelKey" },
     { title: "Cel Name", fieldId: "CelName" },
-    { title: "Date Created String", fieldId: "DateCreatedString" }
+    { title: "Date Created", fieldId: "DateCreated" }
 ];
 
 var workoutloadData = [

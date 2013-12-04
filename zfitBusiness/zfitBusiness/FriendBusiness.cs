@@ -29,6 +29,8 @@ namespace zfit
             //}
 
             FriendData.Load(aFriendCollection);
+
+            // REMEMBER TO SORT AFRIENDCOLLECTION SUCH THAT THE FILTERING FAN IS ALWAYS THE FIRST FAN KEY 
         }
 
         #endregion
@@ -93,20 +95,22 @@ namespace zfit
                 bool bonafide = true;
                 int instancenumber = 0;
 
-                foreach (Friend aFriend in vExisting.FriendList)
-                {                    
-                    if (vFriend.Fan1Key == aFriend.Fan1Key && vFriend.Fan2Key == aFriend.Fan2Key)
+                foreach (Friend oldFriend in vExisting.FriendList)
+                {
+                    if (vFriend.Fan1Key == oldFriend.Fan1Key && vFriend.Fan2Key == oldFriend.Fan2Key)
                     {
                         exists = true;
                         instancenumber++; 
                         break; 
                     }
-                    else if (vFriend.Fan1Key == aFriend.Fan2Key && vFriend.Fan2Key == aFriend.Fan1Key)
+                    else if (vFriend.Fan1Key == oldFriend.Fan2Key && vFriend.Fan2Key == oldFriend.Fan1Key)
                     {
                         bonafide = false; 
                         break;
                     }
                 }
+                if (bonafide)
+                    vFriend.FriendDateEstablished = DateTime.Now.ToLongDateString(); 
                 if ((exists || bonafide) && instancenumber < 2)
                     vFresh.FriendList.Add(vFriend);
             }

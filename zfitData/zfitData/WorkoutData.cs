@@ -52,7 +52,7 @@ namespace zfit
             aWorkout.CelName = Convert.ToString(aSqlDataReader["CEL_Name"]);
             aWorkout.FedKey = Convert.ToInt32(aSqlDataReader["FED_Key"]);
             aWorkout.FedName = Convert.ToString(aSqlDataReader["FED_Name"]);
-            aWorkout.DateCreated = Convert.ToDateTime(aSqlDataReader["WRT_Date"]);
+            aWorkout.DateCreated = (Convert.ToDateTime(aSqlDataReader["WRT_Date"])).ToLongDateString();
         }
 
         #endregion
@@ -71,9 +71,23 @@ namespace zfit
             aSqlCommand.Parameters.AddWithValue("@WRTDescription", aWorkout.WrtDescription);
             aSqlCommand.Parameters.AddWithValue("@WRTOwnerKey", aWorkout.WrtOwnerKey);
             aSqlCommand.Parameters.AddWithValue("@WRTResultFunction", aWorkout.WrtResultFunction);
-            aSqlCommand.Parameters.AddWithValue("@WRTDateCreated", aWorkout.DateCreated);
-            aSqlCommand.Parameters.AddWithValue("@WRTCelKey", aWorkout.CelKey);
-            aSqlCommand.Parameters.AddWithValue("@WRTFedKey", aWorkout.FedKey);
+            aSqlCommand.Parameters.AddWithValue("@WRTDateCreated", DateTime.Parse(aWorkout.DateCreated));
+            if (aWorkout.CelKey < 1)
+            {
+                aSqlCommand.Parameters.AddWithValue("@WRTCelKey", DBNull.Value);
+            }
+            else
+            {
+                aSqlCommand.Parameters.AddWithValue("@WRTCelKey", aWorkout.CelKey);
+            }
+            if (aWorkout.FedKey < 1)
+            {
+                aSqlCommand.Parameters.AddWithValue("@WRTFedKey", DBNull.Value);
+            }
+            else
+            {
+                aSqlCommand.Parameters.AddWithValue("@WRTFedKey", aWorkout.FedKey);
+            }
         }
 
         #endregion
@@ -209,7 +223,6 @@ namespace zfit
                 vStringBuilder.AppendLine("        FED_Key,");
                 vStringBuilder.AppendLine("        CEL_Key,");
                 vStringBuilder.AppendLine("        WRT_Date,");
-                vStringBuilder.AppendLine("        WRT_Name,");
                 vStringBuilder.AppendLine("        WRT_ResultFunction,");
                 vStringBuilder.AppendLine("        WRT_Description)");
                 vStringBuilder.AppendLine("values");
@@ -219,9 +232,8 @@ namespace zfit
                 vStringBuilder.AppendLine("        @WRTFedKey,");
                 vStringBuilder.AppendLine("        @WRTCelKey,");
                 vStringBuilder.AppendLine("        @WRTDateCreated,");
-                vStringBuilder.AppendLine("        @@WRTName,");
                 vStringBuilder.AppendLine("        @WRTResultFunction,");
-                vStringBuilder.AppendLine("        @WRTDescription");
+                vStringBuilder.AppendLine("        @WRTDescription)");
                 vStringBuilder.AppendLine(";");
                 vStringBuilder.AppendLine("select SCOPE_IDENTITY()");
                 ObjectToData(vSqlCommand, aWorkout);

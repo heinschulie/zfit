@@ -603,10 +603,10 @@ namespace zfit
             vWebObject.aTransactionStatus = ServerSession.GetTransactionStatus(HttpContext.Current.Session);
 
             // ********** TEMPORARY REMEDY UNTIL I SORT OUT DATETIME ISSUE 
-            foreach (Friend vCF in aFriendCollection.FriendList)
-            {
-                vCF.FriendDateEstablished = DateTime.Parse(vCF.FriendDateEstablishedString);  
-            } 
+            //foreach (Friend vCF in aFriendCollection.FriendList)
+            //{
+            //    vCF.FriendDateEstablished = DateTime.Parse(vCF.FriendDateEstablishedString);  
+            //} 
 
             try
             {
