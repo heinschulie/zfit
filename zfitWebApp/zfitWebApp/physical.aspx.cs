@@ -572,5 +572,79 @@ namespace zfit
         #endregion
 
         #endregion
+
+        #region FanWorkout Web methods
+
+        #region Load FanWorkoutCollection
+
+        [WebMethod(EnableSession = false)]
+        public static webObject loadFanWorkoutCollection(FanWorkoutCollection aFanWorkoutCollection)
+        {
+            FanToken vFanToken = ServerSession.GetFanToken(HttpContext.Current.Session);
+            ServerSession.ClearSessionBusiness(HttpContext.Current.Session);
+            webObject vWebObject = new webObject();
+            vWebObject.aTransactionStatus = ServerSession.GetTransactionStatus(HttpContext.Current.Session);
+
+            try
+            {
+                FanServiceConsumer.GetFanWorkoutCollection(vFanToken, aFanWorkoutCollection);
+                vWebObject.aTransactionStatus.TransactionResult = TransactionResult.OK;
+                vWebObject.aTransactionStatus.Message = "FanWorkoutCollection Loaded";
+                ServerSession.SetTransactionStatus(HttpContext.Current.Session, vWebObject.aTransactionStatus);
+                vWebObject.AnObject = aFanWorkoutCollection;
+            }
+            catch (TransactionStatusException tx)
+            {
+                vWebObject.aTransactionStatus.AssignFromSource(tx.TransactionStatus);
+                return vWebObject;
+            }
+            catch (Exception ex)
+            {
+                vWebObject.aTransactionStatus.TransactionResult = TransactionResult.GeneralException;
+                vWebObject.aTransactionStatus.Message = "Load of FanWorkoutCollection unsuccesful" + ex.Message;
+                vWebObject.aTransactionStatus.InnerMessage = ex.InnerException == null ? String.Empty : ex.InnerException.Message;
+                return vWebObject;
+            }
+            return vWebObject;
+        }
+        #endregion
+
+        #region Edit FanWorkoutCollection
+
+        [WebMethod(EnableSession = false)]
+        public static webObject editFanWorkoutCollection(FanWorkoutCollection aFanWorkoutCollection)
+        {
+            FanToken vFanToken = ServerSession.GetFanToken(HttpContext.Current.Session);
+            ServerSession.ClearSessionBusiness(HttpContext.Current.Session);
+            webObject vWebObject = new webObject();
+            vWebObject.aTransactionStatus = ServerSession.GetTransactionStatus(HttpContext.Current.Session);
+
+            try
+            {
+                FanServiceConsumer.SaveFanWorkout(vFanToken, aFanWorkoutCollection);
+                vWebObject.aTransactionStatus.TransactionResult = TransactionResult.OK;
+                vWebObject.aTransactionStatus.Message = "FanWorkoutCollection Edited";
+                ServerSession.SetTransactionStatus(HttpContext.Current.Session, vWebObject.aTransactionStatus);
+                vWebObject.AnObject = aFanWorkoutCollection;
+            }
+            catch (TransactionStatusException tx)
+            {
+
+                vWebObject.aTransactionStatus.AssignFromSource(tx.TransactionStatus);
+                return vWebObject;
+            }
+            catch (Exception ex)
+            {
+                vWebObject.aTransactionStatus.TransactionResult = TransactionResult.GeneralException;
+                vWebObject.aTransactionStatus.Message = "Edit of FanWorkoutCollection unsuccesful" + ex.Message;
+                vWebObject.aTransactionStatus.InnerMessage = ex.InnerException == null ? String.Empty : ex.InnerException.Message;
+                return vWebObject;
+            }
+            return vWebObject;
+        }
+        #endregion
+
+        #endregion 
+        
     }
 }

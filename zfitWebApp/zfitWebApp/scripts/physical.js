@@ -532,3 +532,142 @@ var deleteActivityClick = d3.select("div#deleteActivity").on("click", function (
         .text("Delete Activity")
         .on("click", activitycrud);
 });
+
+
+// ||||||||||||||   ***    FANWORKOUT CRUD    ***    |||||||||||||||| //
+
+//Callbacks for FANWORKOUT CRUD 
+
+var populateCollectionFields = function (anArray, fanworkout) {
+
+    //Select & data
+    var elements = d3.select("div.content")
+        .selectAll("div.properties")
+        .data(anArray);
+
+    //Enter
+    elements
+        .enter()
+        .append("div")
+        .classed("properties", true);
+
+    //Update
+    if (fanworkout === "fan") {
+        elements.text(function (d) { return d.WrtName });
+    }
+    else {
+        elements.text(function (d) { return d.FanName });
+    }
+
+    //Exit
+    elements
+        .exit()
+        .remove();
+};
+
+var fanWorkoutCollectionLoaded = function (aFanWorkoutCollection) {
+    populateCollectionFields(aFanWorkoutCollection.FanWorkoutList, "fan");
+};
+
+var fanWorkoutCollectionEdited = function (aFanWorkoutCollection) {
+    populateCollectionFields(aFanWorkoutCollection.FanWorkoutList, "fan");
+};
+
+
+// FANWORKOUT Methods and Events  
+
+var fanworkoutcrud = function fanworkoutData(d, i) {
+
+    var methodname = d.methodName;
+    var callback = d.callBack;
+    var aFanWorkoutCollection = { FanWorkoutFilter: { FawFilter: {} } };
+    var filter = d3.select("#textFilter");
+
+    if (filter.attr("type") === "number") {
+        aFanWorkoutCollection.isFiltered = true;
+        if (d.filtertype === "fan")
+            aFanWorkoutCollection.FanWorkoutFilter.FawFilter.FanKey = filter.node().value;
+        else
+            aFanWorkoutCollection.FanWorkoutFilter.FawFilter.WrtKey = filter.node().value;
+    }
+    else {
+        aFanWorkoutCollection.isFiltered = true;
+        if (d.filtertype === "fan")
+            aFanWorkoutCollection.FanWorkoutFilter.FawFilter.FanName = filter.text();
+        else
+            aFanWorkoutCollection.FanWorkoutFilter.FawFilter.WrtName = filter.text();
+    }
+
+    //Remove the fanworkouts that are have checkboxes that are checked 
+    if (d.crudtype === "edit") {
+        aFanWorkoutCollection.FanWorkoutList = [];
+        var chkboxes = d3.selectAll("input.chkbox");
+        chkboxes.each(function (d, i) {
+            if (chkboxes[0][i].checked === false) {
+                var FanWorkout = {};
+                var thisfanworkout = chkboxes[0][i].__data__;
+                FanWorkout.FanKey = thisfanworkout.FanKey;
+                FanWorkout.WrtKey = thisfanworkout.WrtKey;
+                FanWorkout.FanWorkoutDateCreated = thisfanworkout.FanWorkoutDateCreated;
+
+                aFanWorkoutCollection.FanWorkoutList.push(FanWorkout);
+            }
+        });
+    }
+
+    var FanWorkoutCollection = { 'aFanWorkoutCollection': aFanWorkoutCollection };
+    ajaxCall(methodname, FanWorkoutCollection, callback);
+}
+
+//Data Arrays for FanWorkout Crud Methods 
+var fanworkoutContentTemplate = [
+    { title: "Fan Key", fieldId: "FanKey" },
+    { title: "Wrt Key", fieldId: "WrtKey" },
+    { title: "Wrt Name", fieldId: "WrtName" }
+];
+
+// Fan viewing his/her workouts 
+var fanworkoutloadData = [
+  { methodName: "physical.aspx/loadFanWorkoutCollection", callBack: fanWorkoutCollectionLoaded, filtertype: "fan" }
+];
+// Fan editing his/her workouts 
+var fanworkouteditData = [
+  { methodName: "physical.aspx/editFanWorkoutCollection", callBack: fanWorkoutCollectionEdited, filtertype: "fan", crudtype: "edit" }
+];
+
+//*** FANWORKOUT's from Cells perspective
+
+var loadFanWorkoutClick = d3.select("div#fanworkoutCollection").on("click", function () {
+
+    contentSetup(fanworkoutContentTemplate, false);
+
+    d3.select("#textFilter")
+        .attr("type", "number");
+
+    d3.select(".testButton")
+        .data(fanworkoutloadData)
+        .text("Load FanWorkout")
+        .on("click", fanworkoutcrud);
+
+    var container = d3.select("div#" + this.id + "CrudContainer");
+    sidenav(container);
+});
+
+var editfanWorkoutClick = d3.select("div#editFanworkout").on("click", function () {
+
+    var elements = d3.select("div.content")
+        .selectAll("div.properties");
+
+    elements
+       .each(function (d) {
+           d3.select(this).append("input")
+             .attr("type", "checkbox")
+             .classed("chkbox", true);
+       });
+
+    d3.select(".testButton")
+        .data(fanworkouteditData)
+        .text("Edit FanWorkout")
+        .on("click", fanworkoutcrud);
+});
+

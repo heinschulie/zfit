@@ -55,6 +55,7 @@
     <Compile Include="CellFedData.cs" />
     <Compile Include="ExerciseData.cs" />
     <Compile Include="FanFedData.cs" />
+    <Compile Include="FanWorkoutData.cs" />
     <Compile Include="FedData.cs" />
     <Compile Include="FriendData.cs" />
     <Compile Include="FunctionData.cs" />

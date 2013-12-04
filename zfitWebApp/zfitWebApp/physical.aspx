@@ -32,7 +32,11 @@
             <div class="sideNavTerElement" id="deleteWorkout">Delete Workout</div>
         </div> 
         <div class="sideNavSecElement" id="addWorkout">Add Workout</div>
-        <div class="sideNavSecElement" id="loadWorkoutCollection">Load Workout List</div>
+        <div class="sideNavSecElement" id="loadWorkoutCollection">Load Workout List</div>              
+        <div class="sideNavSecElement" id="fanworkoutCollection">Fan Workout List</div>        
+        <div class="subelementContainer" id="fanworkoutCollectionCrudContainer">
+            <div class="sideNavTerElement" id="editFanworkout">Edit Fan's Workouts</div>
+        </div> 
     </div>
 </asp:Content>
 <asp:Content ID="Content3" ContentPlaceHolderID="contentPlaceHolder" runat="server">

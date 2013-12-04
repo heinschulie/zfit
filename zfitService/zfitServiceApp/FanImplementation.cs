@@ -1289,5 +1289,67 @@ namespace zfit
         }
 
         #endregion   
+
+        
+        #region FanWorkout Methods
+
+        /// <summary>
+        ///   Gets the <see cref="FanWorkout"/> by Key.
+        /// </summary>
+        /// <param name="aXmlArgument">XML Argument <see cref="string"/>.</param>
+        /// <returns>FanWorkout as XML <see cref="string"/>.</returns>
+        /// <exception cref="ArgumentNullException">If <c>aXmlArgument</c> is <c>null</c>.</exception>
+        public static string GetFanWorkout(FanKey aFanKey, string aXmlArgument)
+        {
+            if (aXmlArgument == null)
+            {
+                throw new ArgumentNullException("aXmlArgument of GetFanWorkout");
+            }
+            FanWorkout vFanWorkout = new FanWorkout();
+            vFanWorkout = XmlUtils.Deserialize<FanWorkout>(aXmlArgument);
+            FanWorkoutBusiness.Load(aFanKey, vFanWorkout);
+            return XmlUtils.Serialize<FanWorkout>(vFanWorkout, true);
+        }
+
+        /// <summary>
+        ///   The <c>GetFanWorkoutCollection</c> implementation method deserializes an incoming XML Argument <see cref="string"/> as a new <see cref="FanWorkoutCollection"/> object.
+        ///   It invokes the <c>Insert</c> method of <see cref="FanWorkoutBusiness"/> with the newly deserialized <see cref="FanWorkoutCollection"/> object.
+        ///   Finally, it returns the collection object as a serialized <see cref="string"/> of XML.
+        /// </summary>
+        /// <param name="aXmlArgument">XML Argument <see cref="string"/>.</param>
+        /// <returns><see cref="FanWorkoutCollection"/> as XML <see cref="string"/>.</returns>
+        /// <exception cref="ArgumentNullException">If <c>aXmlArgument</c> is <c>null</c>.</exception>
+        public static string GetFanWorkoutCollection(FanKey aFanKey, string aXmlArgument)
+        {
+            if (aXmlArgument == null)
+            {
+                throw new ArgumentNullException("aXmlArgument of GetFanWorkoutCollection");
+            }
+            FanWorkoutCollection vFanWorkoutCollection = new FanWorkoutCollection();
+            vFanWorkoutCollection = XmlUtils.Deserialize<FanWorkoutCollection>(aXmlArgument);
+            FanWorkoutBusiness.Load(aFanKey, vFanWorkoutCollection);
+            return XmlUtils.Serialize<FanWorkoutCollection>(vFanWorkoutCollection, true);
+        }
+
+        /// <summary>
+        /// Saves the provider suburb.
+        /// </summary>
+        /// <param name="aFanKey">A user key.</param>
+        /// <param name="aXmlArgument">A XML argument.</param>
+        /// <returns>A string of XML representing a FanWorkoutCollection</returns>
+        /// <exception cref="System.ArgumentNullException">aXmlArgument of SaveFanWorkout</exception>
+        public static string SaveFanWorkout(FanKey aFanKey, string aXmlArgument)
+        {
+            if (aXmlArgument == null)
+            {
+                throw new ArgumentNullException("aXmlArgument of SaveFanWorkout");
+            }
+            FanWorkoutCollection vFanWorkoutCollection = new FanWorkoutCollection();
+            vFanWorkoutCollection = XmlUtils.Deserialize<FanWorkoutCollection>(aXmlArgument);
+            FanWorkoutBusiness.Save(aFanKey, vFanWorkoutCollection);
+            return XmlUtils.Serialize<FanWorkoutCollection>(vFanWorkoutCollection, true);
+        }
+
+        #endregion
     }
 }

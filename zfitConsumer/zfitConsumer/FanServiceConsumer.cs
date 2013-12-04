@@ -600,5 +600,39 @@ namespace zfit
             FanCallHandler.ServiceCall<Activity>(aFantoken, "DeleteActivity", aActivity);
         }
         #endregion
+
+        #region FanWorkout Service Calls
+
+        /// <summary>
+        ///   Gets a specified <see cref="FanWorkout"/> by key.
+        /// </summary>
+        /// <param name="aFanToken">A <see cref="FanToken"/> object used for Access Control.</param>
+        /// <param name="aFanWorkout"><see cref="FanWorkout"/> object.</param>
+        public static void GetFanWorkout(FanToken aFanToken, FanWorkout aFanWorkout)
+        {
+            FanCallHandler.ServiceCall<FanWorkout>(aFanToken, "GetFanWorkout", aFanWorkout);
+        }
+
+        /// <summary>
+        ///   Gets a specified <see cref="FanWorkoutCollection"/>.
+        /// </summary>
+        /// <param name="aFanToken">A <see cref="FanToken"/> object used for Access Control.</param>
+        /// <param name="aFanWorkoutCollection"><see cref="FanWorkout"/>Collection object.</param>
+        public static void GetFanWorkoutCollection(FanToken aFanToken, FanWorkoutCollection aFanWorkoutCollection)
+        {
+            FanCallHandler.ServiceCall<FanWorkoutCollection>(aFanToken, "GetFanWorkoutCollection", aFanWorkoutCollection);
+        }
+
+        /// <summary>
+        /// Add a <see cref="FanWorkout" />.
+        /// </summary>
+        /// <param name="aFanToken">A <see cref="FanToken" /> object used for Access Control.</param>
+        /// <param name="aFanWorkoutCollection">A provider suburb collection.</param>
+        public static void SaveFanWorkout(FanToken aFanToken, FanWorkoutCollection aFanWorkoutCollection)
+        {
+            FanCallHandler.ServiceCall<FanWorkoutCollection>(aFanToken, "SaveFanWorkout", aFanWorkoutCollection);
+        }
+
+        #endregion
     }
 }
