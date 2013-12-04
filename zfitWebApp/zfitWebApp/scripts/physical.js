@@ -5,6 +5,21 @@ var populateExerciseFields = function (aExercise) {
     d3.select("#ExcType").text(aExercise.ExcType);
 };
 
+var populateExerciseCollection = function (aExerciseCollection) {
+
+    var wrts = d3.select("div.content")
+        .selectAll("div.properties")
+        .data(aExerciseCollection.ExerciseList);
+
+    wrts.enter()
+        .append("div")
+        .classed("properties", true);
+
+    wrts.text(function (d) { return d.ExcName });
+
+    wrts.exit().remove();
+};
+
 var exerciseLoaded = function (aExercise) {
     populateExerciseFields(aExercise);
 };
@@ -19,6 +34,10 @@ var exerciseEdited = function (aExercise) {
 
 var exerciseDeleted = function (aExercise) {
     alert("Exercise Deleted");
+};
+
+var exerciseCollectionLoaded = function (aExerciseCollection) {
+    populateExerciseCollection(aExerciseCollection);
 };
 
 // EXERCISE Methods and Events  
@@ -63,6 +82,26 @@ var exerciseeditData = [
 var exercisedeleteData = [
   { methodName: "physical.aspx/deleteExercise", callBack: exerciseDeleted }
 ];
+
+var exercisecollectionData = [
+  { methodName: "physical.aspx/loadExerciseCollection", callBack: exerciseCollectionLoaded }
+];
+
+var loadExerciseCollectionClick = d3.select("div#loadExerciseCollection").on("click", function () {
+
+    contentSetup(exerciseContentTemplate, false);
+
+    d3.select("#textFilter")
+        .attr("type", "number");
+
+    d3.select(".testButton")
+        .data(exercisecollectionData)
+        .text("Load Exercise")
+        .on("click", exercisecrud);
+
+    var container = d3.select("div#" + this.id + "CrudContainer");
+    sidenav(container);
+});
 
 var loadExerciseClick = d3.select("div#loadExercise").on("click", function () {
 
@@ -138,6 +177,17 @@ var populateWorkoutFields = function (aWorkout) {
     d3.select("#DateCreated").text(aWorkout.DateCreated);
 };
 
+var populateworkoutCollection = function (aWorkoutCollection) {
+    var wrts = d3.select("div.content")
+        .selectAll("div.properties")
+        .data(aWorkoutCollection.WorkoutList);
+    wrts.enter()
+        .append("div")
+        .classed("properties", true);
+    wrts.text(function (d) { return d.WrtName });
+    wrts.exit().remove(); 
+};
+
 var workoutLoaded = function (aWorkout) {
     populateWorkoutFields(aWorkout);
 };
@@ -154,6 +204,9 @@ var workoutDeleted = function (aWorkout) {
     alert("Workout Deleted");
 };
 
+var workoutCollectionLoaded = function (aWorkoutCollection) {
+    populateworkoutCollection(aWorkoutCollection);
+};
 // WORKOUT Methods and Events  
 
 var workoutcrud = function workoutData(d, i) {
@@ -215,6 +268,26 @@ var workoutdeleteData = [
   { methodName: "physical.aspx/deleteWorkout", callBack: workoutDeleted }
 ];
 
+var workoutcollectionData = [
+  { methodName: "physical.aspx/loadWorkoutCollection", callBack: workoutCollectionLoaded }
+];
+
+var loadWorkoutCollectionClick = d3.select("div#loadWorkoutCollection").on("click", function () {
+
+    contentSetup(workoutContentTemplate, false);
+
+    d3.select("#textFilter")
+        .attr("type", "number");
+
+    d3.select(".testButton")
+        .data(workoutcollectionData)
+        .text("Load Workout")
+        .on("click", workoutcrud);
+
+    var container = d3.select("div#" + this.id + "CrudContainer");
+    sidenav(container);
+});
+
 var loadWorkoutClick = d3.select("div#loadWorkout").on("click", function () {
 
     contentSetup(workoutContentTemplate, false);
@@ -270,4 +343,192 @@ var deleteWorkoutClick = d3.select("div#deleteWorkout").on("click", function () 
         .data(workoutdeleteData)
         .text("Delete Workout")
         .on("click", workoutcrud);
+});
+
+
+// ||||||||||||||   ***    ACTIVITY CRUD    ***    |||||||||||||||| // 
+
+var populateActivityFields = function (aActivity) {
+    d3.select("#ExcKey").text(aActivity.ExcKey);
+    d3.select("#ExcName").text(aActivity.ExcName);
+    d3.select("#WrtKey").text(aActivity.WrtKey);
+    d3.select("#WrtName").text(aActivity.WrtName);
+    d3.select("#ActDescription").text(aActivity.ActDescription);
+    d3.select("#ActUnitOfMeasure").text(aActivity.ActUnitOfMeasure);
+    d3.select("#ActMeasure").text(aActivity.ActMeasure);
+    d3.select("#ActUnitOfTime").text(aActivity.ActUnitOfTime);
+    d3.select("#ActTime").text(aActivity.ActTime);
+    d3.select("#ActRepetitions").text(aActivity.ActRepetitions);
+    d3.select("#ActRest").text(aActivity.ActRest);
+    d3.select("#ActResultType").text(aActivity.ActResultType);
+};
+
+var populateactivityCollection = function (aActivityCollection) {
+    var wrts = d3.select("div.content")
+        .selectAll("div.properties")
+        .data(aActivityCollection.ActivityList);
+    wrts.enter()
+        .append("div")
+        .classed("properties", true);
+    wrts.text(function (d) { return d.ExcName });
+    wrts.exit().remove();
+};
+
+var activityLoaded = function (aActivity) {
+    populateActivityFields(aActivity);
+};
+
+var activityAdded = function (aActivity) {
+    populateActivityFields(aActivity);
+};
+
+var activityEdited = function (aActivity) {
+    populateActivityFields(aActivity);
+};
+
+var activityDeleted = function (aActivity) {
+    alert("Activity Deleted");
+};
+
+var activityCollectionLoaded = function (aActivityCollection) {
+    populateactivityCollection(aActivityCollection);
+};
+// ACTIVITY Methods and Events  
+
+var activitycrud = function activityData(d, i) {
+
+    var methodname = d.methodName;
+    var callback = d.callBack;
+    var aActivity = {};
+    var filter = d3.select("#textFilter");
+
+    if (filter.attr("type") === "number")
+        aActivity.ActKey = filter.node().value;
+    else
+        aActivity.ActKey = parseInt(filter.text());
+
+    aActivity.ExcKey = 1;
+    aActivity.ExcName = d3.select("#ExcName").text();
+    aActivity.WrtKey = 3;
+    aActivity.WrtName = d3.select("#WrtName").text();
+    aActivity.ActDescription = d3.select("#ActDescription").text();
+    aActivity.ActUnitOfMeasure = 3; //Hardcoded - Just to keep html simple 
+    aActivity.ActMeasure = 2; //Hardcoded - Just to keep html simple 
+    aActivity.ActUnitOfTime = 3; //Hardcoded - Just to keep html simple 
+    aActivity.ActTime = 3; //Hardcoded - Just to keep html simple 
+    aActivity.ActRepetitions = 3; //Hardcoded - Just to keep html simple 
+    aActivity.ActRest = 4; //Hardcoded - Just to keep html simple 
+    aActivity.ActResultType = 3;
+
+    var Activity = { 'aActivity': aActivity };
+    ajaxCall(methodname, Activity, callback);
+}
+
+//Data Arrays for Activity Crud Methods 
+var activityContentTemplate = [
+    { title: "Exercise Name", fieldId: "ExcKey" },
+    { title: "Exercise Name", fieldId: "ExcName" },
+    { title: "Workout Key", fieldId: "WrtKey" },
+    { title: "Workout Name", fieldId: "WrtName" },
+    { title: "Act Description", fieldId: "ActDescription" },
+    { title: "Act Unit O fMeasure", fieldId: "ActUnitOfMeasure" },
+    { title: "Act Unit O fMeasure", fieldId: "ActMeasure" },
+    { title: "Act Unit Of Time", fieldId: "ActUnitOfTime" },
+    { title: "Act Time", fieldId: "ActTime" },
+    { title: "ActRepetitions", fieldId: "ActRepetitions" },
+    { title: "Act Rest", fieldId: "ActRest" },
+    { title: "Act ResultType", fieldId: "ActResultType" }
+];
+
+var activityloadData = [
+  { methodName: "physical.aspx/loadActivity", callBack: activityLoaded }
+];
+
+var activityaddData = [
+  { methodName: "physical.aspx/addActivity", callBack: activityAdded }
+];
+
+var activityeditData = [
+  { methodName: "physical.aspx/editActivity", callBack: activityEdited }
+];
+
+var activitydeleteData = [
+  { methodName: "physical.aspx/deleteActivity", callBack: activityDeleted }
+];
+
+var activitycollectionData = [
+  { methodName: "physical.aspx/loadActivityCollection", callBack: activityCollectionLoaded }
+];
+
+var loadActivityCollectionClick = d3.select("div#loadActivityCollection").on("click", function () {
+
+    contentSetup(activityContentTemplate, false);
+
+    d3.select("#textFilter")
+        .attr("type", "number");
+
+    d3.select(".testButton")
+        .data(activitycollectionData)
+        .text("Load Activity")
+        .on("click", activitycrud);
+
+    var container = d3.select("div#" + this.id + "CrudContainer");
+    sidenav(container);
+});
+
+var loadActivityClick = d3.select("div#loadActivity").on("click", function () {
+
+    contentSetup(activityContentTemplate, false);
+
+    d3.select("#textFilter")
+        .attr("type", "number");
+
+    d3.select(".testButton")
+        .data(activityloadData)
+        .text("Load Activity")
+        .on("click", activitycrud);
+
+    var container = d3.select("div#" + this.id + "CrudContainer");
+    sidenav(container);
+});
+
+var addActivityClick = d3.select("div#addActivity").on("click", function () {
+
+    contentSetup(activityContentTemplate, true);
+
+    d3.select("#textFilter")
+        .attr("type", "number");
+
+    d3.select(".testButton")
+        .data(activityaddData)
+        .text("Add Activity")
+        .on("click", activitycrud);
+});
+
+var editActivityClick = d3.select("div#editActivity").on("click", function () {
+    d3.select("div.content")
+        .selectAll("div.properties")
+        .attr("contenteditable", "true")
+        .classed("delete", false)
+        .classed("add", false)
+        .classed("edit", true);
+
+    d3.select(".testButton")
+        .data(activityeditData)
+        .text("Edit Activity")
+        .on("click", activitycrud);
+});
+
+var deleteActivityClick = d3.select("div#deleteActivity").on("click", function () {
+    d3.select("div.content")
+        .selectAll("div.properties")
+        .classed("edit", false)
+        .classed("add", false)
+        .classed("delete", true)
+        .attr("contenteditable", "false");
+
+    d3.select(".testButton")
+        .data(activitydeleteData)
+        .text("Delete Activity")
+        .on("click", activitycrud);
 });

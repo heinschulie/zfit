@@ -53,6 +53,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ActivityBusiness.cs" />
     <Compile Include="CellBusiness.cs" />
     <Compile Include="CellFanBusiness.cs" />
     <Compile Include="CellFedBusiness.cs" />

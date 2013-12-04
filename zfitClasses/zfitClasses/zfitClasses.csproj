@@ -45,6 +45,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Classes\Activity.cs" />
     <Compile Include="Classes\Cell.cs" />
     <Compile Include="Classes\CellFan.cs" />
     <Compile Include="Classes\CellFed.cs" />
@@ -63,6 +64,7 @@
     <Compile Include="Classes\UserFunctionAccess.cs" />
     <Compile Include="Classes\UserRole.cs" />
     <Compile Include="Classes\Workout.cs" />
+    <Compile Include="Collections\ActivityCollection.cs" />
     <Compile Include="Collections\CellCollection.cs" />
     <Compile Include="Collections\CellFanCollection.cs" />
     <Compile Include="Collections\CellFedCollection.cs" />
@@ -81,6 +83,7 @@
     <Compile Include="Collections\UserRoleCollection.cs" />
     <Compile Include="Collections\WorkoutCollection.cs" />
     <Compile Include="Common\zfitEnums.cs" />
+    <Compile Include="Filters\ActivityFilter.cs" />
     <Compile Include="Filters\CellFanFilter.cs" />
     <Compile Include="Filters\CellFedFilter.cs" />
     <Compile Include="Filters\CellFilter.cs" />
@@ -91,6 +94,7 @@
     <Compile Include="Filters\FriendFilter.cs" />
     <Compile Include="Filters\UserFilter.cs" />
     <Compile Include="Filters\WorkoutFilter.cs" />
+    <Compile Include="Keys\ActivityKey.cs" />
     <Compile Include="Keys\CellFanKey.cs" />
     <Compile Include="Keys\CellFedKey.cs" />
     <Compile Include="Keys\CellKey.cs" />

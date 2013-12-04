@@ -24,6 +24,43 @@ namespace zfit
 
         #region Exercise Web methods
 
+        #region Load ExerciseCollection
+
+        [WebMethod(EnableSession = false)]
+        public static webObject loadExerciseCollection(Exercise aExercise)
+        {
+            ExerciseCollection vExerciseCollection = new ExerciseCollection();
+            vExerciseCollection.ExerciseFilter.ExcFilter.AssignFromSource(aExercise);
+            FanToken vFanToken = ServerSession.GetFanToken(HttpContext.Current.Session);
+            ServerSession.ClearSessionBusiness(HttpContext.Current.Session);
+            webObject vWebObject = new webObject();
+            vWebObject.aTransactionStatus = ServerSession.GetTransactionStatus(HttpContext.Current.Session);
+
+            try
+            {
+                FanServiceConsumer.GetExerciseCollection(vFanToken, vExerciseCollection);
+                vWebObject.aTransactionStatus.TransactionResult = TransactionResult.OK;
+                vWebObject.aTransactionStatus.Message = "ExerciseCollection Loaded";
+                ServerSession.SetTransactionStatus(HttpContext.Current.Session, vWebObject.aTransactionStatus);
+                vWebObject.AnObject = vExerciseCollection;
+            }
+            catch (TransactionStatusException tx)
+            {
+
+                vWebObject.aTransactionStatus.AssignFromSource(tx.TransactionStatus);
+                return vWebObject;
+            }
+            catch (Exception ex)
+            {
+                vWebObject.aTransactionStatus.TransactionResult = TransactionResult.GeneralException;
+                vWebObject.aTransactionStatus.Message = "Load of ExerciseCollection unsuccesful" + ex.Message;
+                vWebObject.aTransactionStatus.InnerMessage = ex.InnerException == null ? String.Empty : ex.InnerException.Message;
+                return vWebObject;
+            }
+            return vWebObject;
+        }
+        #endregion
+
         #region Load Exercise
 
         [WebMethod(EnableSession = false)]
@@ -169,8 +206,44 @@ namespace zfit
 
         #endregion
 
-
         #region Workout Web methods
+
+        #region Load WorkoutCollection
+
+        [WebMethod(EnableSession = false)]
+        public static webObject loadWorkoutCollection(Workout aWorkout)
+        {
+            WorkoutCollection vWorkoutCollection = new WorkoutCollection();
+            vWorkoutCollection.WorkoutFilter.WrtFilter.AssignFromSource(aWorkout); 
+            FanToken vFanToken = ServerSession.GetFanToken(HttpContext.Current.Session);
+            ServerSession.ClearSessionBusiness(HttpContext.Current.Session);
+            webObject vWebObject = new webObject();
+            vWebObject.aTransactionStatus = ServerSession.GetTransactionStatus(HttpContext.Current.Session);
+
+            try
+            {
+                FanServiceConsumer.GetWorkoutCollection(vFanToken, vWorkoutCollection);
+                vWebObject.aTransactionStatus.TransactionResult = TransactionResult.OK;
+                vWebObject.aTransactionStatus.Message = "WorkoutCollection Loaded";
+                ServerSession.SetTransactionStatus(HttpContext.Current.Session, vWebObject.aTransactionStatus);
+                vWebObject.AnObject = vWorkoutCollection;
+            }
+            catch (TransactionStatusException tx)
+            {
+
+                vWebObject.aTransactionStatus.AssignFromSource(tx.TransactionStatus);
+                return vWebObject;
+            }
+            catch (Exception ex)
+            {
+                vWebObject.aTransactionStatus.TransactionResult = TransactionResult.GeneralException;
+                vWebObject.aTransactionStatus.Message = "Load of WorkoutCollection unsuccesful" + ex.Message;
+                vWebObject.aTransactionStatus.InnerMessage = ex.InnerException == null ? String.Empty : ex.InnerException.Message;
+                return vWebObject;
+            }
+            return vWebObject;
+        }
+        #endregion
 
         #region Load Workout
 
@@ -317,5 +390,187 @@ namespace zfit
 
         #endregion
 
+        #region Activity Web methods
+
+        #region Load ActivityCollection
+
+        [WebMethod(EnableSession = false)]
+        public static webObject loadActivityCollection(Activity aActivity)
+        {
+            ActivityCollection vActivityCollection = new ActivityCollection();
+            vActivityCollection.ActivityFilter.ActFilter.AssignFromSource(aActivity);
+            FanToken vFanToken = ServerSession.GetFanToken(HttpContext.Current.Session);
+            ServerSession.ClearSessionBusiness(HttpContext.Current.Session);
+            webObject vWebObject = new webObject();
+            vWebObject.aTransactionStatus = ServerSession.GetTransactionStatus(HttpContext.Current.Session);
+
+            try
+            {
+                FanServiceConsumer.GetActivityCollection(vFanToken, vActivityCollection);
+                vWebObject.aTransactionStatus.TransactionResult = TransactionResult.OK;
+                vWebObject.aTransactionStatus.Message = "ActivityCollection Loaded";
+                ServerSession.SetTransactionStatus(HttpContext.Current.Session, vWebObject.aTransactionStatus);
+                vWebObject.AnObject = vActivityCollection;
+            }
+            catch (TransactionStatusException tx)
+            {
+
+                vWebObject.aTransactionStatus.AssignFromSource(tx.TransactionStatus);
+                return vWebObject;
+            }
+            catch (Exception ex)
+            {
+                vWebObject.aTransactionStatus.TransactionResult = TransactionResult.GeneralException;
+                vWebObject.aTransactionStatus.Message = "Load of ActivityCollection unsuccesful" + ex.Message;
+                vWebObject.aTransactionStatus.InnerMessage = ex.InnerException == null ? String.Empty : ex.InnerException.Message;
+                return vWebObject;
+            }
+            return vWebObject;
+        }
+        #endregion
+
+        #region Load Activity
+
+        [WebMethod(EnableSession = false)]
+        public static webObject loadActivity(Activity aActivity)
+        {
+            FanToken vFanToken = ServerSession.GetFanToken(HttpContext.Current.Session);
+            ServerSession.ClearSessionBusiness(HttpContext.Current.Session);
+            webObject vWebObject = new webObject();
+            vWebObject.aTransactionStatus = ServerSession.GetTransactionStatus(HttpContext.Current.Session);
+
+            try
+            {
+                FanServiceConsumer.GetActivity(vFanToken, aActivity);
+                vWebObject.aTransactionStatus.TransactionResult = TransactionResult.OK;
+                vWebObject.aTransactionStatus.Message = "Activity Loaded";
+                ServerSession.SetTransactionStatus(HttpContext.Current.Session, vWebObject.aTransactionStatus);
+                vWebObject.AnObject = aActivity;
+            }
+            catch (TransactionStatusException tx)
+            {
+
+                vWebObject.aTransactionStatus.AssignFromSource(tx.TransactionStatus);
+                return vWebObject;
+            }
+            catch (Exception ex)
+            {
+                vWebObject.aTransactionStatus.TransactionResult = TransactionResult.GeneralException;
+                vWebObject.aTransactionStatus.Message = "Load of Activity unsuccesful" + ex.Message;
+                vWebObject.aTransactionStatus.InnerMessage = ex.InnerException == null ? String.Empty : ex.InnerException.Message;
+                return vWebObject;
+            }
+            return vWebObject;
+        }
+        #endregion
+
+        #region Add Activity
+
+        [WebMethod(EnableSession = false)]
+        public static webObject addActivity(Activity aActivity)
+        {
+            FanToken vFanToken = ServerSession.GetFanToken(HttpContext.Current.Session);
+            FanKey vFanKey = ServerSession.GetObject<FanKey>(HttpContext.Current.Session);
+            webObject vWebObject = new webObject();
+            vWebObject.aTransactionStatus = ServerSession.GetTransactionStatus(HttpContext.Current.Session);
+            try
+            {
+                FanServiceConsumer.AddActivity(vFanToken, aActivity);
+                vWebObject.aTransactionStatus.TransactionResult = TransactionResult.OK;
+                vWebObject.aTransactionStatus.Message = "Activity Added";
+                ServerSession.SetTransactionStatus(HttpContext.Current.Session, vWebObject.aTransactionStatus);
+                vWebObject.AnObject = aActivity;
+            }
+            catch (TransactionStatusException tx)
+            {
+
+                vWebObject.aTransactionStatus.AssignFromSource(tx.TransactionStatus);
+                return vWebObject;
+            }
+            catch (Exception ex)
+            {
+                vWebObject.aTransactionStatus.TransactionResult = TransactionResult.GeneralException;
+                vWebObject.aTransactionStatus.Message = "Addition of Activity unsuccesful" + ex.Message;
+                vWebObject.aTransactionStatus.InnerMessage = ex.InnerException == null ? String.Empty : ex.InnerException.Message;
+                return vWebObject;
+            }
+            return vWebObject;
+        }
+
+        #endregion
+
+        #region Edit Activity
+
+        [WebMethod(EnableSession = false)]
+        public static webObject editActivity(Activity aActivity)
+        {
+            FanToken vFanToken = ServerSession.GetFanToken(HttpContext.Current.Session);
+            ServerSession.ClearSessionBusiness(HttpContext.Current.Session);
+            webObject vWebObject = new webObject();
+            vWebObject.aTransactionStatus = ServerSession.GetTransactionStatus(HttpContext.Current.Session);
+
+            try
+            {
+                FanServiceConsumer.EditActivity(vFanToken, aActivity);
+                vWebObject.aTransactionStatus.TransactionResult = TransactionResult.OK;
+                vWebObject.aTransactionStatus.Message = "Activity Edited";
+                ServerSession.SetTransactionStatus(HttpContext.Current.Session, vWebObject.aTransactionStatus);
+                vWebObject.AnObject = aActivity;
+            }
+            catch (TransactionStatusException tx)
+            {
+
+                vWebObject.aTransactionStatus.AssignFromSource(tx.TransactionStatus);
+                return vWebObject;
+            }
+            catch (Exception ex)
+            {
+                vWebObject.aTransactionStatus.TransactionResult = TransactionResult.GeneralException;
+                vWebObject.aTransactionStatus.Message = "Edit of Activity unsuccesful" + ex.Message;
+                vWebObject.aTransactionStatus.InnerMessage = ex.InnerException == null ? String.Empty : ex.InnerException.Message;
+                return vWebObject;
+            }
+            return vWebObject;
+        }
+
+        #endregion
+
+        #region Delete Activity
+
+        [WebMethod(EnableSession = false)]
+        public static webObject deleteActivity(Activity aActivity)
+        {
+            FanToken vFanToken = ServerSession.GetFanToken(HttpContext.Current.Session);
+            ServerSession.ClearSessionBusiness(HttpContext.Current.Session);
+            webObject vWebObject = new webObject();
+            vWebObject.aTransactionStatus = ServerSession.GetTransactionStatus(HttpContext.Current.Session);
+
+            try
+            {
+                FanServiceConsumer.DeleteActivity(vFanToken, aActivity);
+                vWebObject.aTransactionStatus.TransactionResult = TransactionResult.OK;
+                vWebObject.aTransactionStatus.Message = "Activity Deleted";
+                ServerSession.SetTransactionStatus(HttpContext.Current.Session, vWebObject.aTransactionStatus);
+                vWebObject.AnObject = aActivity;
+            }
+            catch (TransactionStatusException tx)
+            {
+
+                vWebObject.aTransactionStatus.AssignFromSource(tx.TransactionStatus);
+                return vWebObject;
+            }
+            catch (Exception ex)
+            {
+                vWebObject.aTransactionStatus.TransactionResult = TransactionResult.GeneralException;
+                vWebObject.aTransactionStatus.Message = "Deletion of Activity unsuccesful" + ex.Message;
+                vWebObject.aTransactionStatus.InnerMessage = ex.InnerException == null ? String.Empty : ex.InnerException.Message;
+                return vWebObject;
+            }
+            return vWebObject;
+        }
+
+        #endregion
+
+        #endregion
     }
 }

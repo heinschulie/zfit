@@ -1187,5 +1187,107 @@ namespace zfit
         }
 
         #endregion   
+      
+        #region Activity Methods
+
+        /// <summary>
+        ///   Gets the <see cref="Activity"/> by Key.
+        /// </summary>
+        /// <param name="aXmlArgument">XML Argument <see cref="string"/>.</param>
+        /// <returns>Activity as XML <see cref="string"/>.</returns>
+        /// <exception cref="ArgumentNullException">If <c>aXmlArgument</c> is <c>null</c>.</exception>
+        public static string GetActivity(FanKey aFanKey, string aXmlArgument)
+        {
+            if (aXmlArgument == null)
+            {
+                throw new ArgumentNullException("aXmlArgument of GetActivity");
+            }
+            Activity vActivity = new Activity();
+            vActivity = XmlUtils.Deserialize<Activity>(aXmlArgument);
+            ActivityBusiness.Load(aFanKey, vActivity);
+            return XmlUtils.Serialize<Activity>(vActivity, true);
+        }
+
+        /// <summary>
+        ///   The <c>GetActivityCollection</c> implementation method deserializes an incoming XML Argument <see cref="string"/> as a new <see cref="ActivityCollection"/> object.
+        ///   It invokes the <c>Insert</c> method of <see cref="ActivityBusiness"/> with the newly deserialized <see cref="ActivityCollection"/> object.
+        ///   Finally, it returns the collection object as a serialized <see cref="string"/> of XML.
+        /// </summary>
+        /// <param name="aXmlArgument">XML Argument <see cref="string"/>.</param>
+        /// <returns><see cref="ActivityCollection"/> as XML <see cref="string"/>.</returns>
+        /// <exception cref="ArgumentNullException">If <c>aXmlArgument</c> is <c>null</c>.</exception>
+        public static string GetActivityCollection(FanKey aFanKey, string aXmlArgument)
+        {
+            if (aXmlArgument == null)
+            {
+                throw new ArgumentNullException("aXmlArgument of GetActivityCollection");
+            }
+            ActivityCollection vActivityCollection = new ActivityCollection();
+            vActivityCollection = XmlUtils.Deserialize<ActivityCollection>(aXmlArgument);
+            ActivityBusiness.Load(aFanKey, vActivityCollection);
+            return XmlUtils.Serialize<ActivityCollection>(vActivityCollection, true);
+        }
+
+        /// <summary>
+        ///   The <c>AddActivity</c> implementation method deserializes an incoming XML Argument <see cref="string"/> as a new <see cref="Activity"/> object.
+        ///   It invokes the <c>Insert</c> method of <see cref="ActivityBusiness"/> with the newly deserialized <see cref="Activity"/> object.
+        ///   Finally, it returns the inserted object (now with an assigned Activity Key) as a serialized <see cref="string"/> of XML.
+        /// </summary>
+        /// <param name="aXmlArgument">XML Argument <see cref="string"/>.</param>
+        /// <returns><see cref="Activity"/> as XML <see cref="string"/>.</returns>
+        /// <exception cref="ArgumentNullException">If <c>aXmlArgument</c> is <c>null</c>.</exception>
+        public static string AddActivity(FanKey aFanKey, string aXmlArgument)
+        {
+            if (aXmlArgument == null)
+            {
+                throw new ArgumentNullException("aXmlArgument of AddActivity");
+            }
+            Activity vActivity = new Activity();
+            vActivity = XmlUtils.Deserialize<Activity>(aXmlArgument);
+            ActivityBusiness.Insert(aFanKey, vActivity);
+            return XmlUtils.Serialize<Activity>(vActivity, true);
+        }
+
+        /// <summary>
+        ///   The <c>EditActivity</c> implementation method deserializes an incoming XML Argument <see cref="string"/> as a new <see cref="Activity"/> object.
+        ///   It invokes the <c>Update</c> method of <see cref="ActivityBusiness"/> with the newly deserialized <see cref="Activity"/> object.
+        ///   Finally, it returns the updated object unchanged as a serialized <see cref="string"/> of XML.
+        /// </summary>
+        /// <param name="aXmlArgument">XML Argument <see cref="string"/>.</param>
+        /// <returns><see cref="Activity"/> as XML <see cref="string"/>.</returns>
+        /// <exception cref="ArgumentNullException">If <c>aXmlArgument</c> is <c>null</c>.</exception>
+        public static string EditActivity(FanKey aFanKey, string aXmlArgument)
+        {
+            if (aXmlArgument == null)
+            {
+                throw new ArgumentNullException("aXmlArgument of EditActivity");
+            }
+            Activity vActivity = new Activity();
+            vActivity = XmlUtils.Deserialize<Activity>(aXmlArgument);
+            ActivityBusiness.Update(aFanKey, vActivity);
+            return XmlUtils.Serialize<Activity>(vActivity, true);
+        }
+
+        /// <summary>
+        ///   The <c>DeleteActivity</c> implementation method deserializes an incoming XML Argument as a new <see cref="Activity"/> object.
+        ///   It invokes the <c>Delete</c> method of <see cref="ActivityBusiness"/> with the newly deserialized <see cref="Activity"/> object.
+        ///   Finally, it returns the Deleted object unchanged as a serialized <c>string</c> of XML.
+        /// </summary>
+        /// <param name="aXmlArgument">A XML Argument <see cref="string"/>.</param>
+        /// <returns><see cref="Activity"/> as XML <see cref="string"/>.</returns>
+        /// <exception cref="ArgumentNullException">If <c>aXmlArgument</c> is <c>null</c>.</exception>
+        public static string DeleteActivity(FanKey aFanKey, string aXmlArgument)
+        {
+            if (aXmlArgument == null)
+            {
+                throw new ArgumentNullException("aXmlArgument of DeleteActivity");
+            }
+            Activity vActivity = new Activity();
+            vActivity = XmlUtils.Deserialize<Activity>(aXmlArgument);
+            ActivityBusiness.Delete(aFanKey, vActivity);
+            return XmlUtils.Serialize<Activity>(vActivity, true);
+        }
+
+        #endregion   
     }
 }

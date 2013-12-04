@@ -12,7 +12,7 @@
             <div class="sideNavTerElement" id="deleteExercise">Delete Exercise</div>
         </div>       
         <div class="sideNavSecElement" id="addExercise">Add Exercise</div>
-        <div class="sideNavSecElement" id="loadExerciseList">Load Exercise List</div>   
+        <div class="sideNavSecElement" id="loadExerciseCollection">Load Exercise List</div>   
     </div>
     <div class="sideNavElement" id="act" contenteditable="false">Activities</div>
     <div class="subelementContainer" id="actCrudContainer">
@@ -22,7 +22,7 @@
             <div class="sideNavTerElement" id="deleteActivity">Delete Activity</div>
         </div> 
         <div class="sideNavSecElement" id="addActivity">Add Activity</div>       
-        <div class="sideNavSecElement" id="loadActivityList">Load Activity List</div>        
+        <div class="sideNavSecElement" id="loadActivityCollection">Load Activity List</div>        
     </div>
     <div class="sideNavElement" id="wrt" contenteditable="false">Workouts</div>
     <div class="subelementContainer" id="wrtCrudContainer">
@@ -32,7 +32,7 @@
             <div class="sideNavTerElement" id="deleteWorkout">Delete Workout</div>
         </div> 
         <div class="sideNavSecElement" id="addWorkout">Add Workout</div>
-        <div class="sideNavSecElement" id="loadWorkoutList">Load Workout List</div>
+        <div class="sideNavSecElement" id="loadWorkoutCollection">Load Workout List</div>
     </div>
 </asp:Content>
 <asp:Content ID="Content3" ContentPlaceHolderID="contentPlaceHolder" runat="server">
@@ -41,7 +41,8 @@
    
       <%--Scripts--%>
         <script type="text/javascript" src="scripts/jquery-1.10.1.min.js"></script>  
-        <script src="http://d3js.org/d3.v3.min.js" charset="utf-8"></script>
+        <script type="text/javascript" src="scripts/d3.v3.min.js"></script> 
+        <%--<script src="http://d3js.org/d3.v3.min.js" charset="utf-8"></script>--%>
         <script type="text/javascript" src="../scripts/base.js"></script> 
         <script type="text/javascript" src="scripts/physical.js"></script> 
 </asp:Content>

@@ -76,6 +76,7 @@
     <Content Include="scripts\base.js" />
     <Content Include="scripts\classie.js" />
     <Content Include="scripts\community.js" />
+    <Content Include="scripts\d3.v3.min.js" />
     <Content Include="scripts\physical.js" />
     <Content Include="scripts\profile.js" />
     <Content Include="scripts\sidebarEffects.js" />

@@ -459,7 +459,7 @@ namespace zfit
         /// </summary>
         /// <param name="aFantoken">A fantoken.</param>
         /// <param name="aExerciseCollection">A user collection.</param>
-        public static void GetExerciseCollection(FanToken aFantoken, FanCollection aExerciseCollection)
+        public static void GetExerciseCollection(FanToken aFantoken, ExerciseCollection aExerciseCollection)
         {
             FanCallHandler.ServiceCall<ExerciseCollection>(aFantoken, "GetExerciseCollection", aExerciseCollection);
         }
@@ -512,7 +512,7 @@ namespace zfit
         /// </summary>
         /// <param name="aFantoken">A fantoken.</param>
         /// <param name="aWorkoutCollection">A user collection.</param>
-        public static void GetWorkoutCollection(FanToken aFantoken, FanCollection aWorkoutCollection)
+        public static void GetWorkoutCollection(FanToken aFantoken, WorkoutCollection aWorkoutCollection)
         {
             FanCallHandler.ServiceCall<WorkoutCollection>(aFantoken, "GetWorkoutCollection", aWorkoutCollection);
         }
@@ -545,6 +545,59 @@ namespace zfit
         public static void DeleteWorkout(FanToken aFantoken, Workout aWorkout)
         {
             FanCallHandler.ServiceCall<Workout>(aFantoken, "DeleteWorkout", aWorkout);
+        }
+        #endregion
+
+        #region Activity Service Calls
+
+        /// <summary>
+        /// Call the WebService with a request to return a Activity with a specified ActivityKey
+        /// </summary>
+        /// <param name="aActivity">The Activity object to return</param>
+        /// <param name="aFantoken">A Fan token.</param>
+        public static void GetActivity(FanToken aFantoken, Activity aActivity)
+        {
+            FanCallHandler.ServiceCall<Activity>(aFantoken, "GetActivity", aActivity);
+        }
+
+        /// <summary>
+        /// Gets a FanCollection
+        /// </summary>
+        /// <param name="aFantoken">A fantoken.</param>
+        /// <param name="aActivityCollection">A user collection.</param>
+        public static void GetActivityCollection(FanToken aFantoken, ActivityCollection aActivityCollection)
+        {
+            FanCallHandler.ServiceCall<ActivityCollection>(aFantoken, "GetActivityCollection", aActivityCollection);
+        }
+
+        /// <summary>
+        /// Call the WebService with a request to Add a Activity
+        /// </summary>
+        /// <param name="aActivity">The Activity object to Add</param>
+        /// <param name="aFantoken">A fantoken.</param>
+        public static void AddActivity(FanToken aFantoken, Activity aActivity)
+        {
+            FanCallHandler.ServiceCall<Activity>(aFantoken, "AddActivity", aActivity);
+        }
+
+        /// <summary>
+        /// Call the WebService with a request to Edit a Activity
+        /// </summary>
+        /// <param name="aActivity">The Activity object to Edit</param>
+        /// <param name="aFantoken">A fantoken.</param>
+        public static void EditActivity(FanToken aFantoken, Activity aActivity)
+        {
+            FanCallHandler.ServiceCall<Activity>(aFantoken, "EditActivity", aActivity);
+        }
+
+        /// <summary>
+        /// Call the WebService with a request to Delete a Activity
+        /// </summary>
+        /// <param name="aActivity">The Activity object to Delete</param>
+        /// <param name="aFantoken">A fantoken.</param>
+        public static void DeleteActivity(FanToken aFantoken, Activity aActivity)
+        {
+            FanCallHandler.ServiceCall<Activity>(aFantoken, "DeleteActivity", aActivity);
         }
         #endregion
     }
