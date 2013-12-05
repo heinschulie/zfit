@@ -22,7 +22,13 @@
             <div class="sideNavTerElement" id="deleteActivity">Delete Activity</div>
         </div> 
         <div class="sideNavSecElement" id="addActivity">Add Activity</div>       
-        <div class="sideNavSecElement" id="loadActivityCollection">Load Activity List</div>        
+        <div class="sideNavSecElement" id="loadActivityCollection">Load Activity List</div>  
+         
+        <div class="sideNavSecElement" id="activitySessionCollection">Activity's Session List</div>
+        <div class="subelementContainer" id="activitySessionCollectionCrudContainer">
+            <div class="sideNavTerElement" id="editActivitySessionCollection">Edit Activity's Session List</div>
+        </div> 
+              
     </div>
     <div class="sideNavElement" id="wrt" contenteditable="false">Workouts</div>
     <div class="subelementContainer" id="wrtCrudContainer">
@@ -37,6 +43,23 @@
         <div class="subelementContainer" id="fanworkoutCollectionCrudContainer">
             <div class="sideNavTerElement" id="editFanworkout">Edit Fan's Workouts</div>
         </div> 
+    </div>    
+    <div class="sideNavElement" id="fss" contenteditable="false">Sessions</div>
+    <div class="subelementContainer" id="fssCrudContainer">
+        <div class="sideNavSecElement" id="loadFanSession">Load Session</div>
+        <div class="subelementContainer" id="loadFanSessionCrudContainer">
+            <div class="sideNavTerElement" id="editFanSession">Edit Session</div>
+            <div class="sideNavTerElement" id="deleteFanSession">Delete Session</div>
+        </div> 
+        <div class="sideNavSecElement" id="addFanSession">Add Session</div>       
+        <div class="sideNavSecElement" id="fansessionCollection">Load Session List</div>         
+        <div class="subelementContainer" id="fansessionCollectionCrudContainer">
+            <div class="sideNavTerElement" id="editFansessionCollection">Edit Fan's Sessions</div>
+        </div> 
+        <div class="sideNavSecElement" id="sessionactivityCollection">Session's Activity List</div>        
+        <div class="subelementContainer" id="sessionactivityCollectionCrudContainer">
+            <div class="sideNavTerElement" id="editsessionactivityCollection">Edit Session's Activity List</div>
+        </div>       
     </div>
 </asp:Content>
 <asp:Content ID="Content3" ContentPlaceHolderID="contentPlaceHolder" runat="server">

@@ -15,7 +15,7 @@
 			<nav class="navigation">
 				<ul>
 					<li><a class="icon icon-data" href="profile.aspx">My Profile</a></li>
-					<li><a class="icon icon-location" href="#">My Workouts</a></li>
+					<li><a class="icon icon-location" href="physical.aspx">My Workouts</a></li>
 					<li><a class="icon icon-study" href="#">My Schedule</a></li>
 					<li><a class="icon icon-photo" href="community.aspx">The Community</a></li>
 				</ul>

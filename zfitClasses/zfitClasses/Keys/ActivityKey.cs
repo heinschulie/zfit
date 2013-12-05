@@ -11,8 +11,8 @@ namespace zfit
         #region Fields
 
         private int _excKey;
-        private int _wrtKey;
         private int _actKey;
+        private int _wrtKey;
 
         #endregion
 

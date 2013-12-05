@@ -968,7 +968,8 @@ var friendcrud = function fanfedData(d, i) {
                 Friend.Fan2Key = thisfriend.Fan2Key;
                 Friend.Fan2Name = thisfriend.Fan2Name;
                 Friend.Fan2Surname = thisfriend.Fan2Surname;
-                Friend.FriendDateEstablishedString = thisfriend.FriendDateEstablishedString;
+                Friend.Relationship = thisfriend.Relationship;
+                Friend.FriendDateEstablished = thisfriend.FriendDateEstablished;
                 Friend.HashValue = thisfriend.HashValue;
                 Friend.ObjectState = thisfriend.ObjectState;
 

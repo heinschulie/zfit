@@ -48,10 +48,10 @@ namespace zfit
                 throw new ArgumentNullException("Load FanSession Business");
             }
 
-            if (!FanFunctionAccessData.HasModeAccess(aFanKey, "FanSession", AccessMode.Read))
-            {
-                throw new ZpAccessException("Access Denied", String.Format("{0}", aFanKey.FannKey), AccessMode.Read, "FanSession");
-            }
+            //if (!FanFunctionAccessData.HasModeAccess(aFanKey, "FanSession", AccessMode.Read))
+            //{
+            //    throw new ZpAccessException("Access Denied", String.Format("{0}", aFanKey.FannKey), AccessMode.Read, "FanSession");
+            //}
 
             FanSessionData.Load(aFanSession);
         }
@@ -89,6 +89,82 @@ namespace zfit
                 }
             }
             FanSessionData.Save(aFanSessionCollection);
+        }
+
+        #endregion
+
+
+        #region Insert
+
+        /// <summary>
+        ///   Insert a <see cref="FanSession"/> object passed as an argument via Stored Procedure that returns the newly inserted <i>FanSession Key</i>.
+        /// </summary>
+        /// <param name="aFanKey">A <see cref="FanKey"/> object.</param>
+        /// <param name="aFanSession">A <see cref="FanSession"/> object.</param>
+        /// <exception cref="ArgumentNullException">If <c>aFanSession</c> argument is <c>null</c>.</exception>
+        public static void Insert(FanKey aFanKey, FanSession aFanSession)
+        {
+            if (aFanSession == null)
+            {
+                throw new ArgumentNullException("Insert FanSession Business");
+            }
+
+            //if (!FanFunctionAccessData.HasModeAccess(aFanKey, "FanSession", AccessMode.Create))
+            //{
+            //    throw new ZpAccessException("Access Denied", String.Format("{0}", aFanKey.FannKey), AccessMode.Create, "FanSession");
+            //}
+            aFanSession.FanSessionDateDone = DateTime.Now.ToLongDateString();
+            FanSessionData.Insert(aFanSession);
+        }
+
+        #endregion
+
+        #region Update
+
+        /// <summary>
+        ///   Update a <see cref="FanSession"/> object passed as an argument.
+        /// </summary>
+        /// <param name="aFanKey">A <see cref="FanKey"/> object.</param>
+        /// <param name="aFanSession">A <see cref="FanSession"/> object.</param>
+        /// <exception cref="ArgumentNullException">If <c>aFanSession</c> argument is <c>null</c>.</exception>
+        public static void Update(FanKey aFanKey, FanSession aFanSession)
+        {
+            if (aFanSession == null)
+            {
+                throw new ArgumentNullException("Update FanSession Business");
+            }
+
+            //if (!FanFunctionAccessData.HasModeAccess(aFanKey, "FanSession", AccessMode.Update))
+            //{
+            //    throw new ZpAccessException("Access Denied", String.Format("{0}", aFanKey.FanSessionnKey), AccessMode.Update, "FanSession");
+            //}
+
+            FanSessionData.Update(aFanSession);
+        }
+
+        #endregion
+
+        #region Delete
+
+        /// <summary>
+        ///   Delete a <see cref="FanSession"/> object passed as an argument.
+        /// </summary>
+        /// <param name="aFanKey">A <see cref="FanKey"/> object.</param>
+        /// <param name="aFanSession">A <see cref="FanSession"/> object.</param>
+        /// <exception cref="ArgumentNullException">If <c>aFanSession</c> argument is <c>null</c>.</exception>
+        public static void Delete(FanKey aFanKey, FanSession aFanSession)
+        {
+            if (aFanSession == null)
+            {
+                throw new ArgumentNullException("Delete FanSession Business");
+            }
+
+            //if (!FanFunctionAccessData.HasModeAccess(aFanKey, "FanSession", AccessMode.Delete))
+            //{
+            //    throw new ZpAccessException("Access Denied", String.Format("{0}", aFanKey.FanSessionnKey), AccessMode.Delete, "FanSession");
+            //}
+
+            FanSessionData.Delete(aFanSession);
         }
 
         #endregion

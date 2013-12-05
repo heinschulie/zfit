@@ -100,6 +100,7 @@ namespace zfit
                     if (vFriend.Fan1Key == oldFriend.Fan1Key && vFriend.Fan2Key == oldFriend.Fan2Key)
                     {
                         exists = true;
+                        bonafide = false; 
                         instancenumber++; 
                         break; 
                     }

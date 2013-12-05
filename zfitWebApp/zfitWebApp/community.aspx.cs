@@ -602,12 +602,6 @@ namespace zfit
             webObject vWebObject = new webObject();
             vWebObject.aTransactionStatus = ServerSession.GetTransactionStatus(HttpContext.Current.Session);
 
-            // ********** TEMPORARY REMEDY UNTIL I SORT OUT DATETIME ISSUE 
-            //foreach (Friend vCF in aFriendCollection.FriendList)
-            //{
-            //    vCF.FriendDateEstablished = DateTime.Parse(vCF.FriendDateEstablishedString);  
-            //} 
-
             try
             {
                 FanServiceConsumer.SaveFriend(vFanToken, aFriendCollection);

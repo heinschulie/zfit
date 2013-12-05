@@ -210,7 +210,7 @@ namespace zfit
             {
                 var vStringBuilder = new StringBuilder();
                 vStringBuilder.AppendLine("insert into FRD_Friend");
-                vStringBuilder.AppendLine("       (FAN_Key, FAN_Key,");
+                vStringBuilder.AppendLine("       (FAN_Key1, FAN_Key2,");
                 vStringBuilder.AppendLine("        REL_Key,");
                 vStringBuilder.AppendLine("        FRD_DateEstablished)");
                 vStringBuilder.AppendLine("values");
@@ -291,21 +291,10 @@ namespace zfit
             {
                 var vStringBuilder = new StringBuilder();
                 vStringBuilder.AppendLine("delete FRD_Friend");
-                if (aFriend.Fan1Key > 0 && aFriend.Fan2Key > 0)
-                {
-                    vStringBuilder.AppendLine("where  FAN_Key1 = @FAN1Key");
-                    vStringBuilder.AppendLine("and    FAN_Key2 = @FAN2Key");
-                }
-                else if (aFriend.Fan1Key > 0)
-                {
-                    vStringBuilder.AppendLine("where  FAN_Key1 = @FAN1Key");
-                }
-                else if (aFriend.Fan2Key > 0)
-                {
-                    vStringBuilder.AppendLine("where  FAN_Key2 = @FAN2Key");
-                }
+                vStringBuilder.AppendLine("where  FAN_Key1 = @FAN1Key");
+                vStringBuilder.AppendLine("or     FAN_Key2 = @FAN1Key");
+                
                 vSqlCommand.Parameters.AddWithValue("@FAN1Key", aFriend.Fan1Key);
-                vSqlCommand.Parameters.AddWithValue("@FAN2Key", aFriend.Fan2Key);
                 vSqlCommand.CommandText = vStringBuilder.ToString();
                 vSqlCommand.Connection.Open();
                 vSqlCommand.ExecuteNonQuery();

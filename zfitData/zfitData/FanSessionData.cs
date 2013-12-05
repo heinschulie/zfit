@@ -19,8 +19,8 @@ namespace zfit
         private static StringBuilder BuildSQL()
         {
             var vStringBuilder = new StringBuilder();
-            vStringBuilder.AppendLine("select t1.WRT_Key, t1.WRT_Name, t2.FAN_Key, t2.FAN_Name, t2.FAN_Surname, t4.FSS_DateDone");
-            vStringBuilder.AppendLine("       t6.CEL_Key, t6.CEL_Name, t5.PRG_Key, t5.PRG_Name, t4.FSS_Lock");
+            vStringBuilder.AppendLine("select t1.WRT_Key, t1.WRT_Name, t2.FAN_Key, t2.FAN_Name, t2.FAN_Surname, t4.FSS_Key,");
+            vStringBuilder.AppendLine("       t4.FSS_DateDone, t6.CEL_Key, t6.CEL_Name, t5.PRG_Key, t5.PRG_Name, t4.FSS_Lock");
             vStringBuilder.AppendLine("from   WRT_Workout t1, ");
             vStringBuilder.AppendLine("       FAN_Fanatic t2,");
             vStringBuilder.AppendLine("       FAW_FanWorkout t3,");
@@ -59,7 +59,7 @@ namespace zfit
             aFanSession.CelName = Convert.ToString(aSqlDataReader["FAN_Surname"]);
             aFanSession.PrgKey = Convert.ToInt32(aSqlDataReader["PRG_Key"]);
             aFanSession.PrgName = Convert.ToString(aSqlDataReader["FAN_Surname"]);
-            aFanSession.FssLock = Convert.ToBoolean(aSqlDataReader["FSS_Lock"]);
+            aFanSession.FssLock = Convert.ToChar(aSqlDataReader["FSS_Lock"]) == 'Y' ? true : false; 
         }
 
         #endregion
@@ -78,7 +78,7 @@ namespace zfit
             aSqlCommand.Parameters.AddWithValue("@CELKey", aFanSession.CelKey);
             aSqlCommand.Parameters.AddWithValue("@FSSLock", aFanSession.FssLock);
             aSqlCommand.Parameters.AddWithValue("@PRGKey", aFanSession.PrgKey);
-            aSqlCommand.Parameters.AddWithValue("@WRTFANDateCreated", DateTime.Parse(aFanSession.FanSessionDateDone));
+            aSqlCommand.Parameters.AddWithValue("@FSSDateDone", DateTime.Parse(aFanSession.FanSessionDateDone));
         }
 
         #endregion
@@ -176,9 +176,9 @@ namespace zfit
             })
             {
                 var vStringBuilder = BuildSQL();
-                vStringBuilder.AppendLine("and t1.WRT_Key = @WRTKey");
-                vStringBuilder.AppendLine("and t2.FAN_Key = @FANKey");
-                vStringBuilder.AppendLine("and t3.FSS_Key = @FSSKey");
+                vStringBuilder.AppendLine("and t3.WRT_Key = @WRTKey");
+                vStringBuilder.AppendLine("and t3.FAN_Key = @FANKey");
+                vStringBuilder.AppendLine("and t4.FSS_Key = @FSSKey");
                 vSqlCommand.Parameters.AddWithValue("@WRTKey", aFanSession.WrtKey);
                 vSqlCommand.Parameters.AddWithValue("@FANKey", aFanSession.FanKey);
                 vSqlCommand.Parameters.AddWithValue("@FSSKey", aFanSession.FssKey);
@@ -201,6 +201,52 @@ namespace zfit
         #endregion
 
         #region Insert
+
+        /// <summary>
+        ///   Insert a <see cref="FanSession"/> passed as an argument via Stored Procedure that returns the newly inserted FanSession Key 
+        /// </summary>
+        /// <param name="aFanSession">A <see cref="FanSession"/>.</param>
+        /// <exception cref="ArgumentNullException">If <c>aFanSession</c> argument is <c>null</c>.</exception>
+        public static void Insert(FanSession aFanSession)
+        {
+            if (aFanSession == null)
+            {
+                throw new ArgumentNullException("aFanSession");
+            }
+            using (var vSqlCommand = new SqlCommand()
+            {
+                CommandType = CommandType.Text,
+                Connection = new SqlConnection(Connection.Instance.SqlConnectionString)
+            })
+            {
+                var vStringBuilder = new StringBuilder();
+                vStringBuilder.AppendLine("insert into FSS_FanSession");
+                vStringBuilder.AppendLine("       (FAN_Key,");
+                vStringBuilder.AppendLine("        WRT_Key,");
+                vStringBuilder.AppendLine("        FSS_DateDone,");
+                vStringBuilder.AppendLine("        CEL_Key,");
+                vStringBuilder.AppendLine("        PRG_Key,");
+                vStringBuilder.AppendLine("        FSS_Lock)");
+                vStringBuilder.AppendLine("values");
+                vStringBuilder.AppendLine("       (@FANKey,");
+                vStringBuilder.AppendLine("        @WRTKey,");
+                vStringBuilder.AppendLine("        @FSSDateDone,");
+                vStringBuilder.AppendLine("        @CELKey,");
+                vStringBuilder.AppendLine("        @PRGKey,");
+                vStringBuilder.AppendLine("        @FSSLock)");
+                vStringBuilder.AppendLine(";");
+                vStringBuilder.AppendLine("select SCOPE_IDENTITY()");
+                ObjectToData(vSqlCommand, aFanSession);
+                vSqlCommand.CommandText = vStringBuilder.ToString();
+                vSqlCommand.Connection.Open();
+                aFanSession.FssKey = Convert.ToInt32(vSqlCommand.ExecuteScalar());
+                vSqlCommand.Connection.Close();
+            }
+        }
+
+        #endregion
+
+        #region Insert Collection
 
         /// <summary>
         ///   Insert a <see cref="FanSession"/> passed as an argument via Stored Procedure that returns the newly inserted FanSession Key 
@@ -240,7 +286,7 @@ namespace zfit
                 vSqlCommand.Parameters.Add("@CELKey", SqlDbType.Int);
                 vSqlCommand.Parameters.Add("@PRGKey", SqlDbType.Int);
                 vSqlCommand.Parameters.Add("@FSSLock", SqlDbType.Char);
-                vSqlCommand.Parameters.Add("@FAWDateCreated", SqlDbType.DateTime);
+                vSqlCommand.Parameters.Add("@FSSDateDone", SqlDbType.DateTime);
                 vSqlCommand.CommandText = vStringBuilder.ToString();
                 vSqlCommand.Connection.Open();
                 aFanSessionCollection.FanSessionList.ForEach(vFanSession =>
@@ -278,19 +324,16 @@ namespace zfit
             })
             {
                 var vStringBuilder = new StringBuilder();
-                vStringBuilder.AppendLine("update FAW_FanSession");
+                vStringBuilder.AppendLine("update FSS_FanSession");
                 vStringBuilder.AppendLine("set    CEL_Key = @CELKey,");
                 vStringBuilder.AppendLine("       PRG_KEY = @PRGKEY,");
                 vStringBuilder.AppendLine("       FSS_Lock = @FSSLock,");
-                vStringBuilder.AppendLine("       FAW_DateDone = @FAWDateDone");
+                vStringBuilder.AppendLine("       FSS_DateDone = @FSSDateDone");
                 vStringBuilder.AppendLine("where  WRT_Key = @WRTKey");
                 vStringBuilder.AppendLine("and    FAN_Key = @FANKey");
                 vStringBuilder.AppendLine("and    FSS_Key = @FSSKey");
                 ObjectToData(vSqlCommand, aFanSession);
-                vSqlCommand.Parameters.AddWithValue("@CELKey", aFanSession.CelKey);
-                vSqlCommand.Parameters.AddWithValue("@PRG_KEY", aFanSession.PrgKey);
-                vSqlCommand.Parameters.AddWithValue("@FSS_Lock", aFanSession.FssLock);
-                vSqlCommand.Parameters.AddWithValue("@FAWDateCreated", DateTime.Parse(aFanSession.FanSessionDateDone));
+                vSqlCommand.Parameters.AddWithValue("@FSSKey", aFanSession.FssKey);               
                 vSqlCommand.CommandText = vStringBuilder.ToString();
                 vSqlCommand.Connection.Open();
                 vSqlCommand.ExecuteNonQuery();

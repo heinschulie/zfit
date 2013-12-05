@@ -658,6 +658,36 @@ namespace zfit
         }
 
         /// <summary>
+        /// Call the WebService with a request to Add a FanSession
+        /// </summary>
+        /// <param name="aFanSession">The FanSession object to Add</param>
+        /// <param name="aFantoken">A fantoken.</param>
+        public static void AddFanSession(FanToken aFantoken, FanSession aFanSession)
+        {
+            FanCallHandler.ServiceCall<FanSession>(aFantoken, "AddFanSession", aFanSession);
+        }
+
+        /// <summary>
+        /// Call the WebService with a request to Edit a FanSession
+        /// </summary>
+        /// <param name="aFanSession">The FanSession object to Edit</param>
+        /// <param name="aFantoken">A fantoken.</param>
+        public static void EditFanSession(FanToken aFantoken, FanSession aFanSession)
+        {
+            FanCallHandler.ServiceCall<FanSession>(aFantoken, "EditFanSession", aFanSession);
+        }
+
+        /// <summary>
+        /// Call the WebService with a request to Delete a FanSession
+        /// </summary>
+        /// <param name="aFanSession">The FanSession object to Delete</param>
+        /// <param name="aFantoken">A fantoken.</param>
+        public static void DeleteFanSession(FanToken aFantoken, FanSession aFanSession)
+        {
+            FanCallHandler.ServiceCall<FanSession>(aFantoken, "DeleteFanSession", aFanSession);
+        }
+
+        /// <summary>
         /// Add a <see cref="FanSession" />.
         /// </summary>
         /// <param name="aFanToken">A <see cref="FanToken" /> object used for Access Control.</param>
@@ -668,5 +698,41 @@ namespace zfit
         }
 
         #endregion
+
+
+        #region FanSessionActivity Service Calls
+
+        /// <summary>
+        ///   Gets a specified <see cref="FanSessionActivity"/> by key.
+        /// </summary>
+        /// <param name="aFanToken">A <see cref="FanToken"/> object used for Access Control.</param>
+        /// <param name="aFanSessionActivity"><see cref="FanSessionActivity"/> object.</param>
+        public static void GetFanSessionActivity(FanToken aFanToken, FanSessionActivity aFanSessionActivity)
+        {
+            FanCallHandler.ServiceCall<FanSessionActivity>(aFanToken, "GetFanSessionActivity", aFanSessionActivity);
+        }
+
+        /// <summary>
+        ///   Gets a specified <see cref="FanSessionActivityCollection"/>.
+        /// </summary>
+        /// <param name="aFanToken">A <see cref="FanToken"/> object used for Access Control.</param>
+        /// <param name="aFanSessionActivityCollection"><see cref="FanSessionActivity"/>Collection object.</param>
+        public static void GetFanSessionActivityCollection(FanToken aFanToken, FanSessionActivityCollection aFanSessionActivityCollection)
+        {
+            FanCallHandler.ServiceCall<FanSessionActivityCollection>(aFanToken, "GetFanSessionActivityCollection", aFanSessionActivityCollection);
+        }
+
+        /// <summary>
+        /// Add a <see cref="FanSessionActivity" />.
+        /// </summary>
+        /// <param name="aFanToken">A <see cref="FanToken" /> object used for Access Control.</param>
+        /// <param name="aFanSessionActivityCollection">A provider suburb collection.</param>
+        public static void SaveFanSessionActivity(FanToken aFanToken, FanSessionActivityCollection aFanSessionActivityCollection)
+        {
+            FanCallHandler.ServiceCall<FanSessionActivityCollection>(aFanToken, "SaveFanSessionActivity", aFanSessionActivityCollection);
+        }
+
+        #endregion
+
     }
 }

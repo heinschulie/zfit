@@ -59,6 +59,7 @@
     <Compile Include="CellFedBusiness.cs" />
     <Compile Include="ExerciseBusiness.cs" />
     <Compile Include="FanFedBusiness.cs" />
+    <Compile Include="FanSessionActivityBusiness.cs" />
     <Compile Include="FanSessionBusiness.cs" />
     <Compile Include="FanWorkoutBusiness.cs" />
     <Compile Include="FedBusiness.cs" />

@@ -671,3 +671,480 @@ var editfanWorkoutClick = d3.select("div#editFanworkout").on("click", function (
         .on("click", fanworkoutcrud);
 });
 
+// ||||||||||||||   ***    FANSESSION CRUD    ***    |||||||||||||||| //
+
+//Callbacks for FANSESSION CRUD 
+
+var populateSessionCollectionFields = function (anArray, fansession) {
+
+    //Select & data
+    var elements = d3.select("div.content")
+        .selectAll("div.properties")
+        .data(anArray);
+
+    //Enter
+    elements
+        .enter()
+        .append("div")
+        .classed("properties", true);
+
+    //Update
+    if (fansession === "fan") {
+        elements.text(function (d) { return d.WrtName });
+    }
+    else {
+        elements.text(function (d) { return d.FanName });
+    }
+
+    //Exit
+    elements
+        .exit()
+        .remove();
+};
+
+var populateFanSessionFields = function (aFanSession) {
+    d3.select("#FanKey").text(aFanSession.FanKey);
+    d3.select("#FanName").text(aFanSession.FanDisplayName);
+    d3.select("#WrtKey").text(aFanSession.WrtKey);
+    d3.select("#WrtName").text(aFanSession.WrtName);
+    d3.select("#FanSessionDateDone").text(aFanSession.FanSessionDateDone);
+    d3.select("#CelKey").text(aFanSession.CelKey);
+    d3.select("#CelName").text(aFanSession.CelName);
+    d3.select("#PrgKey").text(aFanSession.PrgKey);
+    d3.select("#PrgName").text(aFanSession.PrgName);
+    d3.select("#FssLock").text(aFanSession.FssLock);
+};
+
+var fanSessionCollectionLoaded = function (aFanSessionCollection) {
+    populateSessionCollectionFields(aFanSessionCollection.FanSessionList, "fan");
+};
+
+var fanSessionCollectionEdited = function (aFanSessionCollection) {
+    populateSessionCollectionFields(aFanSessionCollection.FanSessionList, "fan");
+};
+
+var fanSessionLoaded = function (aFanSession) {
+    populateFanSessionFields(aFanSession);
+};
+
+var fanSessionAdded = function (aFanSession) {
+    populateFanSessionFields(aFanSession);
+};
+
+var fanSessionEdited = function (aFanSession) {
+    populateFanSessionFields(aFanSession);
+};
+
+var fanSessionDeleted = function (aFanSession) {
+    alert("FanSession Deleted");
+};
+
+
+// FANSESSION Methods and Events  
+
+var fansessionCollectioncrud = function fansessionData(d, i) {
+
+    var methodname = d.methodName;
+    var callback = d.callBack;
+    var aFanSessionCollection = { FanSessionFilter: { FssFilter: {} } };
+    var filter = d3.select("#textFilter");
+
+    if (filter.attr("type") === "number") {
+        aFanSessionCollection.isFiltered = true;
+        if (d.filtertype === "fss")
+            aFanSessionCollection.FanSessionFilter.FssFilter.FanKey = filter.node().value;
+        else
+            aFanSessionCollection.FanSessionFilter.FssFilter.WrtKey = filter.node().value;
+    }
+    else {
+        aFanSessionCollection.isFiltered = true;
+        if (d.filtertype === "fan")
+            aFanSessionCollection.FanSessionFilter.FssFilter.FanName = filter.text();
+        else
+            aFanSessionCollection.FanSessionFilter.FssFilter.WrtName = filter.text();
+    }
+
+    //Remove the fansessions that are have checkboxes that are checked 
+    if (d.crudtype === "edit") {
+        aFanSessionCollection.FanSessionList = [];
+        var chkboxes = d3.selectAll("input.chkbox");
+        chkboxes.each(function (d, i) {
+            if (chkboxes[0][i].checked === false) {
+                var FanSession = {};
+                var thisfansession = chkboxes[0][i].__data__;
+                FanSession.FanKey = thisfansession.FanKey;
+                FanSession.WrtKey = thisfansession.WrtKey;
+                FanSession.CelKey = thisfansession.CelKey;
+                FanSession.PrgKey = thisfansession.PrgKey;
+                FanSession.FssLock = thisfansession.FssLock;
+                FanSession.FanSessionDateDone = thisfansession.FanSessionDateDone;
+
+                aFanSessionCollection.FanSessionList.push(FanSession);
+            }
+        });
+    }
+
+    var FanSessionCollection = { 'aFanSessionCollection': aFanSessionCollection };
+    ajaxCall(methodname, FanSessionCollection, callback);
+}
+
+//Data Arrays for FanSession Crud Methods 
+var fansessionContentTemplate = [
+    { title: "Fan Key", fieldId: "FanKey" },
+    { title: "Fan Name", fieldId: "FanName" },
+    { title: "Wrt Key", fieldId: "WrtKey" },
+    { title: "Wrt Name", fieldId: "WrtName" },
+    { title: "Fss Date Done", fieldId: "FanSessionDateDone" },
+    { title: "Cel Key", fieldId: "CelKey" },
+    { title: "Cel Name", fieldId: "CelName" },
+    { title: "Prg Key", fieldId: "PrgKey" },
+    { title: "Prg Name", fieldId: "PrgName" },
+    { title: "Fss Lock", fieldId: "FssLock" }
+];
+
+// Fan viewing his/her sessions 
+var fansessionCollectionloadData = [
+  { methodName: "physical.aspx/loadFanSessionCollection", callBack: fanSessionCollectionLoaded, filtertype: "fan" }
+];
+// Fan editing his/her sessions 
+var fansessionCollectioneditData = [
+  { methodName: "physical.aspx/editFanSessionCollection", callBack: fanSessionCollectionEdited, filtertype: "fan", crudtype: "edit" }
+];
+
+var fanSessionloadData = [
+  { methodName: "physical.aspx/loadFanSession", callBack: fanSessionLoaded }
+];
+
+var fanSessionaddData = [
+  { methodName: "physical.aspx/addFanSession", callBack: fanSessionAdded }
+];
+
+var fanSessioneditData = [
+  { methodName: "physical.aspx/editFanSession", callBack: fanSessionEdited }
+];
+
+var fanSessiondeleteData = [
+  { methodName: "physical.aspx/deleteFanSession", callBack: fanSessionDeleted }
+];
+
+//*** FANSESSION's from Cells perspective
+
+var loadFanSessionCollectionClick = d3.select("div#fansessionCollection").on("click", function () {
+
+    contentSetup(fansessionContentTemplate, false);
+
+    d3.select("#textFilter")
+        .attr("type", "number");
+
+    d3.select(".testButton")
+        .data(fansessionCollectionloadData)
+        .text("Load FanSession")
+        .on("click", fansessionCollectioncrud);
+
+    var container = d3.select("div#" + this.id + "CrudContainer");
+    sidenav(container);
+});
+
+var editFansessionCollectionClick = d3.select("div#editFansessionCollection").on("click", function () {
+    var elements = d3.select("div.content")
+        .selectAll("div.properties");
+
+    elements
+       .each(function (d) {
+           d3.select(this).append("input")
+             .attr("type", "checkbox")
+             .classed("chkbox", true);
+       });
+
+    d3.select(".testButton")
+        .data(fansessionCollectioneditData)
+        .text("Edit FanSession")
+        .on("click", fansessionCollectioncrud);
+});
+
+// FANSESSION Methods and Events  
+
+var fanSessioncrud = function fanSessionData(d, i) {
+
+    var methodname = d.methodName;
+    var callback = d.callBack;
+    var aFanSession = {};
+    var filter = d3.select("#textFilter");
+
+    if (filter.attr("type") === "number")
+        aFanSession.FssKey = filter.node().value;
+    else
+        aFanSession.FssKey = parseInt(filter.text());
+
+    aFanSession.FanKey = 2;
+    aFanSession.FanName = d3.select("#FanName").text();
+    aFanSession.WrtKey = 3;
+    aFanSession.WrtName = d3.select("#WrtName").text();
+    aFanSession.FanSessionDateDone = d3.select("#FanSessionDateDone").text();
+    aFanSession.CelKey = 3; //Hardcoded - Just to keep html simple 
+    aFanSession.CelName = d3.select("#CelName").text();
+    aFanSession.PrgKey = 1; //Hardcoded - Just to keep html simple 
+    aFanSession.PrgName = d3.select("#PrgName").text();
+    aFanSession.FssLock = false; //Hardcoded - Just to keep html simple 
+
+    var FanSession = { 'aFanSession': aFanSession };
+    ajaxCall(methodname, FanSession, callback);
+}
+
+
+var loadFanSessionClick = d3.select("div#loadFanSession").on("click", function () {
+
+    contentSetup(fansessionContentTemplate, false);
+
+    d3.select("#textFilter")
+        .attr("type", "number");
+
+    d3.select(".testButton")
+        .data(fanSessionloadData)
+        .text("Load FanSession")
+        .on("click", fanSessioncrud);
+
+    var container = d3.select("div#" + this.id + "CrudContainer");
+    sidenav(container);
+});
+
+var addFanSessionClick = d3.select("div#addFanSession").on("click", function () {
+
+    contentSetup(fansessionContentTemplate, true);
+
+    d3.select("#textFilter")
+        .attr("type", "number");
+
+    d3.select(".testButton")
+        .data(fanSessionaddData)
+        .text("Add FanSession")
+        .on("click", fanSessioncrud);
+});
+
+var editFanSessionClick = d3.select("div#editFanSession").on("click", function () {
+    d3.select("div.content")
+        .selectAll("div.properties")
+        .attr("contenteditable", "true")
+        .classed("delete", false)
+        .classed("add", false)
+        .classed("edit", true);
+
+    d3.select(".testButton")
+        .data(fanSessioneditData)
+        .text("Edit FanSession")
+        .on("click", fanSessioncrud);
+});
+
+var deleteFanSessionClick = d3.select("div#deleteFanSession").on("click", function () {
+    d3.select("div.content")
+        .selectAll("div.properties")
+        .classed("edit", false)
+        .classed("add", false)
+        .classed("delete", true)
+        .attr("contenteditable", "false");
+
+    d3.select(".testButton")
+        .data(fanSessiondeleteData)
+        .text("Delete FanSession")
+        .on("click", fanSessioncrud);
+});
+
+
+
+
+
+
+// ||||||||||||||   ***    SESSIONACTIVITY CRUD    ***    |||||||||||||||| //
+
+//Callbacks for SESSIONACTIVITY CRUD 
+
+var populateFSACollectionFields = function (anArray, sessionactivity) {
+
+    //Select & data
+    var elements = d3.select("div.content")
+        .selectAll("div.properties")
+        .data(anArray);
+
+    //Enter
+    elements
+        .enter()
+        .append("div")
+        .classed("properties", true);
+
+    //Update
+    if (sessionactivity === "activity") {
+        elements.text(function (d) { return d.FsaResult });
+    }
+    else {
+        elements.text(function (d) { return d.FsaResult });
+    }
+
+    //Exit
+    elements
+        .exit()
+        .remove();
+};
+
+var activitySessionCollectionLoaded = function (aSessionActivityCollection) {
+    populateFSACollectionFields(aSessionActivityCollection.FanSessionActivityList, "activity");
+};
+
+var activitySessionCollectionEdited = function (aSessionActivityCollection) {
+    populateFSACollectionFields(aSessionActivityCollection.FanSessionActivityList, "activity");
+};
+
+var sessionActivityCollectionLoaded = function (aSessionActivityCollection) {
+    populateFSACollectionFields(aSessionActivityCollection.FanSessionActivityList, "session");
+};
+
+var sessionActivityCollectionEdited = function (aSessionActivityCollection) {
+    populateFSACollectionFields(aSessionActivityCollection.FanSessionActivityList, "session");
+};
+
+// SESSIONACTIVITY Methods and Events  
+
+var sessionactivitycrud = function sessionactivityData(d, i) {
+
+    var methodname = d.methodName;
+    var callback = d.callBack;
+    var aFanSessionActivityCollection = { FanSessionActivityFilter: { FanSessionActivityFilter: {} } };
+    var filter = d3.select("#textFilter");
+
+    if (filter.attr("type") === "number") {
+        aFanSessionActivityCollection.isFiltered = true;
+        if (d.filtertype === "activity")
+            aFanSessionActivityCollection.FanSessionActivityFilter.FanSessionActivityFilter.ActKey = filter.node().value;
+        else
+            aSessionActivityCollection.FanSessionActivityFilter.FanSessionActivityFilter.FssKey = filter.node().value;
+    }
+    else {
+        aSessionActivityCollection.isFiltered = true;
+        if (d.filtertype === "activity")
+            aSessionActivityCollection.SessionActivityFilter.SessionactivityFilter.ActivityName = filter.text();
+        else
+            aSessionActivityCollection.SessionActivityFilter.SessionactivityFilter.SessionName = filter.text();
+    }
+
+    //Remove the sessionactivitys that are have checkboxes that are checked 
+    if (d.crudtype === "edit") {
+        aFanSessionActivityCollection.FanSessionActivityList = [];
+        var chkboxes = d3.selectAll("input.chkbox");
+        chkboxes.each(function (d, i) {
+            if (chkboxes[0][i].checked === false) {
+                var FanSessionActivity = {};
+                var thissessionactivity = chkboxes[0][i].__data__;
+                FanSessionActivity.FanKey = thissessionactivity.FanKey;
+                FanSessionActivity.WrtKey = thissessionactivity.WrtKey;
+                FanSessionActivity.FssKey = thissessionactivity.FssKey;
+                FanSessionActivity.ExcKey = thissessionactivity.ExcKey;
+                FanSessionActivity.ActKey = thissessionactivity.ActKey;
+                FanSessionActivity.FsaResult = thissessionactivity.FsaResult;
+
+                aFanSessionActivityCollection.FanSessionActivityList.push(FanSessionActivity);
+            }
+        });
+    }
+
+    var FanSessionActivityCollection = { 'aFanSessionActivityCollection': aFanSessionActivityCollection };
+    ajaxCall(methodname, FanSessionActivityCollection, callback);
+}
+
+//Data Arrays for SessionActivity Crud Methods 
+var sessionactivityContentTemplate = [
+    { title: "Fan Key", fieldId: "FanKey" },
+    { title: "Wrt Key", fieldId: "WrtKey" },
+    { title: "Fss Key", fieldId: "FssKey" },
+    { title: "Exc Key", fieldId: "ExcKey" },
+    { title: "Act Key", fieldId: "ActKey" },    
+    { title: "Fsa Result", fieldId: "FsaResult" }
+];
+
+// Activity viewing his/her sessions 
+var activityssessionsloadData = [
+  { methodName: "physical.aspx/loadFanSessionActivityCollection", callBack: activitySessionCollectionLoaded, filtertype: "activity" }
+];
+// Activity editing his/her sessions 
+var activityssessionseditData = [
+  { methodName: "physical.aspx/editFanSessionActivityCollection", callBack: activitySessionCollectionEdited, filtertype: "activity", crudtype: "edit" }
+];
+// Session viewing its activitys 
+var sessionsactivitysloadData = [
+  { methodName: "physical.aspx/loadFanSessionActivityCollection", callBack: sessionActivityCollectionLoaded, filtertype: "session" }
+];
+// Session editing its activitys 
+var sessionsactivityseditData = [
+  { methodName: "physical.aspx/editFanSessionActivityCollection", callBack: sessionActivityCollectionEdited, filtertype: "session", crudtype: "edit" }
+];
+
+//*** SESSIONACTIVITY's from Activitys perspective 
+
+var loadactivitySessionClick = d3.select("div#activitySessionCollection").on("click", function () {
+
+    contentSetup(sessionactivityContentTemplate, false);
+
+    d3.select("#textFilter")
+        .attr("type", "number");
+
+    d3.select(".testButton")
+        .data(activityssessionsloadData)
+        .text("Load SessionActivity")
+        .on("click", sessionactivitycrud);
+
+    var container = d3.select("div#" + this.id + "CrudContainer");
+    sidenav(container);
+});
+
+//Editing of list follows a different pattern  
+var editactivitySessionClick = d3.select("div#editActivitySessionCollection").on("click", function () {
+
+    var elements = d3.select("div.content")
+        .selectAll("div.properties");
+
+    elements
+       .each(function (d) {
+           d3.select(this).append("input")
+             .attr("type", "checkbox")
+             .classed("chkbox", true);
+       });
+
+    d3.select(".testButton")
+        .data(activityssessionseditData)
+        .text("Edit SessionActivity")
+        .on("click", sessionactivitycrud);
+});
+
+//*** SESSIONACTIVITY's from Sessions perspective
+
+var loadSessionActivityClick = d3.select("div#sessionactivitylist").on("click", function () {
+
+    contentSetup(sessionactivityContentTemplate, false);
+
+    d3.select("#textFilter")
+        .attr("type", "number");
+
+    d3.select(".testButton")
+        .data(sessionsactivitysloadData)
+        .text("Load SessionActivity")
+        .on("click", sessionactivitycrud);
+
+    var container = d3.select("div#" + this.id + "CrudContainer");
+    sidenav(container);
+});
+
+var editsessionActivityClick = d3.select("div#editSessionactivitys").on("click", function () {
+
+    var elements = d3.select("div.content")
+        .selectAll("div.properties");
+
+    elements
+       .each(function (d) {
+           d3.select(this).append("input")
+             .attr("type", "checkbox")
+             .classed("chkbox", true);
+       });
+
+    d3.select(".testButton")
+        .data(sessionsactivityseditData)
+        .text("Edit SessionActivity")
+        .on("click", sessionactivitycrud);
+});

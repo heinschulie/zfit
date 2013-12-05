@@ -12,7 +12,7 @@ namespace zfit
         private string _wrtName;
         private string _fanName;
         private string _fanSurname;
-        private string _fawDateDone;
+        private string _fssDateDone;
         private int _celKey;
         private string _celName;
         private int _prgKey;
@@ -74,8 +74,8 @@ namespace zfit
         /// </value>
         public string FanSessionDateDone
         {
-            get { return _fawDateDone; }
-            set { _fawDateDone = value; }
+            get { return _fssDateDone; }
+            set { _fssDateDone = value; }
         }
 
         /// <summary>
@@ -156,7 +156,7 @@ namespace zfit
             _wrtName = (aSource as FanSession)._wrtName;
             _fanName = (aSource as FanSession)._fanName;
             _fanSurname = (aSource as FanSession)._fanSurname;
-            _fawDateDone = (aSource as FanSession)._fawDateDone;
+            _fssDateDone = (aSource as FanSession)._fssDateDone;
             _celKey = (aSource as FanSession)._celKey;
             _celName = (aSource as FanSession)._celName;
             _prgKey = (aSource as FanSession)._prgKey;
